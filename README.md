@@ -19,3 +19,8 @@ The following diagram illustrates the system context of the application, includi
 The components involved are:
 * Web application to offer a set of services for the end user to use: the chat bot user interface will be used for the demonstration.
 * A scoring service to assess current risk of churn for that customer interacting with services of the company
+
+
+### Deployment View
+
+![](docs/deploy-view.png)
