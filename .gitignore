@@ -3,7 +3,6 @@
 src/dist
 /tmp
 src/build
-
 src/server/config.json
 
 # dependencies
