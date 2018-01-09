@@ -1,0 +1,10 @@
+ID,Gender,Status,Children,Est Income,Car Owner,Age,Marital Status,zipcode,LongDistance,International,Local,Dropped,Paymethod,LocalBilltype,LongDistanceBilltype,Usage,RatePlan,DeviceOwned,Churn
+2,F,S,1,38000,N,24.393333,Family,95050,23.56,0,206.08,0,CC,Budget,Intnl_discount,229.64,3,ipho,T
+6,M,M,2,29616,N,49.426667,Single,94000,29.78,0,45.5,0,CH,FreeLocal,Standard,75.29,2,moto,F
+8,M,M,0,19732.8,N,50.673333,Married,94000,24.81,0,22.44,0,CC,FreeLocal,Standard,47.25,3,sam,F
+11,M,S,2,96.33,N,56.473333,Single,94000,26.13,0,32.88,1,CC,Budget,Standard,59.01,1,sam,F
+14,F,M,2,52004.8,N,25.14,Single,95050,5.03,0,23.11,0,CH,Budget,Intnl_discount,28.14,1,moto,F
+17,M,M,2,53010.8,N,18.84,Single,95050,12.45,0,46.42,4,CC,FreeLocal,Standard,58.87,1,ipho,F
+18,M,M,1,75004.5,N,64.8,Single,95050,26.52,0,32.19,0,CC,Budget,Intnl_discount,58.72,1,ipho,F
+21,M,M,0,19749.3,N,60.366667,Single,95050,20.22,0,13.94,0,CC,Budget,Standard,34.17,3,ipho,F
+22,M,S,1,57626.9,Y,43.906667,Married,95050,9.38,0,38.96,0,CC,Budget,Standard,48.35,2,sam,F

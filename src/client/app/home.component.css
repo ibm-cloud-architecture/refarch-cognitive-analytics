@@ -1,0 +1,15 @@
+.roundRect {
+   margin: auto;
+   border-width : 2px;
+   border-radius: 8px;
+   border-style: solid;
+   border-color: #blue;
+   background-color: white;
+   box-shadow: 10px 10px 5px #blue;
+   margin-right: 15px;
+   margin-bottom: 15px;
+     padding: 20px;
+   marging: 10px;
+   height:220px;
+   width:280px;
+}

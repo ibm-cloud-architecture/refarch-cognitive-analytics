@@ -1,0 +1,63 @@
+<div *ngIf="customer" class="row">
+  <h2>{{customer.name}} details!</h2>
+  <p>{{message}}</p>
+  <div><label>id: </label>{{customer.id}}</div>
+  <div class="form-group">
+      <label for="name">Name</label>
+      <input autofocus type="text" class="form-control" required [(ngModel)]="customer.name" name="name" id="name">
+  </div>
+  <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input autofocus type="text" class="form-control" required [(ngModel)]="customer.firstName" name="firstName" id="firstName">
+  </div>
+  <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input autofocus type="text" class="form-control" required [(ngModel)]="customer.lastName" name="lastName" id="lastName">
+  </div>
+  <div class="form-group">
+      <label for="emailAddress">Email Address</label>
+      <input autofocus type="text" class="form-control" required [(ngModel)]="customer.emailAddress" name="emailAddress" id="emailAddress">
+  </div>
+  <div class="form-group">
+      <label for="age">Age</label>
+      <input autofocus type="text" class="form-control" required [(ngModel)]="customer.age" name="age" id="age">
+  </div>
+  <div class="form-group">
+      <label for="gender">Gender</label>
+      <input autofocus type="text" class="form-control" required [(ngModel)]="customer.gender" name="gender" id="gender">
+  </div>
+  <div class="form-group">
+      <label for="status">Status</label>
+      <input autofocus type="text" class="form-control" required [(ngModel)]="customer.status" name="status" id="status">
+  </div>
+  <div>
+      <button class="btn btn-primary" type="button" (click)="save()">Save</button>
+      <button class="btn glyphicon glyphicon-book" type="button" (click)="viewAccount()"></button>
+  </div>
+</div>
+<div *ngIf="account" class="row">
+  <div class="form-group">
+      <label for="accountNumber">Account Number</label>
+      <input autofocus type="text" class="form-control" required [(ngModel)]="customer.accountNumber" name="accountNumber" id="accountNumber">
+  </div>
+  <div class="form-group">
+      <label for="balance">Balance</label>
+      <input autofocus type="text" class="form-control" required [(ngModel)]="customer.balance" name="balance" id="balance">
+  </div>
+  <div class="form-group">
+      <label for="local">Local Usage</label>
+      <input autofocus type="text" class="form-control" required [(ngModel)]="customer.local" name="local" id="local">
+  </div>
+  <div class="form-group">
+      <label for="longDistance">Long Distance</label>
+      <input autofocus type="text" class="form-control" required [(ngModel)]="customer.longDistance" name="longDistance" id="longDistance">
+  </div>
+  <div class="form-group">
+      <label for="international">International</label>
+      <input autofocus type="text" class="form-control" required [(ngModel)]="customer.international" name="international" id="international">
+  </div>
+  <div class="form-group">
+      <label for="paymentMethod">Payment Method</label>
+      <input autofocus type="text" class="form-control" required [(ngModel)]="customer.paymentMethod" name="paymentMethod" id="paymentMethod">
+  </div>
+</div>

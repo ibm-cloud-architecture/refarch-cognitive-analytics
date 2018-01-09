@@ -1,0 +1,68 @@
+{
+  "name": "CaseIncApp",
+  "version": "0.0.1",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ibm-cloud-architecture/refarch-caseinc-app.git"
+  },
+  "engines": {
+    "node": "6.x",
+    "npm": "5.x"
+  },
+  "author": "Jerome Boyer",
+  "scripts": {
+    "ng": "ng",
+    "start": "node server/server",
+    "dev": "concurrently \"ng build\" \"nodemon server/server\"",
+    "devui": "concurrently \"npm run build:watch\" \"npm run serve\"",
+    "build": "ng build",
+    "build:watch": "tsc -p client/ -w",
+    "test": "mocha"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^4.3.0",
+    "@angular/common": "^4.3.0",
+    "@angular/compiler": "^4.3.0",
+    "@angular/core": "^4.3.0",
+    "@angular/forms": "^4.3.0",
+    "@angular/http": "^4.3.0",
+    "@angular/platform-browser": "^4.3.0",
+    "@angular/platform-browser-dynamic": "^4.3.0",
+    "@angular/platform-server": "^4.3.0",
+    "@angular/router": "^4.3.0",
+    "@ngtools/json-schema": "^1.1.0",
+    "body-parser": "^1.17.2",
+    "bootstrap": "^3.3.7",
+    "cfenv": "^1.0.0",
+    "cookie-parser": "^1.4.3",
+    "core-js": "^2.4.1",
+    "express": "^4.15.3",
+    "express-session": "^1.13.0",
+    "extend": "^3.0.0",
+    "hystrixjs": "0.2.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "querystring": "^0.2.0",
+    "request": "^2.72.0",
+    "rxjs": "^5.4.1",
+    "session-memory-store": "^0.2.2",
+    "watson-developer-cloud": "^2.32.x",
+    "webpack": "^2.2.0-rc",
+    "zone.js": "^0.8.4"
+  },
+  "devDependencies": {
+    "@angular/cli": "^1.2.x",
+    "@angular/compiler-cli": "^4.0.0",
+    "@angular/language-service": "^4.0.0",
+    "typescript": "~2.3.3",
+    "lite-server": "^2.2.2",
+    "@types/node": "~6.0.60",
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "concurrently": "^3.5.0",
+    "mocha": "^3.4.1",
+    "nodemon": "^1.11.0"
+  }
+}

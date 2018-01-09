@@ -1,0 +1,15 @@
+{
+    "conversation" :{
+      "version":"2017-02-03",
+      "username":"",
+      "password":"",
+      "workspace1":"",
+      "workspace2":"",
+      "conversationId":"",
+      "usePersistence": true
+    },
+    "dbCredentials" : {
+            "url": "https://...-bluemix:...-bluemix.cloudant.com"
+    },
+    "debug":true
+}

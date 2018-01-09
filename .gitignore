@@ -1,0 +1,21 @@
+
+# compiled output
+src/dist
+/tmp
+src/build
+
+src/server/config.json
+
+# dependencies
+src/node_modules
+
+/.sass-cache
+/connect.lock
+npm-debug.log
+testem.log
+/typings
+
+
+#System Files
+.DS_Store
+Thumbs.db
