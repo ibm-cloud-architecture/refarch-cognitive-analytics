@@ -3,19 +3,19 @@
 # Declare variables to be passed into your templates.
 replicaCount: 1
 image:
-  repository: nginx
-  tag: stable
-  pullPolicy: IfNotPresent
+  repository: greencluster.icp:8500/greencompute/greenapp
+  tag: v0.0.1
+  pullPolicy: Always
 service:
-  name: nginx
+  name: greenapppsvc
   type: ClusterIP
-  externalPort: 80
-  internalPort: 80
+  externalPort: 3001
+  internalPort: 3001
 ingress:
-  enabled: false
+  enabled: true
   # Used to create Ingress record (should used with service.type: ClusterIP).
   hosts:
-    - chart-example.local
+    - greenapp.green.case
   annotations:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
@@ -24,10 +24,26 @@ ingress:
     # - secretName: chart-example-tls
     #   hosts:
     #     - chart-example.local
+config:
+  conversation:
+    version: v1
+    versionDate: 2017-05-26
+    username: 291d9397-073f-46d9-b0d2-11b54e6ae533
+    password: aDFBIIPYkQlD
+    conversationId: Complex Relocation
+    workspace: a97a02e3-d3c3-48de-8e64-20502819e582
+    usePersistence: false
+  customerAPI:
+    url: http://customer.green.case/caseserv/api/v1
+    host: customer.green.case
+  mode: cyan
+  environment: private
+  port: 3001
+  version: v0.0.1
 resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious 
-  # choice for the user. This also increases chances charts run on environments with little 
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following 
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   # limits:
   #  cpu: 100m

@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import { Router }   from '@angular/router';
-import { HomeService }  from './home.service';
 import { User } from "./login/User";
 /*
 Main page component to display access to the different demo features.
@@ -16,7 +15,7 @@ Main page component to display access to the different demo features.
     user: User;
 
 
-    constructor(private router: Router,private homeService : HomeService) {
+    constructor(private router: Router) {
       this.user = JSON.parse(localStorage.getItem('currentUser'));
     }
 

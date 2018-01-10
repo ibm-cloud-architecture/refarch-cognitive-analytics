@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 IBM Corp. All Rights Reserved.
+ * Copyright 2018 IBM Corp. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,6 @@ import { HomeComponent }         from './home.component';
 import { LoginComponent }        from './login/login.component';
 import { ConversationComponent}  from './conv/conversation.component';
 import { ConversationService }   from './conv/conversation.service';
-import { HomeService }           from './home.service';
 import { AuthGuard }             from './login/auth.guard';
 import { AuthenticationService } from "./login/authentication.service";
 import { AlertService }          from "./login/alert.service";
@@ -64,8 +63,7 @@ const routes: Routes = [
     AuthenticationService,
     AuthGuard,
     ConversationService,
-    CustomersService,
-    HomeService],
+    CustomersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

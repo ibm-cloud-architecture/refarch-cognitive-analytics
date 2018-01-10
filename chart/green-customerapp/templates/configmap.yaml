@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "fullname" . }}
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+data:
+  config.json: |+
+    {
+        "conversation" :{
+            "version" : "{{ .Values.config.conversation.version }}",
+            "versionDate":"{{ .Values.config.conversation.versionDate }}",
+            "username":"{{ .Values.config.conversation.username }}",
+            "password":"{{ .Values.config.conversation.password }}",
+            "conversationId":"{{ .Values.config.conversation.conversationId }}",
+            "workspace":"{{ .Values.config.conversation.workspace }}",
+            "usePersistence": "{{ .Values.config.conversation.usePersistence }}"
+          },
+        "customerAPI":{
+              "url":"{{ .Values.config.customerAPI.url }}"
+        },
+        "port": "{{ .Values.config.port }}",
+        "version": "{{ .Values.config.version }}"
+    }

@@ -1,15 +1,18 @@
 {
-    "conversation" :{
-      "version":"2017-02-03",
-      "username":"",
-      "password":"",
-      "workspace1":"",
-      "workspace2":"",
-      "conversationId":"",
-      "usePersistence": true
-    },
-    "dbCredentials" : {
-            "url": "https://...-bluemix:...-bluemix.cloudant.com"
-    },
-    "debug":true
+  "conversation" :{
+    "version" : "v1",
+    "versionDate":"2017-05-26",
+    "username":"",
+    "password":"",
+    "conversationId":"Complex Relocation",
+    "workspace":"",
+    "usePersistence": false
+  },
+  "customerAPI":{
+      "url":"http://customer.green.case/caseserv/api/v1",
+      "host":"customer.green.case"
+  },
+  "debug":true,
+  "port": 3001,
+  "version": "v0.0.1"
 }
