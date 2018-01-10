@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1>Welcome, {{customer.name}}!</h1>
+  </div>
+</div>
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Account Details</h3>
+  </div>
+  <table class="table">
+    <tr>
+      <td class="col-md-3"><b>Account Number</b></td>
+      <td class="col-md-9">{{customer.accountNumber}}</td>
+    <tr>
+    <tr>
+      <td class="col-md-3"><b>Balance</b></td>
+      <td class="col-md-9">${{customer.balance}}</td>
+    <tr>
+    <tr>
+      <td class="col-md-3"><b>Device</b></td>
+      <td class="col-md-9">{{customer.deviceOwned}}</td>
+    <tr>
+    <tr>
+      <td class="col-md-3"><b>Plan</b></td>
+      <td class="col-md-9">{{customer.ratePlan}}</td>
+    <tr>
+  </table>
+</div>
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Usage</h3>
+  </div>
+  <table class="table">
+    <tr>
+      <td class="col-md-3"><b>Total</b></td>
+      <td class="col-md-9">{{customer.usage}}</td>
+    <tr>
+    <tr>
+      <td class="col-md-3"><b>Local</b></td>
+      <td class="col-md-9">{{customer.local}}</td>
+    <tr>
+    <tr>
+      <td class="col-md-3"><b>International</b></td>
+      <td class="col-md-9">{{customer.international}}</td>
+    <tr>
+  </table>
+</div>

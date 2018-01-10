@@ -30,6 +30,7 @@ import { AlertService }          from "./login/alert.service";
 import { CustomersComponent}     from './customer/customers.component';
 import { CustomersService }      from './customer/customers.service';
 import { CustomerDetailComponent}    from './customer/customer.component';
+import { AccountComponent } from './account/account.component';
 
 // Define internal URL mapping to component, protect with authentication guard, meaning user
 // needs to be authenticated with a login
@@ -39,6 +40,7 @@ const routes: Routes = [
   //canActivate: [AuthGuard]
   { path: 'itSupport', component: ConversationComponent,canActivate: [AuthGuard]},
   { path: 'customer', component: CustomersComponent,canActivate: [AuthGuard]},
+  { path: 'account', component: AccountComponent},
   // otherwise redirect to home
   { path: '**', redirectTo: 'home' }
 ]
@@ -50,7 +52,8 @@ const routes: Routes = [
     LoginComponent,
     ConversationComponent,
     CustomersComponent,
-    CustomerDetailComponent
+    CustomerDetailComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,
