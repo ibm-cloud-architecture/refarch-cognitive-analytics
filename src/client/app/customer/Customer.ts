@@ -8,20 +8,25 @@ export class Customer {
   estimatedIncome: number;
   age: number;
   profession: string;
-  childre: number;
+  children: number;
   usage:number;
-  email: string;
   maritalStatus:string;
   ratePlan: string;
-  carOwner: number;
+  carOwner: string;
   type: string;
   status: string;
   zipcode:string;
   accountNumber:string;
   balance:number;
   longDistance:number;
+  longDistanceBillType:string;
   international:number;
   local:number;
   dropped:number;
   paymentMethod:string;
+  localBillType: string;
+  churn: string;
+  churnRisk: number;
+  deviceOwned: string;
+  mostDominantTone: string;
 }
