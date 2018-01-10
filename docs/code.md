@@ -97,6 +97,33 @@ export class CustomerComponent implements OnInit {
 ## Server code
 The application is using nodejs and expressjs standard code structure. The code is under `server` folder.
 ### Conversation back end.
+The script is in `server/route/features\conversation.js` and uses the Watson develop cloud library to connect to the remote service. This library encapsulates HTTP call and simplify the interaction. The only thing that needs to be done for each chat bot is to add logic to process the response, for example to get data for backend, or presents options, or call remote service like a rule engine / decision service.
+This module export one function to be called by the API used by the front end. This API is defined in api.js as:
+```javascript
+app.post('/api/c/conversation',isLoggedIn,(req,res) => {
+  conversation.itSupport(config,req,res)
+});
+```
+The `conversation.itSupport` get the message and connection parameter and uses the Watson API:
+```javascript
+conversation = watson.conversation({
+        username: config.conversation.username,
+        password: config.conversation.password,
+        version: config.conversation.version,
+        version_date: config.conversation.versionDate});
+
+conversation.message(
+    {
+    workspace_id: wkid,
+    input: {'text': message.text},
+    context: message.context
+    },
+    function(err, response) {
+      // add logic here to process the conversation response
+    }
+  )
+```
+Finally this code can persist the conversation to a remote document oriented database. The code is in `persist.js` and a complete detailed explanation to setup this service is in [this note.](chattranscripts.md)
 
 ### Customer back end
 The customer API is defined in the server/routes/feature folder and uses request library to perform the call to the customer micro service API. The config.json file specifies the end point URL.
@@ -126,3 +153,4 @@ router.get('/items', function(req,res){
 
 ```
 ## Customer Micro service
+The back end customer management function is a micro service in its separate repository, and the code implementation explanation can be read [here.](https://github.com/ibm-cloud-architecture/refarch-integration-services#code-explanation)

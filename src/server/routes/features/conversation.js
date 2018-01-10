@@ -26,7 +26,7 @@ module.exports = {
         req.body.context.predefinedResponses="";
     }
     sendMessage(config,req.body,config.conversation.workspace,res,function(config,res,response) {
-      if (config.debug) {console.log(" Advisor <<< "+JSON.stringify(response,null,2));}
+      if (config.debug) {console.log(" Support <<< "+JSON.stringify(response,null,2));}
       if (response.Error !== undefined) {
         res.status(500).send({'text':response.Error});
       } else {
