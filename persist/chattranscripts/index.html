@@ -1,0 +1,551 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.0.1">
+    
+    
+      
+        <title>Persisting the chat transcripts - Customer analysis with cognitive and analytics in hybrid cloud</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.982221ab.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.1f0bcf2b.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#persisting-the-chat-transcripts" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="Customer analysis with cognitive and analytics in hybrid cloud" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Customer analysis with cognitive and analytics in hybrid cloud
+            </span>
+            <span class="md-header-nav__topic">
+              Persisting the chat transcripts
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/ibm-cloud-architecture/refarch-cognitive-analytics/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="Customer analysis with cognitive and analytics in hybrid cloud" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Customer analysis with cognitive and analytics in hybrid cloud
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/ibm-cloud-architecture/refarch-cognitive-analytics/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Welcome" class="md-nav__link">
+      Welcome
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../method/readme/" title="Methodology" class="md-nav__link">
+      Methodology
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Business Problem
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Business Problem
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../businessproblem/" title="Presentation" class="md-nav__link">
+      Presentation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../flow/" title="Demonstration" class="md-nav__link">
+      Demonstration
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Design
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Design
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../design/readme/" title="Design considerations" class="md-nav__link">
+      Design considerations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../design/code/" title="Implementation details" class="md-nav__link">
+      Implementation details
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../run/" title="Deployments" class="md-nav__link">
+      Deployments
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#pre-requisite" title="Pre-requisite" class="md-nav__link">
+    Pre-requisite
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-cloudant-service-in-ibm-cloud" title="Create a Cloudant Service in IBM Cloud" class="md-nav__link">
+    Create a Cloudant Service in IBM Cloud
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-database-wcsdb" title="Create a Database: wcsdb" class="md-nav__link">
+    Create a Database: wcsdb
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-service-credentials" title="Get service credentials" class="md-nav__link">
+    Get service credentials
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implement-service-client" title="Implement service Client" class="md-nav__link">
+    Implement service Client
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#browse-conversation-content-in-cloudant-console" title="Browse conversation content in Cloudant console" class="md-nav__link">
+    Browse conversation content in Cloudant console
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#access-all-conversations-from-a-given-timestamp" title="Access all conversations from a given timestamp" class="md-nav__link">
+    Access all conversations from a given timestamp
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/ibm-cloud-architecture/refarch-cognitive-analytics/edit/master/docs/persist/chattranscripts.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="persisting-the-chat-transcripts">Persisting the chat transcripts</h1>
+<p>To persist the conversation content, we selected a document oriented database running on IBM Cloud, public offering. The Web application can persist the conversation interactions in a single document. The control is done with the parameter <code>conversation.usePersistence</code> in the <code>config.json</code> under the <code>server/config</code> folder.</p>
+<h2 id="pre-requisite">Pre-requisite</h2>
+<p>You need to have an active account on <a href="https://console.bluemix.net/dashboard/apps/">IBM Cloud</a>, an organization and a space created.</p>
+<h2 id="create-a-cloudant-service-in-ibm-cloud">Create a Cloudant Service in IBM Cloud</h2>
+<p>Use the <code>Create resource</code> button on top of the main IBM Cloud dashboard page, select <code>Data &amp; Analytics</code> under the Platform category and then the <code>Cloudant NoSQL DB</code> service:<br />
+<img alt="" src="../cloudant-db.png" /></p>
+<p>Be sure to select the region, organization and space you want to service to be added to.</p>
+<p>Once created go to the service main page and <code>Launch</code> the client tool to create new database.
+<img alt="" src="../cloudant-main.png" /></p>
+<p>This web application helps administrators to access database instances.</p>
+<h2 id="create-a-database-wcsdb">Create a Database: wcsdb</h2>
+<p>From the top menu select <code>Create Database</code> and enter <code>wcsdb</code> as a name:   </p>
+<p><img alt="" src="../cloudant-create-db.png" /></p>
+<p>The main database dashboard is now displayed. We do not need to create any document yet, as the code will do it.</p>
+<h2 id="get-service-credentials">Get service credentials</h2>
+<p>So to make to code accessing the database we need to get the service credentials. At the Cloudant service main page select <code>Service Credentials</code> and add a <code>new credential</code>.</p>
+<p><img alt="" src="../cloudant-serv-cred.png" /></p>
+<p>Open the <code>config.json file</code> to add the URL of the service and enable persistence in the conversation settings.</p>
+<p>ATTENTION: when deploying into IBM Cloud private the configuration is defined in the deployment configuration. So you may want to tune both.</p>
+<pre><code class="json">&quot;watsonassistant&quot;: {
+  &quot;usePersistence&quot;: false
+},
+&quot;dbCredentials&quot; : {
+  &quot;url&quot;: &quot;https://...-bluemix:cd....@...e50-bluemix.cloudant.com&quot;
+},
+</code></pre>
+
+<h2 id="implement-service-client">Implement service Client</h2>
+<p>The code is in the <code>server/routes/features/persist.js</code>. The method is using Cloudant API module, and the conversation response. The code is using the persistId and revId of cloudant response to modify the Watson Assistant context with those two variables so a unique document is created for all interaction, and the document is updated at each interaction.</p>
+<pre><code class="javascript">saveConversation : function(config,conv,next){
+  var cloudant = require('cloudant')(config.dbCredentials.url);
+  var db = cloudant.use('wcsdb');
+  if (conv.context !== undefined) {
+    if (conv.context.revId !== undefined) {
+      conv._id=conv.context.persistId;
+      conv._rev=conv.context.revId;
+    }
+  }
+  db.insert(conv, function(err, data) {
+    if (err) {
+      next({error: err.message});
+    } else {
+      next(data);
+    }
+  });
+}, // saveConversation
+</code></pre>
+
+<h2 id="browse-conversation-content-in-cloudant-console">Browse conversation content in Cloudant console</h2>
+<p>After few conversation sessions, you can access some of the created documents using the Cloudant console: <br />
+<img alt="" src="../wcsdb-docs.png" />  </p>
+<p>Each document has a unique ID and revision id. All the content of the conversation is persisted.</p>
+<p><img alt="" src="../conv-view.png" />  </p>
+<p>It is helpful for assessing the conversation that did not terminate well, or with gaps in the scope of the dialog.</p>
+<h3 id="access-all-conversations-from-a-given-timestamp">Access all conversations from a given timestamp</h3>
+<p>The <code>persist.js</code> add a timestamp variable in the persisted document so queries can be done on the document creation date. Cloudant exposes a query editor to search for documents in the database. The query is a JSON document.</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.b806dc00.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>
