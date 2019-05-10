@@ -36,7 +36,7 @@
     
     
       
-        <title>Run the different components of the solution - Customer analysis with cognitive and analytics in hybrid cloud</title>
+        <title>Tutorial - Customer analysis with cognitive and analytics in hybrid cloud</title>
       
     
     
@@ -96,7 +96,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#run-the-different-components-of-the-solution" tabindex="1" class="md-skip">
+      <a href="#labs-tutorial" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -121,7 +121,7 @@
               Customer analysis with cognitive and analytics in hybrid cloud
             </span>
             <span class="md-header-nav__topic">
-              Run the different components of the solution
+              Tutorial
             </span>
           
         </div>
@@ -553,11 +553,20 @@
       
       
 
+  
 
-  <li class="md-nav__item">
-    <a href="../labs/" title="Tutorial" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+    <a href="./" title="Tutorial" class="md-nav__link md-nav__link--active">
       Tutorial
     </a>
+    
   </li>
 
     
@@ -578,29 +587,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#for-watson-conversation-service" title="For Watson Conversation service" class="md-nav__link">
-    For Watson Conversation service
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#for-tone-analyzer" title="For Tone analyzer" class="md-nav__link">
-    For Tone analyzer
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -611,155 +597,11 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/ibm-cloud-architecture/refarch-cognitive-analytics/edit/master/docs/run.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/ibm-cloud-architecture/refarch-cognitive-analytics/edit/master/docs/labs.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="run-the-different-components-of-the-solution">Run the different components of the solution</h1>
-<h3 id="for-watson-conversation-service">For Watson Conversation service</h3>
-<p>Create the service in IBM Cloud and get the credentials, update the configuration file (config.json and values.yaml) for the webapp to access the conversation service. <a href="../wcs/">See this note about implementation</a></p>
-<h3 id="for-tone-analyzer">For Tone analyzer</h3>
-<p>Create the service in IBM Cloud and get the credentials. See also <a href="../design/w-tone-analyzer/">this note</a> for more details.</p>
-<h1 id="_1"></h1>
-<h3 id="jenkins-pipeline">Jenkins pipeline</h3>
-<p>We deployed a Jenkins server on IBM Cloud Private following the instructions described <a href="https://github.com/ibm-cloud-architecture/refarch-integration/tree/master/docs/devops#jenkins-on-icp">here</a>, with a PVC named <code>jenkins-home</code> under the greencompute namespace and the commands:</p>
-<pre><code>$ helm install --name greenjenkins --set Persistence.ExistingClaim=jenkins-home --set Master.ImageTag=2.67 stable/jenkins --namespace greencompute
-$ cd chart/jenkins
-$ kubectl create -f docker-reg-configMap.yaml --namespace greencompute
-$ kubectl create -f registry-secret.yaml --namespace greencompute
-</code></pre>
-
-<p>Then we added configMap and secret in kubernetes cluster to keep docker private registry information so that build job can publish docker images to the registry automatically.</p>
-<p>The webapp and customer service projects have jenkinsfile that can be used in a Jenkins Pipeline. Pipelines are made up of multiple steps that allow you to build, test and deploy applications.</p>
-<p><img alt="" src="../green-web-pipeline.png" /></p>
-<p>Then define the URL of the github repository and specify the branch to checkout.</p>
-<p><img alt="" src="../pipeline-web.png" />
-The pipeline is created. You can manually start the build job that runs the pipeline. The job pulls the code from Git repository's master branch and runs the Jenkins file. Then, it builds the Docker image and pushes it to the IBM Cloud Private Docker registry.</p>
-<h2 id="run">Run</h2>
-<h3 id="run-the-web-application-locally">Run the web application locally</h3>
-<p>To start the application using node monitoring tool use the command:</p>
-<pre><code>npm run dev
-</code></pre>
-
-<p>To run in non-development mode</p>
-<pre><code>npm start
-</code></pre>
-
-<p>The trace should display a message like below with the url to use</p>
-<pre><code>[1] starting `node server/server server/server`
-[1] Server v0.0.1 starting on http://localhost:3001
-</code></pre>
-
-<p>Point your web browser to the url: <a href="http://localhost:3001">http://localhost:3001</a> to get access to the user interface of the home page.</p>
-<p>The demonstration script is described in this <a href="../flow/">note</a></p>
-<h3 id="run-web-app-on-ibm-cloud-private">Run web app on IBM Cloud Private</h3>
-<p>The application can be deployed with <code>helm install</code>. Once the docker image is built, you need to remote connect to the master node where the docker private repository resides, and push the image to the repo:</p>
-<pre><code>$ docker build -t ibmcase/greenapp .
-$ docker tag ibmcase/greenapp  greencluster.icp:8500/greencompute/greenapp:v0.0.1
-$ docker login greencluster.icp:8500
-$ docker push greencluster.icp:8500/greencompute/greenapp:v0.0.1
-</code></pre>
-
-<h4 id="deploy-the-release-using-the-helm">Deploy the release using the helm</h4>
-<p>First you need to rename the file <code>values-tmpl.yaml</code> to <code>values.yaml</code> and set the parameters as the config.json. We are using the mechanism of config map to externalize the configuration as defined by the <code>config.json</code>. While using cloud foundry or pure local nodejs deployment this file is read from the filesystem by the server.js. But with kubernetes pods the best practice is to export this configuration into <code>ConfigMap</code>.
-To do so we need to create a new template: <code>templates/configmap.yaml</code>. This file uses the same structure as the <code>config.json</code> file:</p>
-<pre><code class="yaml">apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: {{ template &quot;fullname&quot; . }}
-  labels:
-    chart: &quot;{{ .Chart.Name }}-{{ .Chart.Version | replace &quot;+&quot; &quot;_&quot; }}&quot;
-data:
-  config.json: |+
-    {
-    &quot;conversation&quot; :{
-        &quot;version&quot; : &quot;{{ .Values.config.conversation.version }}&quot;,
-        &quot;versionDate&quot;:&quot;{{ .Values.config.conversation.versionDate }}&quot;,
-        &quot;username&quot;:&quot;{{ .Values.config.conversation.username }}&quot;,
-        &quot;password&quot;:&quot;{{ .Values.config.conversation.password }}&quot;,
-        &quot;conversationId&quot;:&quot;{{ .Values.config.conversation.conversationId }}&quot;,
-        &quot;workspace&quot;:&quot;{{ .Values.config.conversation.workspace }}&quot;,
-        &quot;usePersistence&quot;: &quot;{{ .Values.config.conversation.usePersistence }}&quot;
-      },
-    &quot;customerAPI&quot;:{
-          &quot;url&quot;:&quot;{{ .Values.config.customerAPI.url }}&quot;,
-          &quot;host&quot;:&quot;{{ .Values.config.customerAPI.host }}&quot;,
-          &quot;xibmclientid&quot;: &quot;{{ .Values.config.customerAPI.xibmclientid }}&quot;
-    },
-    &quot;toneAnalyzer&quot;:{
-          &quot;url&quot;: &quot;{{ .Values.config.toneAnalyzer.url }}&quot;,
-          &quot;versionDate&quot;: &quot;{{ .Values.config.toneAnalyzer.versionDate }}&quot;,
-          &quot;username&quot;: &quot;{{ .Values.config.toneAnalyzer.username }}&quot;,
-          &quot;password&quot;: &quot;{{ .Values.config.toneAnalyzer.password }}&quot;
-    },
-    &quot;scoringService&quot;:{
-        &quot;type&quot;: &quot;{{ .Values.config.scoringService.type }}&quot;,
-        &quot;baseUrl&quot;: &quot;{{ .Values.config.scoringService.baseUrl }}&quot;,
-        &quot;instance&quot;: &quot;{{ .Values.config.scoringService.instance }}&quot;,
-        &quot;username&quot;: &quot;{{ .Values.config.scoringService.username }}&quot;,
-        &quot;password&quot;: &quot;{{ .Values.config.scoringService.password }}&quot;
-      },
-    &quot;dbCredentials&quot; : {
-        &quot;url&quot;: &quot;{{ .Values.config.dbCredentials.url }}&quot;
-    },
-    &quot;debug&quot;: &quot;{{ .Values.config.debug }}&quot;,
-    &quot;port&quot;: &quot;{{ .Values.config.port }}&quot;,
-    &quot;version&quot;: &quot;{{ .Values.config.version }}&quot;
-    }
-
-</code></pre>
-
-<p>As you can see the real values are set in the <code>values.yaml</code> file. This is an implementation decision to externalize all values in this file, we could have set the value directly in the template as they are not used anywhere else.</p>
-<h3 id="modify-deploymentyaml">Modify deployment.yaml</h3>
-<p>To 'inject' the configuration from the <code>configMap</code> to the server nodejs app, the trick is to specify that the <code>config.json</code> file is coming from a logical volume:</p>
-<p>In the deployment.yaml we add a volumeMount point to the container specification:</p>
-<pre><code class="yaml">spec:
-  containers:
-  - name: {{ .Chart.Name }}
-    image: &quot;{{ .Values.image.repository }}:{{ .Values.image.tag }}&quot;
-    imagePullPolicy: {{ .Values.image.pullPolicy }}
-    ports:
-    - containerPort: {{ .Values.service.internalPort }}
-    volumeMounts:
-    - name: config
-    mountPath: /greenapp/server/config/config.json
-      subPath: config.json
-</code></pre>
-
-<p>the path <em>/greenapp</em> comes from the dockerfile, working directory declaration:</p>
-<pre><code class="docker">COPY . /greenapp
-WORKDIR /greenapp
-</code></pre>
-
-<p>so the mountPath will overwrite the <code>config.json</code> file.</p>
-<p>The volume name (config) is arbitrary but needs to match a volume declared later in the deployment.yaml.</p>
-<pre><code class="yaml">
-   volumes:
-      - name: config
-        configMap:
-          name:  {{ template &quot;fullname&quot; . }}
-</code></pre>
-
-<p>One volume, named <code>config</code> uses the configMap named using the template name of the helm package and match the configMap we defined above.</p>
-<p>Deploy the chart as a new release</p>
-<pre><code>$ cd ../chart
-$ helm install green-customerapp/ --name green-customerapp --namespace greencompute
-</code></pre>
-
-<p>Assess deployment is successful:</p>
-<pre><code>$ kubectl logs &lt;pod name&gt; --namespace greencompute
-</code></pre>
-
-<p>Once deployed and started the Web application can be seen at the URL: http://greenapp.green.case</p>
-<h3 id="run-the-jupyter-notebook">Run the Jupyter notebook</h3>
-<p>The main root project for green compute includes a dockerfile to get all the interesting components you may want to run to execute and develop Jupyter notebooks on your own. If you use <code>docker build -t pysparktf .</code>, you should get the image with python, sklearn, all spark python modules and even Tensorflow.</p>
-<pre><code>REPOSITORY                           TAG         IMAGE ID            CREATED             SIZE
-pysparktf                            latest      ee5d45e40097        2 months ago        5.29G
-pyspark                              latest      06821066e790        3 months ago        5.01GB
-jupyter/pyspark-notebook             latest      f4f7de14d4a7        3 months ago        4.56GB
-
-</code></pre>
-
-<p>From those docker images you can run a container that mounts your local folder where you have notebook under the work folder. The script <code>./startLocalJupyter.sh</code>, and then run the kernel.</p>
+                <h1 id="labs-tutorial">Labs tutorial</h1>
+<p>If you want to deploy and run the solution and even tune it you can do the following labs. The overall time will be around 3 hours. </p>
                 
                   
                 
@@ -776,6 +618,27 @@ jupyter/pyspark-notebook             latest      f4f7de14d4a7        3 months ag
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../Z/" title="Z deployment" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Z deployment
+              </span>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">

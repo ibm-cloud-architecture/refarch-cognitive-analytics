@@ -36,7 +36,7 @@
     
     
       
-        <title>Persisting the chat transcripts - Customer analysis with cognitive and analytics in hybrid cloud</title>
+        <title>Persisting the chatbot transcripts - Customer analysis with cognitive and analytics in hybrid cloud</title>
       
     
     
@@ -121,7 +121,7 @@
               Customer analysis with cognitive and analytics in hybrid cloud
             </span>
             <span class="md-header-nav__topic">
-              Persisting the chat transcripts
+              Persisting the chatbot transcripts
             </span>
           
         </div>
@@ -301,10 +301,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
     
     <label class="md-nav__link" for="nav-4">
       Design
@@ -340,6 +342,296 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../apim/" title="API management" class="md-nav__link">
+      API management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data/" title="Data ingestion" class="md-nav__link">
+      Data ingestion
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../design/scoring-serv/" title="Churn risk scoring" class="md-nav__link">
+      Churn risk scoring
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../design/w-tone-analyzer/" title="Tone analyzer inegration" class="md-nav__link">
+      Tone analyzer inegration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Persisting the chatbot transcripts
+      </label>
+    
+    <a href="./" title="Persisting the chatbot transcripts" class="md-nav__link md-nav__link--active">
+      Persisting the chatbot transcripts
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#pre-requisite" title="Pre-requisite" class="md-nav__link">
+    Pre-requisite
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-cloudant-service-in-ibm-cloud" title="Create a Cloudant Service in IBM Cloud" class="md-nav__link">
+    Create a Cloudant Service in IBM Cloud
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-database-wcsdb" title="Create a Database: wcsdb" class="md-nav__link">
+    Create a Database: wcsdb
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-service-credentials" title="Get service credentials" class="md-nav__link">
+    Get service credentials
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implement-service-client" title="Implement service client" class="md-nav__link">
+    Implement service client
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#browse-conversation-content-in-cloudant-console" title="Browse conversation content in Cloudant console" class="md-nav__link">
+    Browse conversation content in Cloudant console
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#access-all-conversations-from-a-given-timestamp" title="Access all conversations from a given timestamp" class="md-nav__link">
+    Access all conversations from a given timestamp
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../wcs/" title="Watson assistant  implementation" class="md-nav__link">
+      Watson assistant  implementation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ml/" title="Analytics implementation" class="md-nav__link">
+      Analytics implementation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Environment setup
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Environment setup
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../env/public/" title="Public" class="md-nav__link">
+      Public
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../env/private/" title="Private" class="md-nav__link">
+      Private
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Deployments
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        Deployments
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../deploy/local/" title="Local" class="md-nav__link">
+      Local
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../deploy/iks/" title="Public IKS" class="md-nav__link">
+      Public IKS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../deploy/icp/" title="Private ICP" class="md-nav__link">
+      Private ICP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Z/" title="Z deployment" class="md-nav__link">
+      Z deployment
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -351,8 +643,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../run/" title="Deployments" class="md-nav__link">
-      Deployments
+    <a href="../../labs/" title="Tutorial" class="md-nav__link">
+      Tutorial
     </a>
   </li>
 
@@ -406,8 +698,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#implement-service-client" title="Implement service Client" class="md-nav__link">
-    Implement service Client
+  <a href="#implement-service-client" title="Implement service client" class="md-nav__link">
+    Implement service client
   </a>
   
 </li>
@@ -479,7 +771,7 @@
 },
 </code></pre>
 
-<h2 id="implement-service-client">Implement service Client</h2>
+<h2 id="implement-service-client">Implement service client</h2>
 <p>The code is in the <code>server/routes/features/persist.js</code>. The method is using Cloudant API module, and the conversation response. The code is using the persistId and revId of cloudant response to modify the Watson Assistant context with those two variables so a unique document is created for all interaction, and the document is updated at each interaction.</p>
 <pre><code class="javascript">saveConversation : function(config,conv,next){
   var cloudant = require('cloudant')(config.dbCredentials.url);
@@ -524,6 +816,41 @@
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../../design/w-tone-analyzer/" title="Tone analyzer inegration" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Tone analyzer inegration
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../wcs/" title="Watson assistant  implementation" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Watson assistant  implementation
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">

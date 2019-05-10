@@ -387,6 +387,210 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../apim/" title="API management" class="md-nav__link">
+      API management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data/" title="Data ingestion" class="md-nav__link">
+      Data ingestion
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../scoring-serv/" title="Churn risk scoring" class="md-nav__link">
+      Churn risk scoring
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../w-tone-analyzer/" title="Tone analyzer inegration" class="md-nav__link">
+      Tone analyzer inegration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../persist/chattranscripts/" title="Persisting the chatbot transcripts" class="md-nav__link">
+      Persisting the chatbot transcripts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../wcs/" title="Watson assistant  implementation" class="md-nav__link">
+      Watson assistant  implementation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ml/" title="Analytics implementation" class="md-nav__link">
+      Analytics implementation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Environment setup
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Environment setup
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../env/public/" title="Public" class="md-nav__link">
+      Public
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../env/private/" title="Private" class="md-nav__link">
+      Private
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Deployments
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        Deployments
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../deploy/local/" title="Local" class="md-nav__link">
+      Local
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../deploy/iks/" title="Public IKS" class="md-nav__link">
+      Public IKS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../deploy/icp/" title="Private ICP" class="md-nav__link">
+      Private ICP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Z/" title="Z deployment" class="md-nav__link">
+      Z deployment
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -398,8 +602,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../run/" title="Deployments" class="md-nav__link">
-      Deployments
+    <a href="../../labs/" title="Tutorial" class="md-nav__link">
+      Tutorial
     </a>
   </li>
 
@@ -466,23 +670,23 @@
 <p>From above figure left to right the components involved are:</p>
 <ol>
 <li><strong>Web application</strong> to offer a set of services for the end user to access: from this user interface the end user, customer of Green Telco, can access his account, pays his bill (not implemented) and uses the chat bot user interface to get support help. <a href="../code/">This note</a> presents the implementation details and how to deploy it on ICP.</li>
-<li>The account informations are loaded from the back end systems (7) via a customer management micro service (8) and an API product defined (9) in API Connect. The call in (2) is RESTful API and documented in <a href="docs/code.md#account-component">this note</a></li>
-<li>The chat bot is implemented with <strong>Watson Assistant</strong>. The workspace is delivered for you to upload to your own Watson Assistant cloud service you may have created, <a href="docs/wcs/README.md">this note</a> go into the implementation detail.</li>
-<li>The conversation sentences may be analyzed for <strong>tone analysis</strong>, and natural language understanding, those data are used by the scoring service. The service creation in IBM Cloud and the integration into the application flow is explained in <a href="./docs/w-tone-analyzer.md">this note</a></li>
-<li>The conversation transcripts are persisted in a document oriented database. We discuss about its implementation with Cloudant service on IBM Cloud in <a href="docs/persist/chattranscripts.md">this technical note.</a></li>
-<li>A <strong>scoring service</strong> to assess current risk of churn for the customer interacting with Green Telco services. This is a runtime analytics service using customer data and results from the Tone Analysis. <a href="docs/scoring-serv.md">This note</a> goes over the detail of the deployment and implementation of this machine learning based service. It can be deployed on IBM Cloud public Watson Machine learning or IBM Cloud Private.</li>
+<li>The account informations are loaded from the back end systems (7) via a customer management micro service (8) and an API product defined (9) in API Connect. The call in (2) is RESTful API and documented in <a href="../code/#account-component">this note</a></li>
+<li>The chat bot is implemented with <strong>Watson Assistant</strong>. The workspace is delivered for you to upload to your own Watson Assistant cloud service you may have created, <a href="../../wcs/">this note</a> go into the implementation detail.</li>
+<li>Conversation sentences may be analyzed for <strong>tone analysis</strong>, and natural language understanding, those data are used by the scoring service. The service creation in IBM Cloud and the integration into the application flow is explained in <a href="../w-tone-analyzer/">this note</a></li>
+<li>The conversation transcripts are persisted in a document oriented database. We discuss about its implementation with Cloudant service on IBM Cloud in <a href="../../persist/chattranscripts/">this technical note.</a></li>
+<li>A <strong>scoring service</strong> to assess current risk of churn for the customer interacting with Green Telco services. This is a runtime analytics service using customer data and results from the Tone Analysis. <a href="../scoring-serv/">This note</a> goes over the detail of the deployment and implementation of this machine learning based service. It can be deployed on IBM Cloud public Watson Machine learning or IBM Cloud Private.</li>
 <li>The customer <a href="https://github.com/ibm-cloud-architecture/refarch-integration-services#data-model">data</a> are persisted in on-premise server with relational database. We are using DB2 on-premise server for that. To read how the database was created see <a href="https://github.com/ibm-cloud-architecture/refarch-integration-services/blob/master/docs/DB2Creation.md">the note in this repository</a></li>
 <li>Customer data are exposed via a <strong>micro service</strong> approach. The implementation is done in a separate repository: <a href="https://github.com/ibm-cloud-architecture/refarch-integration-services">the Customer management micro-services</a>. It supports the JAXRS implementation deployed in Liberty as Docker image and the DB2 schema for DB2 data base.</li>
-<li><strong>API product</strong> can be defined on top of the customer management service to monitor API usage and perform API governance. The implementation is supported by IBM API Connect. Some explanation of the product development in <a href="./docs/apim/README.md">this note</a> <br />
+<li><strong>API product</strong> can be defined on top of the customer management service to monitor API usage and perform API governance. The implementation is supported by IBM API Connect. Some explanation of the product development in <a href="../../apim/">this note</a> <br />
 At this stage the other components are more used at design time with the involvement of knowledge engineers, data analysts and data scientists.</li>
 <li>Data scientists use machine learning library and Jupiter notebook, R Studio or Zeppelin on top of Apache Spark in IBM Data Science Experience (DSX) to discover the model. We are documenting two different approaches:</li>
-<li>One based on Watson Data Platform running on IBM Cloud and described in <a href="./docs/ml/README.md">this note</a> with <a href="docs/ml/CustomerChurnAnalysisCl-bpull.md">this jupyter notebook</a>.</li>
-<li>One based on <a href="docs/ml/icp-dsx-ml-model.md">Private cloud using DSX and Db2 warehouse</a> and <a href="./docs/ml/CustomerChurnAnalysisDSXICP.md">another notebook</a>.</li>
+<li>One based on Watson Data Platform running on IBM Cloud and described in <a href="../../ml/">this note</a> with <a href="../../ml/CustomerChurnAnalysisCl-bpull/">this jupyter notebook</a>.</li>
+<li>One based on <a href="../../ml/icp-dsx-ml-model/">Private cloud using DSX and Db2 warehouse</a> and <a href="../../ml/CustomerChurnAnalysisDSXICP/">another notebook</a>.</li>
 <li>The data used by data scientists are persisted in Db2 warehouse. <a href="https://github.com/ibm-cloud-architecture/refarch-analytics/tree/master/docs/db2warehouse">This note</a> goes over the creation of the Db2 warehouse release within IBM Cloud private.</li>
-<li><strong>Ingestion</strong> mechanism can move data, for chat transcripts and customer records to the DB2 warehouse. This process can run on demand when Data Scientists need new data to tune the model. It can be implemented with an ETL, with Java program, or using the Db2 Federation capability. <a href="docs/data/README.md">This note</a> explains what was done to move DB2 customer data to Db2 warehouse.</li>
+<li><strong>Ingestion</strong> mechanism can move data, for chat transcripts and customer records to the DB2 warehouse. This process can run on demand when Data Scientists need new data to tune the model. It can be implemented with an ETL, with Java program, or using the Db2 Federation capability. <a href="../../data/">This note</a> explains what was done to move DB2 customer data to Db2 warehouse.</li>
 <li><a href="https://github.com/ibm-cloud-architecture/refarch-cognitive-prod-recommendations">Product recommendations based on Operational Decision Management rules</a></li>
 </ol>
-<p>The natural language understanding service is added to support most advanced language processing from the text entered but the end user: entity extraction, relationships, taxonomy, etc. Those elements could be used for scoring services. The language understanding can be fine tuned by using terms and model defined in <strong>Watson Knowledge Studio</strong>.</p>
+<p>The natural language understanding service is added to support most advanced language processing from the text entered but the end user: entity extraction, relationships, taxonomy, etc. Those elements could be used for scoring services. The language understanding can be fine-tuned by using terms and model defined in <strong>Watson Knowledge Studio</strong>.</p>
 <p>The following sequence diagram explains how the components interact with each others.</p>
 <p><img alt="sequence diagram" src="../seq-diagram.png" /></p>
                 
