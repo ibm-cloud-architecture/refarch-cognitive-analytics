@@ -1,0 +1,76 @@
+<div class='row'>
+  <div class="collapse navbar-collapse" id="main-navbar">
+    <ul class="nav navbar-nav">
+        <li class=""><a [routerLink]="['/home']">Home</a></li>
+    </ul>
+  </div>
+</div>
+<div class='row outer'>
+  <div class='col-md-4'>
+    <p>Welcome to Green Telco Support: Try the following sentences:</p>
+    <ul>
+      <li><b>I was oversea and the data network was poor, slow</b>: The bot will respond with generic answer which should upset you</li>
+      <li><b>I want to know the status of my phone reimbursement request</b>: The bot is querying the trouble ticket service and return unpleasant status</li>
+      <li><b>what? the sale rep told me it will be free, this is a scandal very frustrating, what can be done?</b> Now you are upset, the bot transfert to a human</li>
+      <li><b>I want to move</b>: This use case is to demonstrate product recommendation using IBM Operational Decision Managment: When the bot detects that the customer of a telco provider, wants to relocate, it  asks about the target zipcode as well as the anticipated move date, and uses this data, combined with existing customer data, to offer a personalised recommendation on which new telco service and price the customer should get at his new address. See <a href="https://github.com/ibm-cloud-architecture/refarch-cognitive-prod-recommendations">[this github repository]</a></li>
+    </ul>
+  <br/>
+
+  </div>
+  <div class="col-md-8">
+
+<div class="row">
+  <h4>For the product recommendation demonstration only</h4>
+    <mat-form-field>
+        <mat-label>Select Predefined Customer Profile</mat-label>
+        <mat-select  [formControl]="profileControl"  [(value)]="selectedProfile">
+         <mat-option *ngFor="let p of profiles" [value]="p.value">
+           {{ p.viewValue }}
+         </mat-option>
+
+       </mat-select>
+     </mat-form-field>
+ </div>
+
+
+     <div class="row">
+         <div class="conversation-container" style="box-shadow: 3px 3px 1px #05870b; border-color: #05870b;">
+            <div  #scrollMe class="scrolling-box">
+              <div *ngFor="let p of currentDialog">
+                 <div class="message-box">
+                   <div class="{{p.direction}}">
+                      <div class="{{p.direction+'-icon'}}" >
+                        <span *ngIf="p.direction === 'to-watson'" class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        <div *ngIf="p.direction === 'from-watson'" class="from-watson-icon">
+                          <img src='assets/images/watson-globe.png' style='width:50px'>
+                        </div>
+                      </div>
+                      <div class="{{p.direction+'-text'}}">
+                        <div [innerHTML]="p.text"></div>
+                        <div *ngIf="p.options">
+                          <div *ngFor="let c of p.options">
+                              <br/>
+                            <button type="button" (click)="advisorResponse(c)" class="btn btn-primary">{{c}}</button>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <form class="form-inline" autocomplete="off" (keydown)="keyMessage($event)">
+                <div class="form-group " style="padding:20px">
+                    <input class="form-control message-box"
+                           type="text"
+                           size="60"
+                           [(ngModel)]="queryString"
+                           placeholder="Send a message to Telco Bot!"
+                           name="queryString"
+                           autocomplete="off"/>
+                    <button class="btn btn-primary" (click)="submit()" type="button">Send</button>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
+  </div>
+</div>

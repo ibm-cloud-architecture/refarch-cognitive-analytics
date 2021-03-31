@@ -1,0 +1,71 @@
+<div class="collapse navbar-collapse" id="main-navbar">
+  <ul class="nav navbar-nav">
+      <li class=""><a [routerLink]="['/']">Home</a></li>
+  </ul>
+</div>
+<div *ngIf="error">
+  <h3>{{error}}</h3>
+</div>
+<div *ngIf="customer">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1>{{customer.name}}'s Account</h1>
+    </div>
+  </div>
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Account Details</h3>
+    </div>
+    <table class="table">
+      <tr>
+        <td class="col-md-3"><b>Account Number</b></td>
+        <td class="col-md-9">{{customer.accountNumber}}</td>
+      <tr>
+      <tr>
+        <td class="col-md-3"><b>Balance</b></td>
+        <td class="col-md-9">${{customer.balance}}</td>
+      <tr>
+      <tr>
+        <td class="col-md-3"><b>Plan</b></td>
+        <td class="col-md-9">{{customer.ratePlan}}</td>
+      <tr>
+    </table>
+  </div>
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Usage</h3>
+    </div>
+    <table class="table">
+      <tr>
+        <td class="col-md-3"><b>Total</b></td>
+        <td class="col-md-9">{{customer.usage}}</td>
+      <tr>
+      <tr>
+        <td class="col-md-3"><b>Local</b></td>
+        <td class="col-md-9">{{customer.local}}</td>
+      <tr>
+      <tr>
+        <td class="col-md-3"><b>International</b></td>
+        <td class="col-md-9">{{customer.international}}</td>
+      <tr>
+    </table>
+  </div>
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Devices</h3>
+    </div>
+    <table class="table">
+      <tr>
+        <th class="col-md-3">Name</th>
+        <th class="col-md-9">Usage</th>
+      </tr>
+      <tr *ngFor="let device of customer.devicesOwned">
+        <td class="col-md-3">{{device.productName}}</td>
+        <td class="col-md-9">{{device.monthlyUsage}}</td>
+      <tr>
+    </table>
+  </div>
+</div>

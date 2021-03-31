@@ -1,0 +1,71 @@
+{
+  "name": "GreenTelcoApp",
+  "version": "0.0.1",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ibm-cloud-architecture/refarch-cognitive-analytics.git"
+  },
+  "engines": {
+    "node": "6.x",
+    "npm": "5.x"
+  },
+  "author": "Jerome Boyer",
+  "scripts": {
+    "ng": "ng",
+    "start": "node server/server",
+    "dev": "concurrently \"ng build\" \"nodemon server/server\"",
+    "devui": "concurrently \"npm run build:watch\" \"npm run serve\"",
+    "build": "ng build",
+    "build:watch": "tsc -p client/ -w",
+    "test": "mocha"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^5.1.1",
+    "@angular/common": "^5.1.1",
+    "@angular/core": "^5.1.1",
+    "@angular/forms": "^5.1.1",
+    "@angular/http": "^5.1.1",
+    "@angular/platform-browser": "^5.1.1",
+    "@angular/platform-browser-dynamic": "^5.1.1",
+    "@angular/platform-server": "^5.1.1",
+    "@angular/router": "^5.1.1",
+    "@angular/compiler": "^5.1.2",
+    "@angular/cdk": "^5.0.3",
+    "@angular/material": "^5.0.3",
+    "@ngtools/json-schema": "^1.1.0",
+    "ajv": "^5.0.0",
+    "body-parser": "^1.17.2",
+    "bootstrap": "^3.3.7",
+    "cloudant": "^1.4.x",
+    "cookie-parser": "^1.4.3",
+    "core-js": "^2.4.1",
+    "express": "^4.15.3",
+    "express-session": "^1.13.0",
+    "extend": "^3.0.0",
+    "hystrixjs": "0.2.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "querystring": "^0.2.0",
+    "request": "^2.72.0",
+    "rxjs": "^5.4.1",
+    "session-memory-store": "^0.2.2",
+    "watson-developer-cloud": "^3.2.1",
+    "webpack": "^3.1.0",
+    "btoa": "",
+    "zone.js": "^0.8.4"
+  },
+  "devDependencies": {
+    "@angular/cli": "^6.0.1",
+    "@angular/compiler-cli": "^5.1.2",
+    "@angular/language-service": "^5.1.2",
+    "typescript": "~2.4.2",
+    "lite-server": "^2.2.2",
+    "@types/node": "~6.0.60",
+    "chai": "^4.0.0",
+    "concurrently": "^3.5.0",
+    "mocha": "^3.4.1",
+    "nodemon": "^1.11.0"
+  }
+}

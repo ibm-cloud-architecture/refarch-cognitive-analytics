@@ -1,0 +1,30 @@
+
+<div class="row" style="outline: 10px">
+  <div class="col-md-8">
+    <h4><i>Welcome to the Case Inc Portal Application!</i></h4>
+    <h4>News</h4>
+    <p>This application illustrates a customer churn scoring using Watson cognitive services, hybrid integration and machine learning model deployed as service with public and private cloud as described in the public github repository <a href="https://github.com/ibm-cloud-architecture/refarch-cognitive-analytics">cognitive & analytics reference implementation</a>
+  </div>
+  <div class="col-md-4" style="outline: 4px">
+    <h2>Login</h2>
+    <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+          <div class="form-group" [ngClass]="{ 'has-error': f.submitted }">
+              <label for="email">email</label>
+              <input type="text" class="form-control" name="email" [(ngModel)]="user.email" #email="ngModel" required />
+              <div *ngIf="f.submitted && !email.valid" class="help-block">Email address is required</div>
+          </div>
+          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" name="password" [(ngModel)]="user.password" #password="ngModel" required />
+              <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+          </div>
+          <div class="form-group">
+              <button [disabled]="loggingIn" class="btn btn-primary"><span *ngIf="!loggingIn">Login</span><span *ngIf="loggingIn">Logging in...</span></button>
+              <!-- <a [routerLink]="['/signUp']" class="btn btn-link">Register</a> -->
+          </div>
+      </form>
+      <p style="color: red;">
+        {{errorMessage}}
+      </p>
+  </div>
+</div>

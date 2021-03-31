@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "greencompute-telco-app.fullname" . }}
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+data:
+  config.json: |+
+    {
+        "watsonassistant" :{
+            "version" : "{{ .Values.config.watsonassistant.version }}",
+            "versionDate":"{{ .Values.config.watsonassistant.versionDate }}",
+            "username":"{{ .Values.config.watsonassistant.username }}",
+            "password":"{{ .Values.config.watsonassistant.password }}",
+            "conversationId":"{{ .Values.config.watsonassistant.conversationId }}",
+            "workspace":"{{ .Values.config.watsonassistant.workspace }}",
+            "usePersistence": "{{ .Values.config.watsonassistant.usePersistence }}"
+          },
+        "customerAPI":{
+              "url":"{{ .Values.config.customerAPI.url }}",
+              "host":"{{ .Values.config.customerAPI.host }}",
+              "xibmclientid": "{{ .Values.config.customerAPI.xibmclientid }}"
+        },
+        "toneAnalyzer":{
+              "url": "{{ .Values.config.toneAnalyzer.url }}" ,
+              "versionDate": "{{ .Values.config.toneAnalyzer.versionDate }}",
+              "username": "{{ .Values.config.toneAnalyzer.username }}",
+              "password": "{{ .Values.config.toneAnalyzer.password }}"
+        },
+        "scoringService":{
+            "type": "{{ .Values.config.scoringService.type }}",
+            "baseUrl": "{{ .Values.config.scoringService.baseUrl }}",
+            "instance": "{{ .Values.config.scoringService.instance }}",
+            "username": "{{ .Values.config.scoringService.username }}",
+            "password": "{{ .Values.config.scoringService.password }}"
+          },
+        "odm" : {
+          "hostname": "{{ .Values.config.odm.hostname }}",
+          "port": "{{ .Values.config.odm.port }}",
+          "protocol": "{{ .Values.config.odm.protocol }}",
+          "path": "{{ .Values.config.odm.path }}",
+          "authtoken": "{{ .Values.config.odm.authtoken }}"
+        },
+        "dbCredentials" : {
+            "url": "{{ .Values.config.dbCredentials.url }}"
+        },
+        "debug": "{{ .Values.config.debug }}",
+        "port": "{{ .Values.config.port }}",
+        "version": "{{ .Values.config.version }}"
+    }
