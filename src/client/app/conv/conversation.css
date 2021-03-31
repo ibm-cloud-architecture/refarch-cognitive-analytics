@@ -1,0 +1,77 @@
+
+.conversation-container ***REMOVED***
+  border-style: solid;
+  max-width: 950px;
+  margin: 30px auto;
+  outline: 20px;
+  border-width : 2px;
+  border-radius: 8px;
+  border-color: #blue;
+***REMOVED***
+
+.outer ***REMOVED***
+  outline: 20px;
+***REMOVED***
+
+.scrolling-box ***REMOVED***
+  padding: 0px 5px;
+  height: calc(100vh - 200px);
+  max-height: 500px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+***REMOVED***
+
+.message-box ***REMOVED***
+  margin: 20px 0px;
+  overflow: hidden;
+***REMOVED***
+
+.to-watson ***REMOVED***
+    margin-left: 30%;
+***REMOVED***
+.to-watson-icon ***REMOVED***
+  float: right;
+  font-size: 40px;
+***REMOVED***
+.to-watson-text ***REMOVED***
+  padding: 0px 20px;
+  border-radius: 20px;
+  float: right;
+  background: #05870b;
+  color:white;
+  max-width: calc(100% - 60px);
+***REMOVED***
+
+.from-watson ***REMOVED***
+  max-width: 70%;
+***REMOVED***
+.from-watson-icon ***REMOVED***
+  float: left;
+***REMOVED***
+.from-watson-text ***REMOVED***
+  background: #8bc9ef;
+  padding: 15px 20px;
+  border-radius: 20px;
+  float: left;
+  color:blue;
+  max-width: calc(100% - 60px);
+***REMOVED***
+
+
+
+.mat-form-field***REMOVED***
+  margin: 20px;
+***REMOVED***
+ ::ng-deep .cdk-overlay-container***REMOVED***
+  position: absolute !important;
+  background-color: white;
+  width:20%;
+  top: 450px;
+  left:500px;
+
+***REMOVED***
+
+
+.mat-form-field[_ngcontent-c0]***REMOVED***
+  width: 35%;
+***REMOVED***

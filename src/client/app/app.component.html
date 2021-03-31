@@ -1,0 +1,22 @@
+<!--This is really the placeholder to support top and bottom parts of the page + the internal content derived
+from the routing mechanism -->
+<div class="container-fluid" style="position:relative;">
+  <div class="jumbotron" style="background-image: url(assets/images/top.jpg)">
+    <h2 style="color:white">Green Telco Portal</h2>
+  </div>
+  <div class="header clearfix">
+    <nav>
+      <ul class="nav nav-pills pull-right">
+        <li role="presentation" *ngIf="user"><a (click)="logout()">Logout</a></li>
+      </ul>
+    </nav>
+    <h3 class="text-muted" (click)="home()">Green Telco Portal</h3>
+  </div>
+
+  <router-outlet></router-outlet>
+
+  <footer>
+    <p>&copy; IBM | Cloud Architecture Service Engineering | ***REMOVED******REMOVED***version***REMOVED******REMOVED*** </p>
+  </footer>
+
+</div>

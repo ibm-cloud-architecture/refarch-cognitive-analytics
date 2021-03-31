@@ -1,0 +1,71 @@
+<div class="collapse navbar-collapse" id="main-navbar">
+  <ul class="nav navbar-nav">
+      <li class=""><a [routerLink]="['/']">Home</a></li>
+  </ul>
+</div>
+<div *ngIf="error">
+  <h3>***REMOVED******REMOVED***error***REMOVED******REMOVED***</h3>
+</div>
+<div *ngIf="customer">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1>***REMOVED******REMOVED***customer.name***REMOVED******REMOVED***'s Account</h1>
+    </div>
+  </div>
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Account Details</h3>
+    </div>
+    <table class="table">
+      <tr>
+        <td class="col-md-3"><b>Account Number</b></td>
+        <td class="col-md-9">***REMOVED******REMOVED***customer.accountNumber***REMOVED******REMOVED***</td>
+      <tr>
+      <tr>
+        <td class="col-md-3"><b>Balance</b></td>
+        <td class="col-md-9">$***REMOVED******REMOVED***customer.balance***REMOVED******REMOVED***</td>
+      <tr>
+      <tr>
+        <td class="col-md-3"><b>Plan</b></td>
+        <td class="col-md-9">***REMOVED******REMOVED***customer.ratePlan***REMOVED******REMOVED***</td>
+      <tr>
+    </table>
+  </div>
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Usage</h3>
+    </div>
+    <table class="table">
+      <tr>
+        <td class="col-md-3"><b>Total</b></td>
+        <td class="col-md-9">***REMOVED******REMOVED***customer.usage***REMOVED******REMOVED***</td>
+      <tr>
+      <tr>
+        <td class="col-md-3"><b>Local</b></td>
+        <td class="col-md-9">***REMOVED******REMOVED***customer.local***REMOVED******REMOVED***</td>
+      <tr>
+      <tr>
+        <td class="col-md-3"><b>International</b></td>
+        <td class="col-md-9">***REMOVED******REMOVED***customer.international***REMOVED******REMOVED***</td>
+      <tr>
+    </table>
+  </div>
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Devices</h3>
+    </div>
+    <table class="table">
+      <tr>
+        <th class="col-md-3">Name</th>
+        <th class="col-md-9">Usage</th>
+      </tr>
+      <tr *ngFor="let device of customer.devicesOwned">
+        <td class="col-md-3">***REMOVED******REMOVED***device.productName***REMOVED******REMOVED***</td>
+        <td class="col-md-9">***REMOVED******REMOVED***device.monthlyUsage***REMOVED******REMOVED***</td>
+      <tr>
+    </table>
+  </div>
+</div>

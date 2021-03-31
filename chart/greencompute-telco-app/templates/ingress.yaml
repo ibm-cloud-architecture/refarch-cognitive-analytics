@@ -1,0 +1,39 @@
+***REMOVED******REMOVED***- if .Values.ingress.enabled -***REMOVED******REMOVED***
+***REMOVED******REMOVED***- $fullName := include "greencompute-telco-app.fullname" . -***REMOVED******REMOVED***
+***REMOVED******REMOVED***- $servicePort := .Values.service.externalPort -***REMOVED******REMOVED***
+***REMOVED******REMOVED***- $ingressPath := .Values.ingress.path -***REMOVED******REMOVED***
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ***REMOVED******REMOVED*** $fullName ***REMOVED******REMOVED***
+  labels:
+    app: ***REMOVED******REMOVED*** template "greencompute-telco-app.name" . ***REMOVED******REMOVED***
+    chart: ***REMOVED******REMOVED*** template "greencompute-telco-app.chart" . ***REMOVED******REMOVED***
+    release: ***REMOVED******REMOVED*** .Release.Name ***REMOVED******REMOVED***
+    heritage: ***REMOVED******REMOVED*** .Release.Service ***REMOVED******REMOVED***
+***REMOVED******REMOVED***- with .Values.ingress.annotations ***REMOVED******REMOVED***
+  annotations:
+***REMOVED******REMOVED*** toYaml . | indent 4 ***REMOVED******REMOVED***
+***REMOVED******REMOVED***- end ***REMOVED******REMOVED***
+spec:
+***REMOVED******REMOVED***- if .Values.ingress.tls ***REMOVED******REMOVED***
+  tls:
+  ***REMOVED******REMOVED***- range .Values.ingress.tls ***REMOVED******REMOVED***
+    - hosts:
+      ***REMOVED******REMOVED***- range .hosts ***REMOVED******REMOVED***
+        - ***REMOVED******REMOVED*** . ***REMOVED******REMOVED***
+      ***REMOVED******REMOVED***- end ***REMOVED******REMOVED***
+      secretName: ***REMOVED******REMOVED*** .secretName ***REMOVED******REMOVED***
+  ***REMOVED******REMOVED***- end ***REMOVED******REMOVED***
+***REMOVED******REMOVED***- end ***REMOVED******REMOVED***
+  rules:
+  ***REMOVED******REMOVED***- range .Values.ingress.hosts ***REMOVED******REMOVED***
+    - host: ***REMOVED******REMOVED*** . ***REMOVED******REMOVED***
+      http:
+        paths:
+          - path: ***REMOVED******REMOVED*** $ingressPath ***REMOVED******REMOVED***
+            backend:
+              serviceName: ***REMOVED******REMOVED*** $fullName ***REMOVED******REMOVED***
+              servicePort: ***REMOVED******REMOVED*** $servicePort ***REMOVED******REMOVED***
+  ***REMOVED******REMOVED***- end ***REMOVED******REMOVED***
+***REMOVED******REMOVED***- end ***REMOVED******REMOVED***
