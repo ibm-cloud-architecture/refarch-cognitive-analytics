@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ***REMOVED******REMOVED*** template "greencompute-telco-app.fullname" . ***REMOVED******REMOVED***
+  labels:
+    chart: "***REMOVED******REMOVED*** .Chart.Name ***REMOVED******REMOVED***-***REMOVED******REMOVED*** .Chart.Version | replace "+" "_" ***REMOVED******REMOVED***"
+data:
+  config.json: |+
+    ***REMOVED***
+        "watsonassistant" :***REMOVED***
+            "version" : "***REMOVED******REMOVED*** .Values.config.watsonassistant.version ***REMOVED******REMOVED***",
+            "versionDate":"***REMOVED******REMOVED*** .Values.config.watsonassistant.versionDate ***REMOVED******REMOVED***",
+            "username":"***REMOVED******REMOVED*** .Values.config.watsonassistant.username ***REMOVED******REMOVED***",
+            "password":"***REMOVED******REMOVED*** .Values.config.watsonassistant.password ***REMOVED******REMOVED***",
+            "conversationId":"***REMOVED******REMOVED*** .Values.config.watsonassistant.conversationId ***REMOVED******REMOVED***",
+            "workspace":"***REMOVED******REMOVED*** .Values.config.watsonassistant.workspace ***REMOVED******REMOVED***",
+            "usePersistence": "***REMOVED******REMOVED*** .Values.config.watsonassistant.usePersistence ***REMOVED******REMOVED***"
+        ***REMOVED***
+        "customerAPI":***REMOVED***
+              "url":"***REMOVED******REMOVED*** .Values.config.customerAPI.url ***REMOVED******REMOVED***",
+              "host":"***REMOVED******REMOVED*** .Values.config.customerAPI.host ***REMOVED******REMOVED***",
+              "xibmclientid": "***REMOVED******REMOVED*** .Values.config.customerAPI.xibmclientid ***REMOVED******REMOVED***"
+      ***REMOVED***
+        "toneAnalyzer":***REMOVED***
+              "url": "***REMOVED******REMOVED*** .Values.config.toneAnalyzer.url ***REMOVED******REMOVED***" ,
+              "versionDate": "***REMOVED******REMOVED*** .Values.config.toneAnalyzer.versionDate ***REMOVED******REMOVED***",
+              "username": "***REMOVED******REMOVED*** .Values.config.toneAnalyzer.username ***REMOVED******REMOVED***",
+              "password": "***REMOVED******REMOVED*** .Values.config.toneAnalyzer.password ***REMOVED******REMOVED***"
+      ***REMOVED***
+        "scoringService":***REMOVED***
+            "type": "***REMOVED******REMOVED*** .Values.config.scoringService.type ***REMOVED******REMOVED***",
+            "baseUrl": "***REMOVED******REMOVED*** .Values.config.scoringService.baseUrl ***REMOVED******REMOVED***",
+            "instance": "***REMOVED******REMOVED*** .Values.config.scoringService.instance ***REMOVED******REMOVED***",
+            "username": "***REMOVED******REMOVED*** .Values.config.scoringService.username ***REMOVED******REMOVED***",
+            "password": "***REMOVED******REMOVED*** .Values.config.scoringService.password ***REMOVED******REMOVED***"
+        ***REMOVED***
+        "odm" : ***REMOVED***
+          "hostname": "***REMOVED******REMOVED*** .Values.config.odm.hostname ***REMOVED******REMOVED***",
+          "port": "***REMOVED******REMOVED*** .Values.config.odm.port ***REMOVED******REMOVED***",
+          "protocol": "***REMOVED******REMOVED*** .Values.config.odm.protocol ***REMOVED******REMOVED***",
+          "path": "***REMOVED******REMOVED*** .Values.config.odm.path ***REMOVED******REMOVED***",
+          "authtoken": "***REMOVED******REMOVED*** .Values.config.odm.authtoken ***REMOVED******REMOVED***"
+      ***REMOVED***
+        "dbCredentials" : ***REMOVED***
+            "url": "***REMOVED******REMOVED*** .Values.config.dbCredentials.url ***REMOVED******REMOVED***"
+      ***REMOVED***
+        "debug": "***REMOVED******REMOVED*** .Values.config.debug ***REMOVED******REMOVED***",
+        "port": "***REMOVED******REMOVED*** .Values.config.port ***REMOVED******REMOVED***",
+        "version": "***REMOVED******REMOVED*** .Values.config.version ***REMOVED******REMOVED***"
+    ***REMOVED***

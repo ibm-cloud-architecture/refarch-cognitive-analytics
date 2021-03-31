@@ -1,0 +1,60 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: ***REMOVED******REMOVED*** template "greencompute-telco-app.fullname" . ***REMOVED******REMOVED***
+  labels:
+    app: ***REMOVED******REMOVED*** template "greencompute-telco-app.name" . ***REMOVED******REMOVED***
+    chart: ***REMOVED******REMOVED*** template "greencompute-telco-app.chart" . ***REMOVED******REMOVED***
+    release: ***REMOVED******REMOVED*** .Release.Name ***REMOVED******REMOVED***
+    heritage: ***REMOVED******REMOVED*** .Release.Service ***REMOVED******REMOVED***
+spec:
+  replicas: ***REMOVED******REMOVED*** .Values.replicaCount ***REMOVED******REMOVED***
+  selector:
+    matchLabels:
+      app: ***REMOVED******REMOVED*** template "greencompute-telco-app.name" . ***REMOVED******REMOVED***
+      release: ***REMOVED******REMOVED*** .Release.Name ***REMOVED******REMOVED***
+  template:
+    metadata:
+      labels:
+        app: ***REMOVED******REMOVED*** template "greencompute-telco-app.name" . ***REMOVED******REMOVED***
+        release: ***REMOVED******REMOVED*** .Release.Name ***REMOVED******REMOVED***
+    spec:
+      volumes:
+        - name: config
+          configMap:
+            name:  ***REMOVED******REMOVED*** template "greencompute-telco-app.fullname" . ***REMOVED******REMOVED***
+      containers:
+        - name: ***REMOVED******REMOVED*** .Chart.Name ***REMOVED******REMOVED***
+          image: "***REMOVED******REMOVED*** .Values.image.repository ***REMOVED******REMOVED***:***REMOVED******REMOVED*** .Values.image.tag ***REMOVED******REMOVED***"
+          imagePullPolicy: ***REMOVED******REMOVED*** .Values.image.pullPolicy ***REMOVED******REMOVED***
+          ports:
+            - containerPort: ***REMOVED******REMOVED*** .Values.service.internalPort ***REMOVED******REMOVED***
+          volumeMounts:
+            - name: config
+              mountPath: /greenapp/server/config/config.json
+              subPath: config.json
+          livenessProbe:
+            httpGet:
+              path: /
+              port: ***REMOVED******REMOVED*** .Values.service.internalPort ***REMOVED******REMOVED***
+          readinessProbe:
+            httpGet:
+              path: /
+              port: ***REMOVED******REMOVED*** .Values.service.internalPort ***REMOVED******REMOVED***
+          resources:
+***REMOVED******REMOVED*** toYaml .Values.resources | indent 12 ***REMOVED******REMOVED***
+    ***REMOVED******REMOVED***- with .Values.nodeSelector ***REMOVED******REMOVED***
+        restartPolicy: Always
+        terminationGracePeriodSeconds: 30
+        dnsPolicy: ClusterFirst
+      nodeSelector:
+***REMOVED******REMOVED*** toYaml . | indent 8 ***REMOVED******REMOVED***
+    ***REMOVED******REMOVED***- end ***REMOVED******REMOVED***
+    ***REMOVED******REMOVED***- with .Values.affinity ***REMOVED******REMOVED***
+      affinity:
+***REMOVED******REMOVED*** toYaml . | indent 8 ***REMOVED******REMOVED***
+    ***REMOVED******REMOVED***- end ***REMOVED******REMOVED***
+    ***REMOVED******REMOVED***- with .Values.tolerations ***REMOVED******REMOVED***
+      tolerations:
+***REMOVED******REMOVED*** toYaml . | indent 8 ***REMOVED******REMOVED***
+    ***REMOVED******REMOVED***- end ***REMOVED******REMOVED***

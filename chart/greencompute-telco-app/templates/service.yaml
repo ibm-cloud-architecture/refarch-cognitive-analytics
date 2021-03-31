@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ***REMOVED******REMOVED*** template "greencompute-telco-app.fullname" . ***REMOVED******REMOVED***
+  labels:
+    app: ***REMOVED******REMOVED*** template "greencompute-telco-app.name" . ***REMOVED******REMOVED***
+    chart: ***REMOVED******REMOVED*** template "greencompute-telco-app.chart" . ***REMOVED******REMOVED***
+    release: ***REMOVED******REMOVED*** .Release.Name ***REMOVED******REMOVED***
+    heritage: ***REMOVED******REMOVED*** .Release.Service ***REMOVED******REMOVED***
+spec:
+  type: ***REMOVED******REMOVED*** .Values.service.type ***REMOVED******REMOVED***
+  ports:
+    - port: ***REMOVED******REMOVED*** .Values.service.externalPort ***REMOVED******REMOVED***
+      targetPort: ***REMOVED******REMOVED*** .Values.service.internalPort ***REMOVED******REMOVED***
+      protocol: TCP
+      name: ***REMOVED******REMOVED*** .Values.service.name ***REMOVED******REMOVED***
+  selector:
+    app: ***REMOVED******REMOVED*** template "greencompute-telco-app.name" . ***REMOVED******REMOVED***
+    release: ***REMOVED******REMOVED*** .Release.Name ***REMOVED******REMOVED***

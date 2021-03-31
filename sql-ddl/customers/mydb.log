@@ -1,0 +1,61 @@
+connect to CUSTDB
+
+   Database Connection Information
+
+ Database server        = DB2/LINUXX8664 10.5.5
+ SQL authorization ID   = DB2INST1
+ Local database alias   = CUSTDB
+
+
+CREATE TABLE "ACCOUNTS" ( "ACCOUNTNUMBER" VARCHAR(20) NOT NULL, "BALANCE" DOUBLE, "CREATIONDATE" TIMESTAMP, "DROPPED" INTEGER, "INTERNATIONAL" DOUBLE, "LOCAL" DOUBLE, "LOCALBILLTYPE" VARCHAR(30), "LONGDISTANCE" DOUBLE, "LONGDISTANCEBILLTYPE" VARCHAR(30), "PAYMENTMETHOD" VARCHAR(10), "RATEPLAN" VARCHAR(30), "UPDATEDATE" TIMESTAMP, "USAGE" DOUBLE, PRIMARY KEY (accountNumber))
+DB20000I  The SQL command completed successfully.
+
+CREATE TABLE "CUSTOMERS" ( "ID" BIGINT NOT NULL, "CREATIONDATE" TIMESTAMP, "NAME" VARCHAR(100) NOT NULL, "STATUS" VARCHAR(10), "TYPE" VARCHAR(10), "UPDATEDATE" TIMESTAMP, "ZIPCODE" VARCHAR(254), "AGE" DOUBLE, "CAROWNER" VARCHAR(254), "CHILDREN" INTEGER, "CHURN" VARCHAR(254), "CHURNRISK" DOUBLE, "EMAILADDRESS" VARCHAR(150) NOT NULL, "ESTIMATEDINCOME" DOUBLE, "FIRSTNAME" VARCHAR(50) NOT NULL, "GENDER" VARCHAR(10), "LASTNAME" VARCHAR(50) NOT NULL, "MARITALSTATUS" VARCHAR(254), "MOSTDOMINANTTONE" VARCHAR(254), "PROFESSION" VARCHAR(50), "ACCOUNT_ACCOUNTNUMBER" VARCHAR(254), "CHURNSTATUS" VARCHAR(20), "CHURNCLASS" VARCHAR(254) ) DATA CAPTURE NONE
+DB20000I  The SQL command completed successfully.
+
+CREATE INDEX "I_CUSTMRS_ACCOUNT" ON "CUSTOMERS" ("ACCOUNT_ACCOUNTNUMBER"		ASC) PCTFREE 10 ALLOW REVERSE SCANS
+DB20000I  The SQL command completed successfully.
+
+ALTER TABLE "CUSTOMERS" ADD CONSTRAINT "SQL180112224203910" PRIMARY KEY ("ID")
+DB20000I  The SQL command completed successfully.
+
+CREATE TABLE "PRODUCTS" ( "NAME" VARCHAR(20) NOT NULL, "DOWNLOADSPEED" INTEGER, "MONTHLYUSAGE" INTEGER, "PACKAGENAME" VARCHAR(50), "PRICE" DOUBLE, "PRODUCTCATEGORY" VARCHAR(50), "CREATIONDATE" TIMESTAMP, "UPDATEDATE" TIMESTAMP ) DATA CAPTURE NONE
+DB20000I  The SQL command completed successfully.
+
+ALTER TABLE "PRODUCTS" ADD CONSTRAINT "SQL180112042935210" PRIMARY KEY ("NAME")
+DB20000I  The SQL command completed successfully.
+
+CREATE TABLE "CUSTOMERS_PRODUCTS" ( "CUSTOMERID" BIGINT NOT NULL, "PRODUCTNAME" VARCHAR(20) NOT NULL, "PHONENUMBER" VARCHAR(20), "OWNEDPRODUCTS_NAME" VARCHAR(254), "CUSTOMER_ID" BIGINT ) DATA CAPTURE NONE
+DB20000I  The SQL command completed successfully.
+
+CREATE INDEX "I_CSTMCTS_CUSTOMER" ON "CUSTOMERS_PRODUCTS" ("CUSTOMER_ID"		ASC) PCTFREE 10 ALLOW REVERSE SCANS
+DB20000I  The SQL command completed successfully.
+
+CREATE INDEX "I_CSTMCTS_PRODUCT" ON "CUSTOMERS_PRODUCTS" ("OWNEDPRODUCTS_NAME"		ASC) PCTFREE 10 ALLOW REVERSE SCANS
+DB20000I  The SQL command completed successfully.
+
+ALTER TABLE "CUSTOMERS_PRODUCTS" ADD CONSTRAINT "SQL180112224205470" PRIMARY KEY ("CUSTOMERID", "PRODUCTNAME")
+DB20000I  The SQL command completed successfully.
+
+COMMIT
+DB20000I  The SQL command completed successfully.
+
+INSERT INTO customers (id,name, status, gender,type,  age, carOwner, children, emailAddress, estimatedIncome, firstName, lastName, profession,maritalStatus,churn,mostDominantTone,zipcode,ACCOUNT_ACCOUNTNUMBER) VALUES ('1','Eddie TheBuilder','S','M','Person','45','N',	1,'eddie@email.com','140000','Eddie','TheBuilder','Engineer','Married','T','NotEvaluated','95500','ACT01'), VALUES ('3','Bob TheBuilder','S','M','Person','24.393333','N',	1,'bobbuilder@email.com','40000','Bob','TheBuilder','Engineer','Married','T','NotEvaluated','94000','ACT03') INSERT INTO PRODUCTS (name,productCategory,price) VALUES('ipho','smartphone',750)
+DB21034E  The command was processed as an SQL statement because it was not a 
+valid Command Line Processor command.  During SQL processing it returned:
+SQL0104N  An unexpected token "INSERT INTO PRODUCTS (name" was found following 
+"ed','94000','ACT03')".  Expected tokens may include:  "<space>".  
+SQLSTATE=42601
+
+INSERT INTO PRODUCTS (name,productCategory,price) VALUES('sam','smartphone',700)
+DB20000I  The SQL command completed successfully.
+
+INSERT INTO PRODUCTS (name,productCategory,price) VALUES('moto','smartphone',250)
+DB20000I  The SQL command completed successfully.
+
+INSERT INTO ACCOUNTS ( accountNumber, balance, dropped, international, local,localBillType, longDistance, longDistanceBillType, paymentMethod, ratePlan, usage,   CUSTOMER_ID) VALUES('ACT01','150','0','0','206','Budget','25','Standard','CC',3,'231',1), ('ACT03','300','0','0','120','Budget','25','Standard','CC',3,'231',3) INSERT INTO CUSTOMERS_PRODUCTS(CUSTOMERID,productName,phoneNumber,CUSTOMER_ID,OWNEDPRODUCTS_NAME) VALUES(1,'ipho','4157890001',1,'ipho'), VALUES(1,'sam','4157890002',1,'sam'), VALUES(3,'sam','4157890003',3,'sam')
+DB21034E  The command was processed as an SQL statement because it was not a 
+valid Command Line Processor command.  During SQL processing it returned:
+SQL0206N  "CUSTOMER_ID" is not valid in the context where it is used.  
+SQLSTATE=42703
+

@@ -1,0 +1,33 @@
+.selected ***REMOVED***
+  background-color: #CFD8DC !important;
+  color: white;
+***REMOVED***
+.customers ***REMOVED***
+  margin: 0 0 2em 0;
+  list-style-type: none;
+  padding: 0;
+  width: 15em;
+***REMOVED***
+.customers li ***REMOVED***
+  cursor: pointer;
+  position: relative;
+  left: 0;
+  background-color: #EEE;
+  margin: .5em;
+  padding: .3em 0;
+  height: 1.6em;
+  border-radius: 4px;
+***REMOVED***
+.customers li.selected:hover ***REMOVED***
+  background-color: #BBD8DC !important;
+  color: white;
+***REMOVED***
+.customers li:hover ***REMOVED***
+  color: #607D8B;
+  background-color: #DDD;
+  left: .1em;
+***REMOVED***
+.customers .text ***REMOVED***
+  position: relative;
+  top: -3px;
+***REMOVED***

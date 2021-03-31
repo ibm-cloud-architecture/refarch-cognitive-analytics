@@ -1,0 +1,31 @@
+site_name: Customer analysis with cognitive and analytics in hybrid cloud
+repo_url: https://github.com/ibm-cloud-architecture/refarch-cognitive-analytics
+nav:
+  - Welcome: index.md
+  - Methodology: method/readme.md
+  - Business Problem: 
+    - Presentation: businessproblem.md
+    - Demonstration: ./flow/README.md
+  - Design: 
+    - Design considerations: design/readme.md
+    - Implementation details: design/code.md
+    - API management: apim/README.md
+    - Data ingestion: data/README.md
+    - Churn risk scoring: design/scoring-serv.md
+    - Tone analyzer inegration: design/w-tone-analyzer.md
+    - Persisting the chatbot transcripts: persist/chattranscripts.md
+    - Watson assistant  implementation: wcs/README.md
+    - Analytics implementation: ml/README.md
+  - Environment setup:
+    - Public: env/public.md
+    - Private: env/private.md
+  - Deployments: 
+    - Local: deploy/local.md
+    - Public IKS: deploy/iks.md
+    - Private ICP: deploy/icp.md
+    - Z deployment: Z/README.md
+  - Tutorial: labs.md
+
+theme: 
+  name: material
+extra_css: ["extra.css"]
