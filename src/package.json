@@ -35,7 +35,7 @@
     "@angular/cdk": "^5.0.3",
     "@angular/material": "^5.0.3",
     "@ngtools/json-schema": "^1.1.0",
-    "ajv": "^5.0.0",
+    "ajv": "^6.12.3",
     "body-parser": "^1.17.2",
     "bootstrap": "^3.3.7",
     "cloudant": "^1.4.x",
