@@ -58,7 +58,7 @@ API management is using its own vocabulary for such implementation:
   The URL includes the webcontext and URL mapping as defined in the `web.xml` file of the java webapp.
 `http://customer.green.case/caseserv/api/v1$(request.path)`
 
-  The variable request.path is the one defined in the Paths, for example can be `/customers/***REMOVED***id***REMOVED***`
+  The variable request.path is the one defined in the Paths, for example can be `/customers/{id}`
 
   **Attention!:** there is something wrong here!. How API gateway that will run this product implementation will know how to map the customer.green.case host to the ICP proxy server responsible to route the traffic to the pod running the backend service? As this name is only known by ICP internal kubernetes DNS service.
 
@@ -93,7 +93,7 @@ To unit test, you need first to `republish` the product
 
 ![](republish.png)
 
-Then select the operation to trigger, like /customers/***REMOVED***id***REMOVED***, set the parameter, id=3 and `invoke` the service
+Then select the operation to trigger, like /customers/{id}, set the parameter, id=3 and `invoke` the service
 
 ![](ut-invoke.png)
 
@@ -151,33 +151,33 @@ This client id needs to be part of the HTTP header for any request to the api. Y
 The webapp we developed for the demonstration, needs to be update to integrate the HTTP header as below:
 
 ```javascript
-var buildOptions=function(met,aPath,config)***REMOVED***
-  return ***REMOVED***
+var buildOptions=function(met,aPath,config){
+  return {
     url: config.customerAPI.url+aPath,
     method: met,
     rejectUnauthorized: true,
-    headers: ***REMOVED***
+    headers: {
       accept: 'application/json',
       'Content-Type': 'application/json',
       'X-IBM-Client-Id': config.customerAPI.xibmclientid,
       Host: config.customerAPI.host,
-    ***REMOVED***
-  ***REMOVED***
-***REMOVED***
-getCustomerByEmail : function(config,req,res)***REMOVED***
+    }
+  }
+}
+getCustomerByEmail : function(config,req,res){
   var opts = buildOptions('GET','/customers/email/'+req.params.email,config);
   opts.headers['Content-Type']='multipart/form-data';
   processRequest(res,opts);
-***REMOVED***
+}
 
 ```
 and in the configuration file, we need to change the URL and add the new parameter:
 ```json
-"customerAPI":***REMOVED***
+"customerAPI":{
     "url":"https://172.16.50.8:443/csplab/sb",
     "host":"customer.green.case",
-    "xibmclientid": "***REMOVED***"
-***REMOVED***
+    "xibmclientid": "d6ef6d26-f017-42e6-b703-1d8aecfe1834"
+}
 ```
 Remark: the host attribute is still needed if you do not have DNS resolution in the network where ICP, API gateway are running.
 

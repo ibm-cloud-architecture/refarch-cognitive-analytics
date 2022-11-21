@@ -1,7 +1,7 @@
 <div *ngIf="customer" class="row">
-  <h2>***REMOVED******REMOVED***customer.name***REMOVED******REMOVED*** details!</h2>
-  <p>***REMOVED******REMOVED***message***REMOVED******REMOVED***</p>
-  <div><label>id: </label>***REMOVED******REMOVED***customer.id***REMOVED******REMOVED***</div>
+  <h2>{{customer.name}} details!</h2>
+  <p>{{message}}</p>
+  <div><label>id: </label>{{customer.id}}</div>
   <div class="form-group">
       <label for="name">Name</label>
       <input autofocus type="text" class="form-control" required [(ngModel)]="customer.name" name="name" id="name">

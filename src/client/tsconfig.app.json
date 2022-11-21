@@ -1,5 +1,5 @@
-***REMOVED***
-  "compilerOptions": ***REMOVED***
+{
+  "compilerOptions": {
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
@@ -14,9 +14,9 @@
     "module": "es2015",
     "baseUrl": "",
     "types": []
-***REMOVED***
+  },
   "exclude": [
     "test.ts",
     "**/*.spec.ts"
   ]
-***REMOVED***
+}

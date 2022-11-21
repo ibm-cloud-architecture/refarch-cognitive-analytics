@@ -1,42 +1,42 @@
-import ***REMOVED*** Injectable ***REMOVED***    from '@angular/core';
-import ***REMOVED*** Headers, Http,Response,RequestOptions ***REMOVED*** from '@angular/http';
+import { Injectable }    from '@angular/core';
+import { Headers, Http,Response,RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import ***REMOVED***Observable***REMOVED*** from 'rxjs/Rx';
+import {Observable} from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 
 
 @Injectable()
-export class CustomersService ***REMOVED***
+export class CustomersService {
   private custUrl ='/api/cust';
 
-  constructor(private http: Http) ***REMOVED***
+  constructor(private http: Http) {
 
-  ***REMOVED***;
+  };
 
-  getCustomers(): Observable<any>***REMOVED***
+  getCustomers(): Observable<any>{
     return this.http.get(this.custUrl+'/customers')
          .map((res:Response) =>
           res.json())
-  ***REMOVED***
+  }
 
-  getCustomerByEmail(email): Observable<any>***REMOVED***
+  getCustomerByEmail(email): Observable<any>{
     return this.http.get(this.custUrl+'/customers/email/'+email)
          .map((res:Response) =>
           res.json())
-  ***REMOVED***
+  }
 
-  saveCustomer(c) : Observable<any> ***REMOVED***
-    return this.http.post(this.custUrl+'/customers',***REMOVED***customer:c***REMOVED***).map((res:Response) => res.json());
-  ***REMOVED***
+  saveCustomer(c) : Observable<any> {
+    return this.http.post(this.custUrl+'/customers',{customer:c}).map((res:Response) => res.json());
+  }
 
-  updateCustomer(c): Observable<any> ***REMOVED***
-      return this.http.put(this.custUrl+'/customers',***REMOVED***customer:c***REMOVED***).map((res:Response) => res.json());
-  ***REMOVED***
+  updateCustomer(c): Observable<any> {
+      return this.http.put(this.custUrl+'/customers',{customer:c}).map((res:Response) => res.json());
+  }
 
-  deleteCustomer(idx) : Observable<any> ***REMOVED***
+  deleteCustomer(idx) : Observable<any> {
     return this.http.delete(this.custUrl+'/customers/'+idx)
     .map((res:Response) =>
        res.json());
-  ***REMOVED***
+  }
 
-***REMOVED***
+}

@@ -27,29 +27,29 @@ var path = require('path');
 const customer    = require('./features/customerProxy');
 const chatBot = require('./features/chatBot');
 
-module.exports = function(app,config)***REMOVED***
+module.exports = function(app,config){
 
-  app.get('/api/authenticated', isLoggedIn, function(req, res)***REMOVED***
-    var response = ***REMOVED***
+  app.get('/api/authenticated', isLoggedIn, function(req, res){
+    var response = {
         authenticated: true,
-    ***REMOVED***
+    }
     res.status(200).json(response);
-  ***REMOVED***)
+  })
 
-  app.post('/api/c/conversation',isLoggedIn,(req,res) => ***REMOVED***
+  app.post('/api/c/conversation',isLoggedIn,(req,res) => {
     chatBot.chat(config,req,res)
-  ***REMOVED***);
+  });
 
 
-  app.get('/api/cust/customers/email/:email',isLoggedIn, (req,res) => ***REMOVED***
+  app.get('/api/cust/customers/email/:email',isLoggedIn, (req,res) => {
     customer.getCustomerByEmail(config,req.params.email,res);
-  ***REMOVED***)
-***REMOVED*** // exports
+  })
+} // exports
 
-function isLoggedIn(req, res, next) ***REMOVED***
+function isLoggedIn(req, res, next) {
     console.log("IsLoggedin() " + req.user);
-    if (req.isAuthenticated())***REMOVED***
+    if (req.isAuthenticated()){
       return next();
-    ***REMOVED***
+    }
     res.status(401).send('unauthenticated');
-***REMOVED***
+}

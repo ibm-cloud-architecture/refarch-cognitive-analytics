@@ -5,42 +5,42 @@
  that returns an Observable that is used by the alert component to subscribe to
  notifications for whenever a message should be displayed
 */
-import ***REMOVED*** Injectable ***REMOVED*** from '@angular/core';
-import ***REMOVED*** Router, NavigationStart ***REMOVED*** from '@angular/router';
-import ***REMOVED*** Observable ***REMOVED*** from 'rxjs';
-import ***REMOVED*** Subject ***REMOVED*** from 'rxjs/Subject';
+import { Injectable } from '@angular/core';
+import { Router, NavigationStart } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
-export class AlertService ***REMOVED***
+export class AlertService {
     private subject = new Subject<any>();
     private keepAfterNavigationChange = false;
 
-    constructor(private router: Router) ***REMOVED***
+    constructor(private router: Router) {
         // clear alert message on route change
-        router.events.subscribe(event => ***REMOVED***
-            if (event instanceof NavigationStart) ***REMOVED***
-                if (this.keepAfterNavigationChange) ***REMOVED***
+        router.events.subscribe(event => {
+            if (event instanceof NavigationStart) {
+                if (this.keepAfterNavigationChange) {
                     // only keep for a single location change
                     this.keepAfterNavigationChange = false;
-                ***REMOVED*** else ***REMOVED***
+                } else {
                     // clear alert
                     this.subject.next();
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***);
-    ***REMOVED***
+                }
+            }
+        });
+    }
 
-    success(message: string, keepAfterNavigationChange = false) ***REMOVED***
+    success(message: string, keepAfterNavigationChange = false) {
         this.keepAfterNavigationChange = keepAfterNavigationChange;
-        this.subject.next(***REMOVED*** type: 'success', text: message ***REMOVED***);
-    ***REMOVED***
+        this.subject.next({ type: 'success', text: message });
+    }
 
-    error(message: string, keepAfterNavigationChange = false) ***REMOVED***
+    error(message: string, keepAfterNavigationChange = false) {
         this.keepAfterNavigationChange = keepAfterNavigationChange;
-        this.subject.next(***REMOVED*** type: 'error', text: message ***REMOVED***);
-    ***REMOVED***
+        this.subject.next({ type: 'error', text: message });
+    }
 
-    getMessage(): Observable<any> ***REMOVED***
+    getMessage(): Observable<any> {
         return this.subject.asObservable();
-    ***REMOVED***
-***REMOVED***
+    }
+}

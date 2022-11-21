@@ -16,31 +16,31 @@
  */
 var ToneAnalyzerV3=require('watson-developer-cloud/tone-analyzer/v3');
 
-var buildOptions = function(config)***REMOVED***
-  return ***REMOVED***
+var buildOptions = function(config){
+  return {
     username: config.toneAnalyzer.username,
     password: config.toneAnalyzer.password,
     version_date: config.toneAnalyzer.versionDate
-  ***REMOVED***
-***REMOVED***
+  }
+}
 
-module.exports = ***REMOVED***
-  analyzeSentence : function(config,message,res)***REMOVED***
-      return new Promise(function(resolve, reject)***REMOVED***
+module.exports = {
+  analyzeSentence : function(config,message,res){
+      return new Promise(function(resolve, reject){
           var tone_analyzer = new ToneAnalyzerV3(buildOptions(config));
-          var params = ***REMOVED***
-            utterances: [***REMOVED***"text":message***REMOVED***]
-          ***REMOVED***;
+          var params = {
+            utterances: [{"text":message}]
+          };
 
-          tone_analyzer.tone_chat(params, function(error, response) ***REMOVED***
-            if (error) ***REMOVED***
+          tone_analyzer.tone_chat(params, function(error, response) {
+            if (error) {
               console.error('error:', error);
               reject(null,error);
-            ***REMOVED***
-            else ***REMOVED***
+            }
+            else {
               resolve(response);
-            ***REMOVED***
-          ***REMOVED***);
-      ***REMOVED***); // promise
-  ***REMOVED*** // analyseSentence
-***REMOVED*** // exports
+            }
+          });
+      }); // promise
+  } // analyseSentence
+} // exports

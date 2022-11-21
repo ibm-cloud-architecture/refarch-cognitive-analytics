@@ -1,34 +1,34 @@
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
-  name: ***REMOVED******REMOVED*** template "greencompute-telco-app.fullname" . ***REMOVED******REMOVED***
+  name: {{ template "greencompute-telco-app.fullname" . }}
   labels:
-    app: ***REMOVED******REMOVED*** template "greencompute-telco-app.name" . ***REMOVED******REMOVED***
-    chart: ***REMOVED******REMOVED*** template "greencompute-telco-app.chart" . ***REMOVED******REMOVED***
-    release: ***REMOVED******REMOVED*** .Release.Name ***REMOVED******REMOVED***
-    heritage: ***REMOVED******REMOVED*** .Release.Service ***REMOVED******REMOVED***
+    app: {{ template "greencompute-telco-app.name" . }}
+    chart: {{ template "greencompute-telco-app.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
 spec:
-  replicas: ***REMOVED******REMOVED*** .Values.replicaCount ***REMOVED******REMOVED***
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: ***REMOVED******REMOVED*** template "greencompute-telco-app.name" . ***REMOVED******REMOVED***
-      release: ***REMOVED******REMOVED*** .Release.Name ***REMOVED******REMOVED***
+      app: {{ template "greencompute-telco-app.name" . }}
+      release: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: ***REMOVED******REMOVED*** template "greencompute-telco-app.name" . ***REMOVED******REMOVED***
-        release: ***REMOVED******REMOVED*** .Release.Name ***REMOVED******REMOVED***
+        app: {{ template "greencompute-telco-app.name" . }}
+        release: {{ .Release.Name }}
     spec:
       volumes:
         - name: config
           configMap:
-            name:  ***REMOVED******REMOVED*** template "greencompute-telco-app.fullname" . ***REMOVED******REMOVED***
+            name:  {{ template "greencompute-telco-app.fullname" . }}
       containers:
-        - name: ***REMOVED******REMOVED*** .Chart.Name ***REMOVED******REMOVED***
-          image: "***REMOVED******REMOVED*** .Values.image.repository ***REMOVED******REMOVED***:***REMOVED******REMOVED*** .Values.image.tag ***REMOVED******REMOVED***"
-          imagePullPolicy: ***REMOVED******REMOVED*** .Values.image.pullPolicy ***REMOVED******REMOVED***
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - containerPort: ***REMOVED******REMOVED*** .Values.service.internalPort ***REMOVED******REMOVED***
+            - containerPort: {{ .Values.service.internalPort }}
           volumeMounts:
             - name: config
               mountPath: /greenapp/server/config/config.json
@@ -36,25 +36,25 @@ spec:
           livenessProbe:
             httpGet:
               path: /
-              port: ***REMOVED******REMOVED*** .Values.service.internalPort ***REMOVED******REMOVED***
+              port: {{ .Values.service.internalPort }}
           readinessProbe:
             httpGet:
               path: /
-              port: ***REMOVED******REMOVED*** .Values.service.internalPort ***REMOVED******REMOVED***
+              port: {{ .Values.service.internalPort }}
           resources:
-***REMOVED******REMOVED*** toYaml .Values.resources | indent 12 ***REMOVED******REMOVED***
-    ***REMOVED******REMOVED***- with .Values.nodeSelector ***REMOVED******REMOVED***
+{{ toYaml .Values.resources | indent 12 }}
+    {{- with .Values.nodeSelector }}
         restartPolicy: Always
         terminationGracePeriodSeconds: 30
         dnsPolicy: ClusterFirst
       nodeSelector:
-***REMOVED******REMOVED*** toYaml . | indent 8 ***REMOVED******REMOVED***
-    ***REMOVED******REMOVED***- end ***REMOVED******REMOVED***
-    ***REMOVED******REMOVED***- with .Values.affinity ***REMOVED******REMOVED***
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
       affinity:
-***REMOVED******REMOVED*** toYaml . | indent 8 ***REMOVED******REMOVED***
-    ***REMOVED******REMOVED***- end ***REMOVED******REMOVED***
-    ***REMOVED******REMOVED***- with .Values.tolerations ***REMOVED******REMOVED***
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
       tolerations:
-***REMOVED******REMOVED*** toYaml . | indent 8 ***REMOVED******REMOVED***
-    ***REMOVED******REMOVED***- end ***REMOVED******REMOVED***
+{{ toYaml . | indent 8 }}
+    {{- end }}

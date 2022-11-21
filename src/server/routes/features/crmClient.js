@@ -19,17 +19,17 @@
  */
 
 // mockup of the customer data source
-var customers = ***REMOVED******REMOVED***
-customers["young"] = ***REMOVED***"age":18,"existingProduct":***REMOVED***"productCategory":"ADSL"***REMOVED******REMOVED***;
-customers["student"] = ***REMOVED***"age":18,"existingProduct":***REMOVED***"productCategory":"ADSL"***REMOVED******REMOVED***;
-customers["noFiber"] = ***REMOVED***"age":30,"existingProduct":***REMOVED***"productCategory":"ADSL"***REMOVED******REMOVED***;
-customers["retiree"] = ***REMOVED***"age":65,"existingProduct":***REMOVED***"productCategory":"ADSL"***REMOVED******REMOVED***;
-customers["adult"] = ***REMOVED***"age":36,"existingProduct":***REMOVED***"productCategory":"ADSL"***REMOVED******REMOVED***;
+var customers = {}
+customers["young"] = {"age":18,"existingProduct":{"productCategory":"ADSL"}};
+customers["student"] = {"age":18,"existingProduct":{"productCategory":"ADSL"}};
+customers["noFiber"] = {"age":30,"existingProduct":{"productCategory":"ADSL"}};
+customers["retiree"] = {"age":65,"existingProduct":{"productCategory":"ADSL"}};
+customers["adult"] = {"age":36,"existingProduct":{"productCategory":"ADSL"}};
 
-module.exports=  ***REMOVED***
-    getUserProfile: function(config,user,next)***REMOVED***
+module.exports=  {
+    getUserProfile: function(config,user,next){
       // config to be used later when doing http request
       var c= customers[user];
       next(c);
-    ***REMOVED***
- ***REMOVED***
+    }
+ }

@@ -8,28 +8,28 @@ podTemplate(label: 'mynode',
     containers: [
         containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl', ttyEnabled: true, command: 'cat'),
         containerTemplate(name: 'docker' , image: 'docker:17.06.1-ce', ttyEnabled: true, command: 'cat')
-  ])***REMOVED***
+  ]){
 
-    node('mynode') ***REMOVED***
+    node('mynode') {
         checkout scm
-        container('docker') ***REMOVED***
-            stage('build app') ***REMOVED***
+        container('docker') {
+            stage('build app') {
                 sh """
                 #!/bin/bash
                 cd src
                 npm install
                 ng build
                 """
-            ***REMOVED***
-            stage('Build Docker Image') ***REMOVED***
+            }
+            stage('Build Docker Image') {
                 sh """
                 #!/bin/bash
                 NAMESPACE=`cat /var/run/configs/registry-config/namespace`
                 REGISTRY=`cat /var/run/configs/registry-config/registry`
-                docker build -t \$***REMOVED***REGISTRY***REMOVED***/\$***REMOVED***NAMESPACE***REMOVED***/greenapp:$***REMOVED***env.BUILD_NUMBER***REMOVED*** .
+                docker build -t \${REGISTRY}/\${NAMESPACE}/greenapp:${env.BUILD_NUMBER} .
                 """
-            ***REMOVED***
-            stage('Push Docker Image to Registry') ***REMOVED***
+            }
+            stage('Push Docker Image to Registry') {
                 sh """
                 #!/bin/bash
                 NAMESPACE=`cat /var/run/configs/registry-config/namespace`
@@ -37,12 +37,12 @@ podTemplate(label: 'mynode',
                 set +x
                 DOCKER_USER=`cat /var/run/secrets/registry-account/username`
                 DOCKER_PASSWORD=`cat /var/run/secrets/registry-account/password`
-                docker login -u=\$***REMOVED***DOCKER_USER***REMOVED*** -p=\$***REMOVED***DOCKER_PASSWORD***REMOVED*** \$***REMOVED***REGISTRY***REMOVED***
+                docker login -u=\${DOCKER_USER} -p=\${DOCKER_PASSWORD} \${REGISTRY}
                 set -x
-                docker push \$***REMOVED***REGISTRY***REMOVED***/\$***REMOVED***NAMESPACE***REMOVED***/greenapp:$***REMOVED***env.BUILD_NUMBER***REMOVED***
+                docker push \${REGISTRY}/\${NAMESPACE}/greenapp:${env.BUILD_NUMBER}
                 """
-            ***REMOVED***
-        ***REMOVED***
+            }
+        }
 
-    ***REMOVED***
-***REMOVED***
+    }
+}

@@ -1,4 +1,4 @@
-.roundRect ***REMOVED***
+.roundRect {
    margin: auto;
    border-width : 2px;
    border-radius: 8px;
@@ -12,9 +12,9 @@
    marging: 10px;
    height:220px;
    width:100%;
-***REMOVED***
+}
 
 
-.outer ***REMOVED***
+.outer {
    outline: 10px;
-***REMOVED***
+}

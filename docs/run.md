@@ -73,46 +73,46 @@ To do so we need to create a new template: `templates/configmap.yaml`. This file
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: ***REMOVED******REMOVED*** template "fullname" . ***REMOVED******REMOVED***
+  name: {{ template "fullname" . }}
   labels:
-    chart: "***REMOVED******REMOVED*** .Chart.Name ***REMOVED******REMOVED***-***REMOVED******REMOVED*** .Chart.Version | replace "+" "_" ***REMOVED******REMOVED***"
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
 data:
   config.json: |+
-    ***REMOVED***
-    "conversation" :***REMOVED***
-        "version" : "***REMOVED******REMOVED*** .Values.config.conversation.version ***REMOVED******REMOVED***",
-        "versionDate":"***REMOVED******REMOVED*** .Values.config.conversation.versionDate ***REMOVED******REMOVED***",
-        "username":"***REMOVED******REMOVED*** .Values.config.conversation.username ***REMOVED******REMOVED***",
-        "password":"***REMOVED******REMOVED*** .Values.config.conversation.password ***REMOVED******REMOVED***",
-        "conversationId":"***REMOVED******REMOVED*** .Values.config.conversation.conversationId ***REMOVED******REMOVED***",
-        "workspace":"***REMOVED******REMOVED*** .Values.config.conversation.workspace ***REMOVED******REMOVED***",
-        "usePersistence": "***REMOVED******REMOVED*** .Values.config.conversation.usePersistence ***REMOVED******REMOVED***"
-    ***REMOVED***
-    "customerAPI":***REMOVED***
-          "url":"***REMOVED******REMOVED*** .Values.config.customerAPI.url ***REMOVED******REMOVED***",
-          "host":"***REMOVED******REMOVED*** .Values.config.customerAPI.host ***REMOVED******REMOVED***",
-          "xibmclientid": "***REMOVED******REMOVED*** .Values.config.customerAPI.xibmclientid ***REMOVED******REMOVED***"
-  ***REMOVED***
-    "toneAnalyzer":***REMOVED***
-          "url": "***REMOVED******REMOVED*** .Values.config.toneAnalyzer.url ***REMOVED******REMOVED***",
-          "versionDate": "***REMOVED******REMOVED*** .Values.config.toneAnalyzer.versionDate ***REMOVED******REMOVED***",
-          "username": "***REMOVED******REMOVED*** .Values.config.toneAnalyzer.username ***REMOVED******REMOVED***",
-          "password": "***REMOVED******REMOVED*** .Values.config.toneAnalyzer.password ***REMOVED******REMOVED***"
-  ***REMOVED***
-    "scoringService":***REMOVED***
-        "type": "***REMOVED******REMOVED*** .Values.config.scoringService.type ***REMOVED******REMOVED***",
-        "baseUrl": "***REMOVED******REMOVED*** .Values.config.scoringService.baseUrl ***REMOVED******REMOVED***",
-        "instance": "***REMOVED******REMOVED*** .Values.config.scoringService.instance ***REMOVED******REMOVED***",
-        "username": "***REMOVED******REMOVED*** .Values.config.scoringService.username ***REMOVED******REMOVED***",
-        "password": "***REMOVED******REMOVED*** .Values.config.scoringService.password ***REMOVED******REMOVED***"
-    ***REMOVED***
-    "dbCredentials" : ***REMOVED***
-        "url": "***REMOVED******REMOVED*** .Values.config.dbCredentials.url ***REMOVED******REMOVED***"
-  ***REMOVED***
-    "debug": "***REMOVED******REMOVED*** .Values.config.debug ***REMOVED******REMOVED***",
-    "port": "***REMOVED******REMOVED*** .Values.config.port ***REMOVED******REMOVED***",
-    "version": "***REMOVED******REMOVED*** .Values.config.version ***REMOVED******REMOVED***"
-    ***REMOVED***
+    {
+    "conversation" :{
+        "version" : "{{ .Values.config.conversation.version }}",
+        "versionDate":"{{ .Values.config.conversation.versionDate }}",
+        "username":"{{ .Values.config.conversation.username }}",
+        "password":"{{ .Values.config.conversation.password }}",
+        "conversationId":"{{ .Values.config.conversation.conversationId }}",
+        "workspace":"{{ .Values.config.conversation.workspace }}",
+        "usePersistence": "{{ .Values.config.conversation.usePersistence }}"
+      },
+    "customerAPI":{
+          "url":"{{ .Values.config.customerAPI.url }}",
+          "host":"{{ .Values.config.customerAPI.host }}",
+          "xibmclientid": "{{ .Values.config.customerAPI.xibmclientid }}"
+    },
+    "toneAnalyzer":{
+          "url": "{{ .Values.config.toneAnalyzer.url }}",
+          "versionDate": "{{ .Values.config.toneAnalyzer.versionDate }}",
+          "username": "{{ .Values.config.toneAnalyzer.username }}",
+          "password": "{{ .Values.config.toneAnalyzer.password }}"
+    },
+    "scoringService":{
+        "type": "{{ .Values.config.scoringService.type }}",
+        "baseUrl": "{{ .Values.config.scoringService.baseUrl }}",
+        "instance": "{{ .Values.config.scoringService.instance }}",
+        "username": "{{ .Values.config.scoringService.username }}",
+        "password": "{{ .Values.config.scoringService.password }}"
+      },
+    "dbCredentials" : {
+        "url": "{{ .Values.config.dbCredentials.url }}"
+    },
+    "debug": "{{ .Values.config.debug }}",
+    "port": "{{ .Values.config.port }}",
+    "version": "{{ .Values.config.version }}"
+    }
 
 ```
 As you can see the real values are set in the `values.yaml` file. This is an implementation decision to externalize all values in this file, we could have set the value directly in the template as they are not used anywhere else.
@@ -125,11 +125,11 @@ In the deployment.yaml we add a volumeMount point to the container specification
 ```yaml
 spec:
   containers:
-  - name: ***REMOVED******REMOVED*** .Chart.Name ***REMOVED******REMOVED***
-    image: "***REMOVED******REMOVED*** .Values.image.repository ***REMOVED******REMOVED***:***REMOVED******REMOVED*** .Values.image.tag ***REMOVED******REMOVED***"
-    imagePullPolicy: ***REMOVED******REMOVED*** .Values.image.pullPolicy ***REMOVED******REMOVED***
+  - name: {{ .Chart.Name }}
+    image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+    imagePullPolicy: {{ .Values.image.pullPolicy }}
     ports:
-    - containerPort: ***REMOVED******REMOVED*** .Values.service.internalPort ***REMOVED******REMOVED***
+    - containerPort: {{ .Values.service.internalPort }}
     volumeMounts:
     - name: config
     mountPath: /greenapp/server/config/config.json
@@ -149,7 +149,7 @@ The volume name (config) is arbitrary but needs to match a volume declared later
    volumes:
       - name: config
         configMap:
-          name:  ***REMOVED******REMOVED*** template "fullname" . ***REMOVED******REMOVED***
+          name:  {{ template "fullname" . }}
 ```
 One volume, named `config` uses the configMap named using the template name of the helm package and match the configMap we defined above.
 

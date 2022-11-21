@@ -1,19 +1,19 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: ***REMOVED******REMOVED*** template "greencompute-telco-app.fullname" . ***REMOVED******REMOVED***
+  name: {{ template "greencompute-telco-app.fullname" . }}
   labels:
-    app: ***REMOVED******REMOVED*** template "greencompute-telco-app.name" . ***REMOVED******REMOVED***
-    chart: ***REMOVED******REMOVED*** template "greencompute-telco-app.chart" . ***REMOVED******REMOVED***
-    release: ***REMOVED******REMOVED*** .Release.Name ***REMOVED******REMOVED***
-    heritage: ***REMOVED******REMOVED*** .Release.Service ***REMOVED******REMOVED***
+    app: {{ template "greencompute-telco-app.name" . }}
+    chart: {{ template "greencompute-telco-app.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
 spec:
-  type: ***REMOVED******REMOVED*** .Values.service.type ***REMOVED******REMOVED***
+  type: {{ .Values.service.type }}
   ports:
-    - port: ***REMOVED******REMOVED*** .Values.service.externalPort ***REMOVED******REMOVED***
-      targetPort: ***REMOVED******REMOVED*** .Values.service.internalPort ***REMOVED******REMOVED***
+    - port: {{ .Values.service.externalPort }}
+      targetPort: {{ .Values.service.internalPort }}
       protocol: TCP
-      name: ***REMOVED******REMOVED*** .Values.service.name ***REMOVED******REMOVED***
+      name: {{ .Values.service.name }}
   selector:
-    app: ***REMOVED******REMOVED*** template "greencompute-telco-app.name" . ***REMOVED******REMOVED***
-    release: ***REMOVED******REMOVED*** .Release.Name ***REMOVED******REMOVED***
+    app: {{ template "greencompute-telco-app.name" . }}
+    release: {{ .Release.Name }}

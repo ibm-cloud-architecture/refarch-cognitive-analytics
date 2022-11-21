@@ -1,39 +1,39 @@
-import ***REMOVED***Component***REMOVED*** from '@angular/core';
-import ***REMOVED*** Router ***REMOVED***   from '@angular/router';
-import ***REMOVED*** User ***REMOVED*** from "./login/User";
+import {Component} from '@angular/core';
+import { Router }   from '@angular/router';
+import { User } from "./login/User";
 /*
 Main page component to display access to the different demo features.
 */
 
-@Component(***REMOVED***
+@Component({
     selector: 'home',
     styleUrls: ['./home.component.css'],
     templateUrl: './home.component.html'
-  ***REMOVED***)
-  export class HomeComponent ***REMOVED***
+  })
+  export class HomeComponent {
     user: User;
 
 
-    constructor(private router: Router) ***REMOVED***
+    constructor(private router: Router) {
       this.user = JSON.parse(localStorage.getItem('currentUser'));
-    ***REMOVED***
+    }
 
-    account()***REMOVED***
+    account(){
       this.router.navigate(['account']);
-    ***REMOVED***
+    }
 
-    itSupport()***REMOVED***
+    itSupport(){
       this.router.navigate(['itSupport']);
-    ***REMOVED***
+    }
     // ADD Here methods to be called from HTLM button to route to other component
 
-    bill()***REMOVED***
+    bill(){
       this.router.navigate(['bill']);
-    ***REMOVED***
+    }
 
-    logout()***REMOVED***
+    logout(){
       localStorage.removeItem('currentUser');
       this.user=new User();
       this.router.navigate(['log']);
-    ***REMOVED***
-  ***REMOVED***
+    }
+  }

@@ -1,17 +1,17 @@
-***REMOVED***
+{
   "name": "GreenTelcoApp",
   "version": "0.0.1",
   "license": "MIT",
-  "repository": ***REMOVED***
+  "repository": {
     "type": "git",
     "url": "https://github.com/ibm-cloud-architecture/refarch-cognitive-analytics.git"
-***REMOVED***
-  "engines": ***REMOVED***
+  },
+  "engines": {
     "node": "6.x",
     "npm": "5.x"
-***REMOVED***
+  },
   "author": "Jerome Boyer",
-  "scripts": ***REMOVED***
+  "scripts": {
     "ng": "ng",
     "start": "node server/server",
     "dev": "concurrently \"ng build\" \"nodemon server/server\"",
@@ -19,9 +19,9 @@
     "build": "ng build",
     "build:watch": "tsc -p client/ -w",
     "test": "mocha"
-***REMOVED***
+  },
   "private": true,
-  "dependencies": ***REMOVED***
+  "dependencies": {
     "@angular/animations": "^5.1.1",
     "@angular/common": "^5.1.1",
     "@angular/core": "^5.1.1",
@@ -55,8 +55,8 @@
     "webpack": "^3.1.0",
     "btoa": "",
     "zone.js": "^0.8.4"
-***REMOVED***
-  "devDependencies": ***REMOVED***
+  },
+  "devDependencies": {
     "@angular/cli": "^6.0.1",
     "@angular/compiler-cli": "^5.1.2",
     "@angular/language-service": "^5.1.2",
@@ -67,5 +67,5 @@
     "concurrently": "^3.5.0",
     "mocha": "^3.4.1",
     "nodemon": "^1.11.0"
-  ***REMOVED***
-***REMOVED***
+  }
+}

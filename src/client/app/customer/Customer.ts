@@ -1,4 +1,4 @@
-export class Customer ***REMOVED***
+export class Customer {
   id: number;
   name: string;
   firstName: string;
@@ -28,4 +28,4 @@ export class Customer ***REMOVED***
   localBillType: string;
   ratePlan: string;
   devicesOwned: any[];
-***REMOVED***
+}

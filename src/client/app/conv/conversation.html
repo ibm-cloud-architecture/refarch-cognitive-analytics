@@ -25,7 +25,7 @@
         <mat-label>Select Predefined Customer Profile</mat-label>
         <mat-select  [formControl]="profileControl"  [(value)]="selectedProfile">
          <mat-option *ngFor="let p of profiles" [value]="p.value">
-           ***REMOVED******REMOVED*** p.viewValue ***REMOVED******REMOVED***
+           {{ p.viewValue }}
          </mat-option>
 
        </mat-select>
@@ -38,19 +38,19 @@
             <div  #scrollMe class="scrolling-box">
               <div *ngFor="let p of currentDialog">
                  <div class="message-box">
-                   <div class="***REMOVED******REMOVED***p.direction***REMOVED******REMOVED***">
-                      <div class="***REMOVED******REMOVED***p.direction+'-icon'***REMOVED******REMOVED***" >
+                   <div class="{{p.direction}}">
+                      <div class="{{p.direction+'-icon'}}" >
                         <span *ngIf="p.direction === 'to-watson'" class="glyphicon glyphicon-user" aria-hidden="true"></span>
                         <div *ngIf="p.direction === 'from-watson'" class="from-watson-icon">
                           <img src='assets/images/watson-globe.png' style='width:50px'>
                         </div>
                       </div>
-                      <div class="***REMOVED******REMOVED***p.direction+'-text'***REMOVED******REMOVED***">
+                      <div class="{{p.direction+'-text'}}">
                         <div [innerHTML]="p.text"></div>
                         <div *ngIf="p.options">
                           <div *ngFor="let c of p.options">
                               <br/>
-                            <button type="button" (click)="advisorResponse(c)" class="btn btn-primary">***REMOVED******REMOVED***c***REMOVED******REMOVED***</button>
+                            <button type="button" (click)="advisorResponse(c)" class="btn btn-primary">{{c}}</button>
                           </div>
                       </div>
                     </div>

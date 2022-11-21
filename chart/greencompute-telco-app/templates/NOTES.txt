@@ -1,19 +1,19 @@
 1. Get the application URL by running these commands:
-***REMOVED******REMOVED***- if .Values.ingress.enabled ***REMOVED******REMOVED***
-***REMOVED******REMOVED***- range .Values.ingress.hosts ***REMOVED******REMOVED***
-  http***REMOVED******REMOVED*** if $.Values.ingress.tls ***REMOVED******REMOVED***s***REMOVED******REMOVED*** end ***REMOVED******REMOVED***://***REMOVED******REMOVED*** . ***REMOVED******REMOVED******REMOVED******REMOVED*** $.Values.ingress.path ***REMOVED******REMOVED***
-***REMOVED******REMOVED***- end ***REMOVED******REMOVED***
-***REMOVED******REMOVED***- else if contains "NodePort" .Values.service.type ***REMOVED******REMOVED***
-  export NODE_PORT=$(kubectl get --namespace ***REMOVED******REMOVED*** .Release.Namespace ***REMOVED******REMOVED*** -o jsonpath="***REMOVED***.spec.ports[0].nodePort***REMOVED***" services ***REMOVED******REMOVED*** template "greencompute-telco-app.fullname" . ***REMOVED******REMOVED***)
-  export NODE_IP=$(kubectl get nodes --namespace ***REMOVED******REMOVED*** .Release.Namespace ***REMOVED******REMOVED*** -o jsonpath="***REMOVED***.items[0].status.addresses[0].address***REMOVED***")
+{{- if .Values.ingress.enabled }}
+{{- range .Values.ingress.hosts }}
+  http{{ if $.Values.ingress.tls }}s{{ end }}://{{ . }}{{ $.Values.ingress.path }}
+{{- end }}
+{{- else if contains "NodePort" .Values.service.type }}
+  export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ template "greencompute-telco-app.fullname" . }})
+  export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
   echo http://$NODE_IP:$NODE_PORT
-***REMOVED******REMOVED***- else if contains "LoadBalancer" .Values.service.type ***REMOVED******REMOVED***
+{{- else if contains "LoadBalancer" .Values.service.type }}
      NOTE: It may take a few minutes for the LoadBalancer IP to be available.
-           You can watch the status of by running 'kubectl get svc -w ***REMOVED******REMOVED*** template "greencompute-telco-app.fullname" . ***REMOVED******REMOVED***'
-  export SERVICE_IP=$(kubectl get svc --namespace ***REMOVED******REMOVED*** .Release.Namespace ***REMOVED******REMOVED*** ***REMOVED******REMOVED*** template "greencompute-telco-app.fullname" . ***REMOVED******REMOVED*** -o jsonpath='***REMOVED***.status.loadBalancer.ingress[0].ip***REMOVED***')
-  echo http://$SERVICE_IP:***REMOVED******REMOVED*** .Values.service.port ***REMOVED******REMOVED***
-***REMOVED******REMOVED***- else if contains "ClusterIP" .Values.service.type ***REMOVED******REMOVED***
-  export POD_NAME=$(kubectl get pods --namespace ***REMOVED******REMOVED*** .Release.Namespace ***REMOVED******REMOVED*** -l "app=***REMOVED******REMOVED*** template "greencompute-telco-app.name" . ***REMOVED******REMOVED***,release=***REMOVED******REMOVED*** .Release.Name ***REMOVED******REMOVED***" -o jsonpath="***REMOVED***.items[0].metadata.name***REMOVED***")
+           You can watch the status of by running 'kubectl get svc -w {{ template "greencompute-telco-app.fullname" . }}'
+  export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ template "greencompute-telco-app.fullname" . }} -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+  echo http://$SERVICE_IP:{{ .Values.service.port }}
+{{- else if contains "ClusterIP" .Values.service.type }}
+  export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app={{ template "greencompute-telco-app.name" . }},release={{ .Release.Name }}" -o jsonpath="{.items[0].metadata.name}")
   echo "Visit http://127.0.0.1:8080 to use your application"
   kubectl port-forward $POD_NAME 8080:80
-***REMOVED******REMOVED***- end ***REMOVED******REMOVED***
+{{- end }}

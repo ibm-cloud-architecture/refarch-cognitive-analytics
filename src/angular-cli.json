@@ -1,10 +1,10 @@
-***REMOVED***
+{
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "project": ***REMOVED***
+  "project": {
     "name": "caseinc-app"
-***REMOVED***
+  },
   "apps": [
-    ***REMOVED***
+    {
       "root": "client",
       "outDir": "dist",
       "assets": [
@@ -23,25 +23,25 @@
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
-      "environments": ***REMOVED***
+      "environments": {
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
-      ***REMOVED***
-    ***REMOVED***
+      }
+    }
   ],
-  "e2e": ***REMOVED***
-    "protractor": ***REMOVED***
+  "e2e": {
+    "protractor": {
       "config": "./protractor.conf.js"
-    ***REMOVED***
-***REMOVED***
+    }
+  },
   
-  "test": ***REMOVED***
-    "karma": ***REMOVED***
+  "test": {
+    "karma": {
       "config": "./karma.conf.js"
-    ***REMOVED***
-***REMOVED***
-  "defaults": ***REMOVED***
+    }
+  },
+  "defaults": {
     "styleExt": "css",
-    "component": ***REMOVED******REMOVED***
-  ***REMOVED***
-***REMOVED***
+    "component": {}
+  }
+}

@@ -1,43 +1,43 @@
-***REMOVED***
-  "watsonassistant" :***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-  "customerAPI":***REMOVED***
-***REMOVED***
-***REMOVED***
-      "xibmclientid": "***REMOVED***"
-***REMOVED***
-  "toneAnalyzer":***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-  "scoringService":***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-  "dbCredentials" : ***REMOVED***
-***REMOVED***
-***REMOVED***
-  "odm" : ***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-    "authtoken":"Basic cmVzQWRtaW46MWpldzFyNTc1enU1ZA=="
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
+{
+  "watsonassistant" :{
+    "version" : "v1",
+    "versionDate":"2018-02-16",
+    "url": "https://gateway.watsonplatform.net/conversation/api",
+    "username":"",
+    "password":"",
+    "conversationId":"Complex Relocation",
+    "workspace":"",
+    "usePersistence": false
+  },
+  "customerAPI":{
+      "url":"http://customer.green.case/caseserv/api/v1",
+      "host":"customer.green.case",
+      "xibmclientid": ""
+  },
+  "toneAnalyzer":{
+      "url": "https://gateway.watsonplatform.net/tone-analyzer/api",
+      "versionDate": "2017-09-21",
+      "username": "3eda",
+      "password": "zXf"
+  },
+  "scoringService":{
+    "type":"WML",
+    "baseUrl": "https://ibm-watson-ml.mybluemix.net",
+    "instance": "/v3/wml_instances/e947215d-9d96-48d0-bdce-d50e9431ca80/published_models/face8a83-b3e2-4cee-9b5e-76aaf01b3b78/deployments/3233874f-e8bd-459d-afa3-ab1d9ca148f9/online",
+    "username": "",
+    "password": ""
+  },
+  "dbCredentials" : {
+    "url": "https://...-bluemix:cd....@...e50-bluemix.cloudant.com"
+  },
+  "odm" : {
+    "hostname": "172.16.40.131",
+    "port": 31154,
+    "protocol": "http:",
+    "path": "/DecisionService/rest/v1/ProductRecommendationRuleApp/1.0/ProductRecommendation/1.0/WADL",
+    "authtoken":""
+  },
+  "debug":true,
+  "port": 3001,
+  "version": "v0.0.4"
+}

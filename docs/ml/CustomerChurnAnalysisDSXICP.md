@@ -113,7 +113,7 @@ df_customer_transactions.printSchema()
 
 ```
 
-    ***REMOVED***u'description': u'', u'URL': u'jdbc:db2://172.16.40.131:32166/BLUDB', 'driver_class': 'com.ibm.db2.jcc.DB2Driver', u'dsx_artifact_type': u'datasource', u'shared': True, u'type': u'DB2', u'name': u'CUSTOMER'***REMOVED***
+    {u'description': u'', u'URL': u'jdbc:db2://172.16.40.131:32166/BLUDB', 'driver_class': 'com.ibm.db2.jcc.DB2Driver', u'dsx_artifact_type': u'datasource', u'shared': True, u'type': u'DB2', u'name': u'CUSTOMER'}
     BLUADMIN.CUSTOMER
     +----+------+------+--------+----------+---------+---------+--------------+-------+------------+-------------+-----+-------+---------+-------------+--------------------+------+--------+-----------+-----+
     |  ID|GENDER|STATUS|CHILDREN|EST_INCOME|CAR_OWNER|      AGE|MARITAL_STATUS|ZIPCODE|LONGDISTANCE|INTERNATIONAL|LOCAL|DROPPED|PAYMETHOD|LOCALBILLTYPE|LONGDISTANCEBILLTYPE| USAGE|RATEPLAN|DEVICEOWNED|CHURN|
@@ -164,7 +164,7 @@ df_call_notes.printSchema()
 
 ```
 
-    ***REMOVED***u'description': u'', u'URL': u'jdbc:db2://172.16.40.131:32166/BLUDB', 'driver_class': 'com.ibm.db2.jcc.DB2Driver', u'dsx_artifact_type': u'datasource', u'shared': True, u'type': u'DB2', u'name': u'CUSTOMER'***REMOVED***
+    {u'description': u'', u'URL': u'jdbc:db2://172.16.40.131:32166/BLUDB', 'driver_class': 'com.ibm.db2.jcc.DB2Driver', u'dsx_artifact_type': u'datasource', u'shared': True, u'type': u'DB2', u'name': u'CUSTOMER'}
     BLUADMIN.CALLNOTES
     +----+--------------------+----------+--------------+--------+
     |  ID|            COMMENTS|SENTIMENTS|      KEYWORD1|KEYWORD2|
@@ -199,7 +199,7 @@ df_campaign_responses.show(5)
 df_campaign_responses.printSchema()
 ```
 
-    ***REMOVED***u'description': u'', u'URL': u'jdbc:db2://172.16.40.131:32166/BLUDB', 'driver_class': 'com.ibm.db2.jcc.DB2Driver', u'dsx_artifact_type': u'datasource', u'shared': True, u'type': u'DB2', u'name': u'CUSTOMER'***REMOVED***
+    {u'description': u'', u'URL': u'jdbc:db2://172.16.40.131:32166/BLUDB', 'driver_class': 'com.ibm.db2.jcc.DB2Driver', u'dsx_artifact_type': u'datasource', u'shared': True, u'type': u'DB2', u'name': u'CUSTOMER'}
     BLUADMIN.CAMPAIGNRESPONSES_EXPANDED
     +----+------------------+---------------------------+-------------------------------------+
     |  ID|RESPONDED_CAMPAIGN|OWNS_MULTIPLE_PHONE_NUMBERS|AVERAGE_TEXT_MESSAGES__90_DAY_PERIOD_|
@@ -225,10 +225,10 @@ The next few steps involve a series of data preparation tasks such as filling th
 
 
 ```python
-df_campaign_responses = df_campaign_responses.na.fill(***REMOVED***'AVERAGE_TEXT_MESSAGES__90_DAY_PERIOD_':'0'***REMOVED***)
-df_call_notes = df_call_notes.na.fill(***REMOVED***'SENTIMENTS':' '***REMOVED***)
-df_call_notes = df_call_notes.na.fill(***REMOVED***'KEYWORD1':' '***REMOVED***)
-df_call_notes = df_call_notes.na.fill(***REMOVED***'KEYWORD2':' '***REMOVED***)
+df_campaign_responses = df_campaign_responses.na.fill({'AVERAGE_TEXT_MESSAGES__90_DAY_PERIOD_':'0'})
+df_call_notes = df_call_notes.na.fill({'SENTIMENTS':' '})
+df_call_notes = df_call_notes.na.fill({'KEYWORD1':' '})
+df_call_notes = df_call_notes.na.fill({'KEYWORD2':' '})
 ```
 
 In the following cell we join some of the customer and call note data sources using the ID field. This ID field is the one coming from the CUSTOMER DB2 transactional database.
@@ -332,17 +332,17 @@ pandas_df_callnotes_campaign_churn.head(12)
 
 <div>
 <style>
-    .dataframe thead tr:only-child th ***REMOVED***
+    .dataframe thead tr:only-child th {
         text-align: right;
-    ***REMOVED***
+    }
 
-    .dataframe thead th ***REMOVED***
+    .dataframe thead th {
         text-align: left;
-    ***REMOVED***
+    }
 
-    .dataframe tbody tr th ***REMOVED***
+    .dataframe tbody tr th {
         vertical-align: top;
-    ***REMOVED***
+    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -801,7 +801,7 @@ display(data_joined_callnotes_churn_campaign)
 ```
 
 
-<style type="text/css">.pd_warning***REMOVED***display:none;***REMOVED***</style><div class="pd_warning"><em>Hey, there's something awesome here! To see it, open this notebook outside GitHub, in a viewer like Jupyter</em></div>
+<style type="text/css">.pd_warning{display:none;}</style><div class="pd_warning"><em>Hey, there's something awesome here! To see it, open this notebook outside GitHub, in a viewer like Jupyter</em></div>
         <div class="pd_save is-viewer-good" style="padding-right:10px;text-align: center;line-height:initial !important;font-size: xx-large;font-weight: 500;color: coral;">
             
         </div>
@@ -879,17 +879,17 @@ results.toPandas().head(6)
 
 <div>
 <style>
-    .dataframe thead tr:only-child th ***REMOVED***
+    .dataframe thead tr:only-child th {
         text-align: right;
-    ***REMOVED***
+    }
 
-    .dataframe thead th ***REMOVED***
+    .dataframe thead th {
         text-align: left;
-    ***REMOVED***
+    }
 
-    .dataframe tbody tr th ***REMOVED***
+    .dataframe tbody tr th {
         vertical-align: top;
-    ***REMOVED***
+    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -968,10 +968,10 @@ results.toPandas().head(6)
 
 
 ```python
-prefix_precision = 'Precision model1 = ***REMOVED***:.2f***REMOVED***.'
+prefix_precision = 'Precision model1 = {:.2f}.'
 print (prefix_precision.format(results.filter(results.label == results.prediction).count() / float(results.count())))
 
-prefix_aoc = 'Area under ROC curve = ***REMOVED***:.2f***REMOVED***.'
+prefix_aoc = 'Area under ROC curve = {:.2f}.'
 evaluator = BinaryClassificationEvaluator(rawPredictionCol="prediction", labelCol="label", metricName="areaUnderROC")
 print (prefix_aoc.format(evaluator.evaluate(results)))
 ```

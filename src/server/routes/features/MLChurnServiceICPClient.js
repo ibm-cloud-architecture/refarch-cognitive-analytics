@@ -24,51 +24,51 @@ const CommandsFactory = require('hystrixjs').commandFactory;
 const customerService = require('./customerProxy')
 
 
- module.exports = ***REMOVED***
-   scoreCustomer : function(config,req,next)***REMOVED***
-     if (config.debug) ***REMOVED***
+ module.exports = {
+   scoreCustomer : function(config,req,next){
+     if (config.debug) {
        console.log("Call churn scoring service for "+JSON.stringify(req.user));
-     ***REMOVED***
-     customerService.getCustomerDetail(config,req.user.email).then(function(response) ***REMOVED***
+     }
+     customerService.getCustomerDetail(config,req.user.email).then(function(response) {
          // do data preparation
          var payLoadToScore=buildScoringPayload(req.body.context["ToneAnalysisResponse"].tone_id,JSON.parse(response))
          // call the WML service
-         var score = getScoring(config,payLoadToScore).then(function(score)***REMOVED***
-             next(***REMOVED***"score":score***REMOVED***)
-         ***REMOVED***).catch(function(error)***REMOVED***
-             next(***REMOVED***"score":.5***REMOVED***)
-         ***REMOVED***);
-     ***REMOVED***).catch(function(error)***REMOVED***
+         var score = getScoring(config,payLoadToScore).then(function(score){
+             next({"score":score})
+         }).catch(function(error){
+             next({"score":.5})
+         });
+     }).catch(function(error){
         console.error(error)
-        next(***REMOVED***"score":.5***REMOVED***)
-     ***REMOVED***)
-   ***REMOVED***
-***REMOVED*** // exports
+        next({"score":.5})
+     })
+   }
+} // exports
 
 
 // ------------------------------------------------------------
 // Private
 // ------------------------------------------------------------
-function getToken(config)***REMOVED***
-  return new Promise(function(resolve, reject)***REMOVED***
-      request(***REMOVED***
+function getToken(config){
+  return new Promise(function(resolve, reject){
+      request({
         url:config.scoringService.baseUrl+ "/v3/identity/token",
         method: "GET",
-        headers: ***REMOVED***
+        headers: {
           accept: 'application/json',
           'Content-Type': 'application/json;charset=UTF-8',
           Authorization: "Basic " + btoa(config.scoringService.username + ":" + config.scoringService.password)
-        ***REMOVED******REMOVED***,
-       function(error,response,body)***REMOVED***
-            if (body) ***REMOVED***
+        }},
+       function(error,response,body){
+            if (body) {
               const token=JSON.parse(body).token;
               console.log("Got the token... call the scoring "+body);
               resolve(token)
-            ***REMOVED***
+            }
             reject(error);
-      ***REMOVED***)
-  ***REMOVED***)
-***REMOVED*** // getToken
+      })
+  })
+} // getToken
 
 // times out calls that take longer, than the configured threshold.
 var getTokenServiceCommand = CommandsFactory.getOrCreate("getTokenServiceCommand")
@@ -77,31 +77,31 @@ var getTokenServiceCommand = CommandsFactory.getOrCreate("getTokenServiceCommand
   .requestVolumeRejectionThreshold(2)
   .build();
 
-function scorePayload(config,token,payload)***REMOVED***
-    return new Promise(function(resolve, reject)***REMOVED***
+function scorePayload(config,token,payload){
+    return new Promise(function(resolve, reject){
       const scoring_url = config.scoringService.baseUrl+config.scoringService.instance;
-      request(***REMOVED***url:scoring_url,
+      request({url:scoring_url,
             method:"POST",
-            headers: ***REMOVED***
+            headers: {
               Accept: 'application/json',
               'Content-Type': 'application/json;charset=UTF-8',
               Authorization: 'Bearer '+token
-          ***REMOVED***
+            },
             body: JSON.stringify(payload)
-        ***REMOVED***function(error,response,body)***REMOVED***
-              if (body) ***REMOVED***
+          },function(error,response,body){
+              if (body) {
                 const result = JSON.parse(body)
                 console.log(result)
                 const churnIdx=result.values[0][43]
                 const churn=result.values[0][44]
                 console.log(churn+" "+result.values[0][42][churnIdx])
                 resolve(result.values[0][42][churnIdx]);
-              ***REMOVED***
+              }
               reject(0.5)
-            ***REMOVED***
+            }
       ) // scoring request
-    ***REMOVED***)
-***REMOVED*** // scorePayload
+    })
+} // scorePayload
 
 var getScoringServiceCommand = CommandsFactory.getOrCreate("getScoringServiceCommand")
   .run(scorePayload)
@@ -110,7 +110,7 @@ var getScoringServiceCommand = CommandsFactory.getOrCreate("getScoringServiceCom
   .build();
 
 
-function buildScoringPayload(sentiment,custRecord)***REMOVED***
+function buildScoringPayload(sentiment,custRecord){
   var record = [];
   record.push(sentiment);
   record.push("none");
@@ -119,19 +119,19 @@ function buildScoringPayload(sentiment,custRecord)***REMOVED***
   record.push(custRecord.gender);
   record.push(custRecord.children);
   record.push(custRecord.estimatedIncome);
-  if (custRecord.carOwner === "T") ***REMOVED***
+  if (custRecord.carOwner === "T") {
     record.push("Y");
-  ***REMOVED*** else ***REMOVED***
+  } else {
     record.push("N");
-  ***REMOVED***
+  }
 
   //record.push(custRecord.age);
   record.push(24);
-  if (custRecord.maritalStatus === 'Familly') ***REMOVED***
+  if (custRecord.maritalStatus === 'Familly') {
     record.push("Married");
-  ***REMOVED*** else ***REMOVED***
+  } else {
     record.push(custRecord.maritalStatus);
-  ***REMOVED***
+  }
 
   record.push("95051"); // TODO need to get zipcode in backend
   record.push(custRecord.longDistance);
@@ -149,25 +149,25 @@ function buildScoringPayload(sentiment,custRecord)***REMOVED***
   record.push("Y"); // TODO need to get OMPN
   record.push(1220); // TODO need to get SMScount
 
-  var payload = ***REMOVED***"fields": ["Sentiment", "Keyword_Component", "Keyword_Query", "ID", "Gender", "Children", "Income", "CarOwnership", "Age", "MaritalStatus", "zipcode", "LongDistance", "International", "Local", "Dropped", "Paymethod", "LocalBilltype", "LongDistanceBilltype", "Usage", "RatePlan", "DeviceOwned", "Preference", "OMPN", "SMSCount"]***REMOVED***;
+  var payload = {"fields": ["Sentiment", "Keyword_Component", "Keyword_Query", "ID", "Gender", "Children", "Income", "CarOwnership", "Age", "MaritalStatus", "zipcode", "LongDistance", "International", "Local", "Dropped", "Paymethod", "LocalBilltype", "LongDistanceBilltype", "Usage", "RatePlan", "DeviceOwned", "Preference", "OMPN", "SMSCount"]};
   payload.values=new Array(record);
   console.log(JSON.stringify(payload));
   return payload;
-***REMOVED***
+}
 
 
-function getScoring(config,payload)***REMOVED***
- return new Promise(function(resolve, reject)***REMOVED***
-    getTokenServiceCommand.execute(config).then(function(token)***REMOVED***
-          getScoringServiceCommand.execute(config,token,payload).then(function(score)***REMOVED***
+function getScoring(config,payload){
+ return new Promise(function(resolve, reject){
+    getTokenServiceCommand.execute(config).then(function(token){
+          getScoringServiceCommand.execute(config,token,payload).then(function(score){
             resolve(score)
-          ***REMOVED***).catch(function(errorMsg)***REMOVED***
+          }).catch(function(errorMsg){
                 console.error("in catch "+errorMsg);
                 reject(0.5)
-          ***REMOVED***);
-    ***REMOVED***).catch(function(errorMsg)***REMOVED***
+          });
+    }).catch(function(errorMsg){
       console.error("in catch "+errorMsg);
-      reject(***REMOVED***error:errorMsg.Error***REMOVED***);
-    ***REMOVED***);
- ***REMOVED***);
-***REMOVED*** // get scoring
+      reject({error:errorMsg.Error});
+    });
+ });
+} // get scoring

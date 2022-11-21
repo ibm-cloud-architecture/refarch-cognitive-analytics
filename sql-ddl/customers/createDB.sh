@@ -1,7 +1,7 @@
 #!/bin/bash 
 
 # Get the list of databases 
-customerdb=$(db2 list db directory | grep Indirect -B 5 |grep "Database alias" |awk ***REMOVED***'print $4'***REMOVED*** |grep "CUSTDB")
+customerdb=$(db2 list db directory | grep Indirect -B 5 |grep "Database alias" |awk {'print $4'} |grep "CUSTDB")
 echo $customerdb
 if [ -z "$customerdb" ] ; then 
    echo "DB: CUSTDB not found so let create it"
