@@ -5,7 +5,7 @@
 </div>
 <h2>Customer Management  <i *ngIf="loading" class="fa fa-cog fa-spin fa-3x fa-fw"></i> <span><button class="btn btnbg glyphicon glyphicon-plus" type="button" (click)="add()"></button></span></h2>
 <div class="row">
-  <p>***REMOVED******REMOVED***message***REMOVED******REMOVED***</p>
+  <p>{{message}}</p>
   <div class="col-md-7" *ngIf="!loading">
       <table id="dataTable" class="table table-striped table-condensed">
         <thead>
@@ -20,11 +20,11 @@
         </thead>
         <tbody>
           <tr class="customers" *ngFor="let customer of customers;let i = index">
-             <td>***REMOVED******REMOVED***customer.id***REMOVED******REMOVED***</td>
-             <td>***REMOVED******REMOVED***customer.name***REMOVED******REMOVED***</td>
-             <td>***REMOVED******REMOVED***customer.gender***REMOVED******REMOVED***</td>
-             <td>***REMOVED******REMOVED***customer.emailAddress***REMOVED******REMOVED***</td>
-             <td>***REMOVED******REMOVED***customer.status***REMOVED******REMOVED***</td>
+             <td>{{customer.id}}</td>
+             <td>{{customer.name}}</td>
+             <td>{{customer.gender}}</td>
+             <td>{{customer.emailAddress}}</td>
+             <td>{{customer.status}}</td>
              <td style="background-color: white; border-width:0;">
                <button class="btn glyphicon glyphicon-edit" type="button"  (click)="edit(customer)"></button>
                <button class="btn glyphicon glyphicon-trash" type="button" (click)="remove(i)"></button>

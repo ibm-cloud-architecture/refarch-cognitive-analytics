@@ -20,55 +20,55 @@ Author: IBM - Jerome Boyer
 
 
 
-module.exports=  ***REMOVED***
-  saveConversation : function(config,conv,next)***REMOVED***
+module.exports=  {
+  saveConversation : function(config,conv,next){
     var cloudant = require('cloudant')(config.dbCredentials.url);
     var db = cloudant.use('wcsdb');
-    if (conv.context !== undefined) ***REMOVED***
-      if (conv.context.revId !== undefined) ***REMOVED***
+    if (conv.context !== undefined) {
+      if (conv.context.revId !== undefined) {
         conv._id=conv.context.persistId;
         conv._rev=conv.context.revId;
         conv.ts= new Date();
-      ***REMOVED***
-    ***REMOVED***
-    db.insert(conv, function(err, data) ***REMOVED***
-      if (err) ***REMOVED***
-        next(***REMOVED***error: err.message***REMOVED***);
-      ***REMOVED*** else ***REMOVED***
+      }
+    }
+    db.insert(conv, function(err, data) {
+      if (err) {
+        next({error: err.message});
+      } else {
         next(data);
-      ***REMOVED***
-    ***REMOVED***);
-***REMOVED*** // saveConversation
-  getAllConversations: function(cid,next)***REMOVED***
-    var cloudantquery = ***REMOVED***
-      "selector": ***REMOVED***
+      }
+    });
+  }, // saveConversation
+  getAllConversations: function(cid,next){
+    var cloudantquery = {
+      "selector": {
         "conv_id": cid
-      ***REMOVED***
-    ***REMOVED***;
-    db.find(cloudantquery, function(err, data) ***REMOVED***
-      if (err) ***REMOVED***
-        next(***REMOVED***error: err.message***REMOVED***)
-      ***REMOVED*** else ***REMOVED***
+      }
+    };
+    db.find(cloudantquery, function(err, data) {
+      if (err) {
+        next({error: err.message})
+      } else {
         next(data.docs);
-      ***REMOVED***
-    ***REMOVED***);
-***REMOVED***
-  getConversationById: function(id,next)***REMOVED***
-    var cloudantquery = ***REMOVED***
-      "selector": ***REMOVED***
+      }
+    });
+  },
+  getConversationById: function(id,next){
+    var cloudantquery = {
+      "selector": {
         "_id": id
-      ***REMOVED***
-    ***REMOVED***;
-    db.find(cloudantquery, function(err, data) ***REMOVED***
-      if (err) ***REMOVED***
-        next(***REMOVED***error: err.message***REMOVED***)
-      ***REMOVED*** else ***REMOVED***
-        if(data.docs.length > 0)***REMOVED***
+      }
+    };
+    db.find(cloudantquery, function(err, data) {
+      if (err) {
+        next({error: err.message})
+      } else {
+        if(data.docs.length > 0){
           next(data.docs[0]);
-        ***REMOVED*** else ***REMOVED***
-          next(***REMOVED***error: 'no conversation found with _id: ' + id***REMOVED***);
-        ***REMOVED***
-      ***REMOVED***
-    ***REMOVED***);
-  ***REMOVED***
-***REMOVED***
+        } else {
+          next({error: 'no conversation found with _id: ' + id});
+        }
+      }
+    });
+  }
+}

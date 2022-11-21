@@ -30,22 +30,22 @@ const bodyParser =   require('body-parser');
 var config = require('./config/config.json');
 require('./routes/passport')(passport,config)
 
-app.use(session(***REMOVED***
+app.use(session({
 	name: 'JSESSION',
 	secret: '321sessionverysecretsecret123',
 	resave: false,
   saveUninitialized: false,
-	cookie: ***REMOVED*** secure: false ***REMOVED***, // not using https between browser and bff
+	cookie: { secure: false }, // not using https between browser and bff
 	store: new MemoryStore()
-***REMOVED***));
+}));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 
 app.use(require('cookie-parser')());
 // Parsers for POST JSON PAYLOAD
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded(***REMOVED*** extended: true ***REMOVED***));
-//app.use(session(***REMOVED***resave: 'true', saveUninitialized: 'true' , secret: 'keyboard cat', cookie:***REMOVED***secure: false***REMOVED******REMOVED***));
+app.use(bodyParser.urlencoded({ extended: true }));
+//app.use(session({resave: 'true', saveUninitialized: 'true' , secret: 'keyboard cat', cookie:{secure: false}}));
 
 // Point static path to dist
 app.use(express.static(path.join(__dirname, '../dist')));
@@ -55,14 +55,14 @@ require('./routes/userlogin')(app, passport);
 require('./routes/api')(app,config);
 
 // Catch all other routes and return the index file
-app.get('*', (req, res) => ***REMOVED***
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/index.html'));
-***REMOVED***);
+});
 
 const port = process.env.PORT || config.port;
-var server=app.listen(port, '0.0.0.0', function() ***REMOVED***
+var server=app.listen(port, '0.0.0.0', function() {
   console.log("Green Telco Portal UI Server "+ config.version+" starting on " + port);
   console.log("  Use your web browser: http://localhost:"+port);
-***REMOVED***);
+});
 
 module.exports = server;

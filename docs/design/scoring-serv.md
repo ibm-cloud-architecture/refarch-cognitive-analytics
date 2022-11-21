@@ -27,16 +27,16 @@ Once deployed the service can be accessed via API. The code is in server/routes/
 
 ```javascript
 const scoring_url = config.scoringService.baseUrl+config.scoringService.instance;
-request(***REMOVED***url:scoring_url,
+request({url:scoring_url,
       method:"POST",
-      headers: ***REMOVED***
+      headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json;charset=UTF-8',
         Authorization: 'Bearer '+token
-    ***REMOVED***
+      },
       body: JSON.stringify(payload)
       ...
-    ***REMOVED***)
+    })
 ```
 
 ## ICP 

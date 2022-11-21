@@ -25,36 +25,36 @@ var odmclient = require('./ODMClient');
 Function to support the logic of integrating all the services and interact with Watson Conversation.
 When the conversation context includes toneAnalyzis, call the service
 */
-module.exports = ***REMOVED***
-  chat : function(config,req,res)***REMOVED***
+module.exports = {
+  chat : function(config,req,res){
     req.body.context.predefinedResponses="";
     console.log("text "+req.body.text+".")
     // logic to handle WCS response after prompting to user a message
-    if (req.body.context.toneAnalyzer && req.body.text !== "" ) ***REMOVED***
+    if (req.body.context.toneAnalyzer && req.body.text !== "" ) {
         analyzeTone(config,req,res)
-    ***REMOVED***
-    if (req.body.context.action === "search" && req.body.context.item ==="UserRequests") ***REMOVED***
+    }
+    if (req.body.context.action === "search" && req.body.context.item ==="UserRequests") {
         getSupportTicket(config,req,res);
-    ***REMOVED***
-    if (req.body.context.action === "recommend") ***REMOVED***
-          odmclient.recommend(config,req.body.context,res, function(contextWithRecommendation)***REMOVED***
+    }
+    if (req.body.context.action === "recommend") {
+          odmclient.recommend(config,req.body.context,res, function(contextWithRecommendation){
 
-            if (config.debug) ***REMOVED***
+            if (config.debug) {
               console.log('Context back to WCS with recommendation: ' + JSON.stringify(contextWithRecommendation));
-            ***REMOVED***
+            }
             req.body.context = contextWithRecommendation;
             sendToWCSAndBackToUser(config,req,res);
-          ***REMOVED***)
-    ***REMOVED***
-    if (req.body.context.action === "transfer") ***REMOVED***
+          })
+    }
+    if (req.body.context.action === "transfer") {
         console.log("Transfer to "+ req.body.context.item)
-    ***REMOVED***
+    }
 
-    if (req.body.context.action === undefined) ***REMOVED***
+    if (req.body.context.action === undefined) {
         sendToWCSAndBackToUser(config,req,res);
-    ***REMOVED***
-  ***REMOVED*** // chat
-***REMOVED***;
+    }
+  } // chat
+};
 
 // ------------------------------------------------------------
 // Private
@@ -63,95 +63,95 @@ module.exports = ***REMOVED***
 Call tone analyzis and when the tone assessment is frustrated call scoring services
 Call WCS back
 **/
-function analyzeTone(config,req,res)***REMOVED***
-  toneAnalyzer.analyzeSentence(config,req.body.text).then(function(toneArep) ***REMOVED***
-        if (config.debug) ***REMOVED***console.log('Tone Analyzer '+ JSON.stringify(toneArep));***REMOVED***
+function analyzeTone(config,req,res){
+  toneAnalyzer.analyzeSentence(config,req.body.text).then(function(toneArep) {
+        if (config.debug) {console.log('Tone Analyzer '+ JSON.stringify(toneArep));}
         var tone=toneArep.utterances_tone[0].tones[0];
-        if (tone !== undefined && tone.tone_name !== undefined) ***REMOVED***
+        if (tone !== undefined && tone.tone_name !== undefined) {
           req.body.context["ToneAnalysisResponse"]=tone;
-          if (tone.tone_name === "Frustrated") ***REMOVED***
-            churnScoring.scoreCustomer(config,req,function(score)***REMOVED***
+          if (tone.tone_name === "Frustrated") {
+            churnScoring.scoreCustomer(config,req,function(score){
                       req.body.context["ChurnScore"]=score;
                       sendToWCSAndBackToUser(config,req,res);
-                ***REMOVED***)
-          ***REMOVED*** else ***REMOVED***
+                })
+          } else {
             sendToWCSAndBackToUser(config,req,res);
-          ***REMOVED***// frustrated
-        ***REMOVED*** else ***REMOVED***
-          req.body.context["ToneAnalysisResponse"]=***REMOVED******REMOVED***
+          }// frustrated
+        } else {
+          req.body.context["ToneAnalysisResponse"]={}
           sendToWCSAndBackToUser(config,req,res);
-        ***REMOVED***
+        }
 
-  ***REMOVED***).catch(function(error)***REMOVED***
+  }).catch(function(error){
       console.error(error);
-      res.status(500).send(***REMOVED***'msg':error.Error***REMOVED***);
-    ***REMOVED***);
-***REMOVED*** // analyzeTone
+      res.status(500).send({'msg':error.Error});
+    });
+} // analyzeTone
 
-function getSupportTicket(config,req,res)***REMOVED***
-  ticketing.getUserTicket(config,req.body.user.email,function(ticket)***REMOVED***
-      if (config.debug) ***REMOVED***
+function getSupportTicket(config,req,res){
+  ticketing.getUserTicket(config,req.body.user.email,function(ticket){
+      if (config.debug) {
           console.log('Ticket response: ' + JSON.stringify(ticket));
-      ***REMOVED***
+      }
       req.body.context["Ticket"]=ticket
       sendToWCSAndBackToUser(config,req,res);
-  ***REMOVED***)
-***REMOVED*** // getSupportTicket
+  })
+} // getSupportTicket
 
-function sendToWCSAndBackToUser(config, req, res)***REMOVED***
-  sendMessage(config,req.body,config.watsonassistant.workspace,res).then(function(response) ***REMOVED***
-    if (config.debug) ***REMOVED***console.log("\n <<< From WCS "+JSON.stringify(response,null,2));***REMOVED***
+function sendToWCSAndBackToUser(config, req, res){
+  sendMessage(config,req.body,config.watsonassistant.workspace,res).then(function(response) {
+    if (config.debug) {console.log("\n <<< From WCS "+JSON.stringify(response,null,2));}
     response.text="<p>"+response.output.text[0]+"</p>";
     //  support multiple choices response
-    if (response.context.action === "click") ***REMOVED***
+    if (response.context.action === "click") {
         response.text= response.text+ "<br/><a class=\"btn btn-primary\" href=\""+response.context.url+"\">"+response.context.buttonText+"</a>"
-    ***REMOVED***
+    }
     res.status(200).send(response);
-  ***REMOVED***).catch(function(error)***REMOVED***
+  }).catch(function(error){
       console.error(error);
-      res.status(500).send(***REMOVED***'text':error.Error***REMOVED***);
-    ***REMOVED***);
-***REMOVED***
+      res.status(500).send({'text':error.Error});
+    });
+}
 
-var sendMessage = function(config,message,wkid,res,next)***REMOVED***
-  var conversation = new AssistantV1(***REMOVED***
+var sendMessage = function(config,message,wkid,res,next){
+  var conversation = new AssistantV1({
       username: config.watsonassistant.username,
       password: config.watsonassistant.password,
       version: config.watsonassistant.versionDate
-    ***REMOVED***);
-  return new Promise(function(resolve, reject)***REMOVED***
-      if (message.context.conversation_id === undefined) ***REMOVED***
+    });
+  return new Promise(function(resolve, reject){
+      if (message.context.conversation_id === undefined) {
           message.context["conversation_id"]=config.watsonassistant.conversationId;
-      ***REMOVED***
-      if (config.debug) ***REMOVED***
+      }
+      if (config.debug) {
           console.log("\n--- Connect to Watson Assistant named: " + config.watsonassistant.conversationId);
           console.log(">>> to Assistant "+JSON.stringify(message,null,2));
-      ***REMOVED***
+      }
       conversation.message(
-          ***REMOVED***
+          {
           workspace_id: wkid,
-          input: ***REMOVED***'text': message.text***REMOVED***,
+          input: {'text': message.text},
           context: message.context
-        ***REMOVED***
-          function(err, response) ***REMOVED***
-            if (err) ***REMOVED***
+          },
+          function(err, response) {
+            if (err) {
               console.log('error:', err);
-              reject(null,***REMOVED***'Error': "Communication error with Watson Service. Please contact your administrator"***REMOVED***);
-            ***REMOVED*** else ***REMOVED***
-              if (config.watsonassistant.usePersistence) ***REMOVED***
+              reject(null,{'Error': "Communication error with Watson Service. Please contact your administrator"});
+            } else {
+              if (config.watsonassistant.usePersistence) {
                   response.context.persistId=message.context.persistId;
                   response.context.revId=message.context.revId;
-                  persist.saveConversation(config,response,function(persistRep)***REMOVED***
+                  persist.saveConversation(config,response,function(persistRep){
                         response.context.persistId=persistRep.id;
                         response.context.revId=persistRep.rev;
                         console.log("Conversation persisted, response is now: "+JSON.stringify(response,null,2));
                         resolve(response);
-                  ***REMOVED***);
-              ***REMOVED*** else ***REMOVED***
+                  });
+              } else {
                   resolve(response);
-              ***REMOVED***
-            ***REMOVED***
-          ***REMOVED***
+              }
+            }
+          }
       );
-   ***REMOVED***); // promise
-***REMOVED*** // sendMessage
+   }); // promise
+} // sendMessage

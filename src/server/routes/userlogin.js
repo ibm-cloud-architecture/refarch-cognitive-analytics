@@ -14,19 +14,19 @@
  * limitations under the License.
  */
 
-module.exports = function(app, passport)***REMOVED***
-  app.get('/logout', function(req, res)***REMOVED***
-    if(req.user)***REMOVED***
+module.exports = function(app, passport){
+  app.get('/logout', function(req, res){
+    if(req.user){
       console.log('logging out user:', req.user);
-    ***REMOVED***
+    }
     req.logout();
-    req.session.destroy(function (err) ***REMOVED***
-        res.status(200).send(***REMOVED***loggedOut: true***REMOVED***);
-    ***REMOVED***);
-  ***REMOVED***)
+    req.session.destroy(function (err) {
+        res.status(200).send({loggedOut: true});
+    });
+  })
 
-  app.post('/login', passport.authenticate('local', ***REMOVED*** failureFlash: 'Invalid username or password.' ***REMOVED***), function(req, res)***REMOVED***
+  app.post('/login', passport.authenticate('local', { failureFlash: 'Invalid username or password.' }), function(req, res){
     console.log('Login API: User Authenticated Successfully:', req.user)
     res.status(200).send(req.user);
-  ***REMOVED***)
-***REMOVED***
+  })
+}

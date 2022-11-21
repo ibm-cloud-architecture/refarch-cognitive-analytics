@@ -1,35 +1,35 @@
-import ***REMOVED*** Component, OnInit ***REMOVED*** from '@angular/core';
-import ***REMOVED*** CustomersService ***REMOVED***  from '../customer/customers.service';
-import ***REMOVED*** Customer ***REMOVED*** from "../customer/Customer";
-import ***REMOVED*** User ***REMOVED*** from "../login/User";
+import { Component, OnInit } from '@angular/core';
+import { CustomersService }  from '../customer/customers.service';
+import { Customer } from "../customer/Customer";
+import { User } from "../login/User";
 
-@Component(***REMOVED***
+@Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.css']
-***REMOVED***)
-export class AccountComponent implements OnInit ***REMOVED***
+})
+export class AccountComponent implements OnInit {
 
   user: User;
   customer: Customer;
   error: String;
 
-  constructor(customerService : CustomersService) ***REMOVED***
+  constructor(customerService : CustomersService) {
     this.user = JSON.parse(sessionStorage.getItem('currentUser'));
-    if(this.user && 'email' in this.user) ***REMOVED***
+    if(this.user && 'email' in this.user) {
       customerService.getCustomerByEmail(this.user.email).subscribe(
-          data => ***REMOVED***
+          data => {
             this.customer=data;
-        ***REMOVED***
-          error => ***REMOVED***
+          },
+          error => {
             console.log(error);
             this.error="An error occurs on backend, try again later.";
-          ***REMOVED***);
-    ***REMOVED***
+          });
+    }
 
-  ***REMOVED***
+  }
 
-  ngOnInit() ***REMOVED***
-  ***REMOVED***
+  ngOnInit() {
+  }
 
-***REMOVED***
+}

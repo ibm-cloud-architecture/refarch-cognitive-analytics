@@ -1,5 +1,5 @@
-export class User ***REMOVED***
+export class User {
   email: string;
   password : string;
   token : string;
-***REMOVED***
+}

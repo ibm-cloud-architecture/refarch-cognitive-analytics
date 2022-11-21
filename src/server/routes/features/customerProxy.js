@@ -14,36 +14,36 @@
  * limitations under the License.
  * Jerome Boyer IBM boyerje@us.ibm.com
  */
-const request = require('request').defaults(***REMOVED***strictSSL: false***REMOVED***);
+const request = require('request').defaults({strictSSL: false});
 const CommandsFactory = require('hystrixjs').commandFactory;
 
 
-var buildOptions=function(met,aPath,config)***REMOVED***
-  return ***REMOVED***
+var buildOptions=function(met,aPath,config){
+  return {
     url: config.customerAPI.url+aPath,
     method: met,
     rejectUnauthorized: true,
     //ca: caCerts,
-    headers: ***REMOVED***
+    headers: {
       accept: 'application/json',
       'Content-Type': 'application/json',
       'X-IBM-Client-Id': config.customerAPI.xibmclientid,
       Host: config.customerAPI.host,
-    ***REMOVED***
-  ***REMOVED***
-***REMOVED***
+    }
+  }
+}
 
 // what run in the command pattern. Must returns a Promise
-var run = function(config,email)***REMOVED***
-  return new Promise(function(resolve, reject)***REMOVED***
+var run = function(config,email){
+  return new Promise(function(resolve, reject){
       var opts = buildOptions('GET','/customers/email/'+email,config);
       opts.headers['Content-Type']='multipart/form-data';
-      request(opts,function (error, response, body) ***REMOVED***
-        if (error) ***REMOVED***reject(error)***REMOVED***
+      request(opts,function (error, response, body) {
+        if (error) {reject(error)}
         resolve(body);
-      ***REMOVED***);
-  ***REMOVED***);
-***REMOVED***
+      });
+  });
+}
 
 // times out calls that take longer, than the configured threshold.
 var serviceCommand =CommandsFactory.getOrCreate("getCustomerDetail")
@@ -53,16 +53,16 @@ var serviceCommand =CommandsFactory.getOrCreate("getCustomerDetail")
   .build();
 
 
-module.exports = ***REMOVED***
-  getCustomerByEmail : function(config,email,res)***REMOVED***
-    serviceCommand.execute(config,email).then(function(response)***REMOVED***
+module.exports = {
+  getCustomerByEmail : function(config,email,res){
+    serviceCommand.execute(config,email).then(function(response){
       res.send(response);
-    ***REMOVED***).catch(function(errorMsg)***REMOVED***
+    }).catch(function(errorMsg){
       console.error("in catch "+errorMsg);
-      res.status(500).send(***REMOVED***error:errorMsg.Error***REMOVED***);
-    ***REMOVED***);
-***REMOVED***
-  getCustomerDetail : function(config,email) ***REMOVED***
+      res.status(500).send({error:errorMsg.Error});
+    });
+  },
+  getCustomerDetail : function(config,email) {
       return serviceCommand.execute(config,email);
-  ***REMOVED***
-***REMOVED*** // export
+  }
+} // export

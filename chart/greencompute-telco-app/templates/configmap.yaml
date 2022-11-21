@@ -1,50 +1,50 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: ***REMOVED******REMOVED*** template "greencompute-telco-app.fullname" . ***REMOVED******REMOVED***
+  name: {{ template "greencompute-telco-app.fullname" . }}
   labels:
-    chart: "***REMOVED******REMOVED*** .Chart.Name ***REMOVED******REMOVED***-***REMOVED******REMOVED*** .Chart.Version | replace "+" "_" ***REMOVED******REMOVED***"
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
 data:
   config.json: |+
-    ***REMOVED***
-        "watsonassistant" :***REMOVED***
-            "version" : "***REMOVED******REMOVED*** .Values.config.watsonassistant.version ***REMOVED******REMOVED***",
-            "versionDate":"***REMOVED******REMOVED*** .Values.config.watsonassistant.versionDate ***REMOVED******REMOVED***",
-            "username":"***REMOVED******REMOVED*** .Values.config.watsonassistant.username ***REMOVED******REMOVED***",
-            "password":"***REMOVED******REMOVED*** .Values.config.watsonassistant.password ***REMOVED******REMOVED***",
-            "conversationId":"***REMOVED******REMOVED*** .Values.config.watsonassistant.conversationId ***REMOVED******REMOVED***",
-            "workspace":"***REMOVED******REMOVED*** .Values.config.watsonassistant.workspace ***REMOVED******REMOVED***",
-            "usePersistence": "***REMOVED******REMOVED*** .Values.config.watsonassistant.usePersistence ***REMOVED******REMOVED***"
-        ***REMOVED***
-        "customerAPI":***REMOVED***
-              "url":"***REMOVED******REMOVED*** .Values.config.customerAPI.url ***REMOVED******REMOVED***",
-              "host":"***REMOVED******REMOVED*** .Values.config.customerAPI.host ***REMOVED******REMOVED***",
-              "xibmclientid": "***REMOVED******REMOVED*** .Values.config.customerAPI.xibmclientid ***REMOVED******REMOVED***"
-      ***REMOVED***
-        "toneAnalyzer":***REMOVED***
-              "url": "***REMOVED******REMOVED*** .Values.config.toneAnalyzer.url ***REMOVED******REMOVED***" ,
-              "versionDate": "***REMOVED******REMOVED*** .Values.config.toneAnalyzer.versionDate ***REMOVED******REMOVED***",
-              "username": "***REMOVED******REMOVED*** .Values.config.toneAnalyzer.username ***REMOVED******REMOVED***",
-              "password": "***REMOVED******REMOVED*** .Values.config.toneAnalyzer.password ***REMOVED******REMOVED***"
-      ***REMOVED***
-        "scoringService":***REMOVED***
-            "type": "***REMOVED******REMOVED*** .Values.config.scoringService.type ***REMOVED******REMOVED***",
-            "baseUrl": "***REMOVED******REMOVED*** .Values.config.scoringService.baseUrl ***REMOVED******REMOVED***",
-            "instance": "***REMOVED******REMOVED*** .Values.config.scoringService.instance ***REMOVED******REMOVED***",
-            "username": "***REMOVED******REMOVED*** .Values.config.scoringService.username ***REMOVED******REMOVED***",
-            "password": "***REMOVED******REMOVED*** .Values.config.scoringService.password ***REMOVED******REMOVED***"
-        ***REMOVED***
-        "odm" : ***REMOVED***
-          "hostname": "***REMOVED******REMOVED*** .Values.config.odm.hostname ***REMOVED******REMOVED***",
-          "port": "***REMOVED******REMOVED*** .Values.config.odm.port ***REMOVED******REMOVED***",
-          "protocol": "***REMOVED******REMOVED*** .Values.config.odm.protocol ***REMOVED******REMOVED***",
-          "path": "***REMOVED******REMOVED*** .Values.config.odm.path ***REMOVED******REMOVED***",
-          "authtoken": "***REMOVED******REMOVED*** .Values.config.odm.authtoken ***REMOVED******REMOVED***"
-      ***REMOVED***
-        "dbCredentials" : ***REMOVED***
-            "url": "***REMOVED******REMOVED*** .Values.config.dbCredentials.url ***REMOVED******REMOVED***"
-      ***REMOVED***
-        "debug": "***REMOVED******REMOVED*** .Values.config.debug ***REMOVED******REMOVED***",
-        "port": "***REMOVED******REMOVED*** .Values.config.port ***REMOVED******REMOVED***",
-        "version": "***REMOVED******REMOVED*** .Values.config.version ***REMOVED******REMOVED***"
-    ***REMOVED***
+    {
+        "watsonassistant" :{
+            "version" : "{{ .Values.config.watsonassistant.version }}",
+            "versionDate":"{{ .Values.config.watsonassistant.versionDate }}",
+            "username":"{{ .Values.config.watsonassistant.username }}",
+            "password":"{{ .Values.config.watsonassistant.password }}",
+            "conversationId":"{{ .Values.config.watsonassistant.conversationId }}",
+            "workspace":"{{ .Values.config.watsonassistant.workspace }}",
+            "usePersistence": "{{ .Values.config.watsonassistant.usePersistence }}"
+          },
+        "customerAPI":{
+              "url":"{{ .Values.config.customerAPI.url }}",
+              "host":"{{ .Values.config.customerAPI.host }}",
+              "xibmclientid": "{{ .Values.config.customerAPI.xibmclientid }}"
+        },
+        "toneAnalyzer":{
+              "url": "{{ .Values.config.toneAnalyzer.url }}" ,
+              "versionDate": "{{ .Values.config.toneAnalyzer.versionDate }}",
+              "username": "{{ .Values.config.toneAnalyzer.username }}",
+              "password": "{{ .Values.config.toneAnalyzer.password }}"
+        },
+        "scoringService":{
+            "type": "{{ .Values.config.scoringService.type }}",
+            "baseUrl": "{{ .Values.config.scoringService.baseUrl }}",
+            "instance": "{{ .Values.config.scoringService.instance }}",
+            "username": "{{ .Values.config.scoringService.username }}",
+            "password": "{{ .Values.config.scoringService.password }}"
+          },
+        "odm" : {
+          "hostname": "{{ .Values.config.odm.hostname }}",
+          "port": "{{ .Values.config.odm.port }}",
+          "protocol": "{{ .Values.config.odm.protocol }}",
+          "path": "{{ .Values.config.odm.path }}",
+          "authtoken": "{{ .Values.config.odm.authtoken }}"
+        },
+        "dbCredentials" : {
+            "url": "{{ .Values.config.dbCredentials.url }}"
+        },
+        "debug": "{{ .Values.config.debug }}",
+        "port": "{{ .Values.config.port }}",
+        "version": "{{ .Values.config.version }}"
+    }

@@ -1,79 +1,79 @@
 /* Space out content a bit */
-body ***REMOVED***
+body {
   padding-top: 20px;
   padding-bottom: 20px;
-***REMOVED***
+}
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
-.footer ***REMOVED***
+.footer {
   padding-right: 15px;
   padding-left: 15px;
-***REMOVED***
+}
 
 /* Custom page header */
-.header ***REMOVED***
+.header {
   padding-bottom: 20px;
   border-bottom: 1px solid #e5e5e5;
-***REMOVED***
+}
 /* Make the masthead heading the same height as the navigation */
-.header h3 ***REMOVED***
+.header h3 {
   margin-top: 0;
   margin-bottom: 0;
   line-height: 40px;
-***REMOVED***
+}
 
 /* Custom page footer */
-.footer ***REMOVED***
+.footer {
   padding-top: 19px;
   color: #777;
   border-top: 1px solid #e5e5e5;
-***REMOVED***
+}
 
 /* Customize container */
-@media (min-width: 768px) ***REMOVED***
-  .container ***REMOVED***
+@media (min-width: 768px) {
+  .container {
     max-width: 730px;
-  ***REMOVED***
-***REMOVED***
-.container-narrow > hr ***REMOVED***
+  }
+}
+.container-narrow > hr {
   margin: 30px 0;
-***REMOVED***
+}
 
 /* Main marketing message and sign up button */
-.jumbotron ***REMOVED***
+.jumbotron {
   text-align: center;
   border-bottom: 1px solid #e5e5e5;
-***REMOVED***
-.jumbotron .btn ***REMOVED***
+}
+.jumbotron .btn {
   padding: 14px 24px;
   font-size: 21px;
-***REMOVED***
+}
 
 /* Supporting marketing content */
-.marketing ***REMOVED***
+.marketing {
   margin: 40px 0;
-***REMOVED***
-.marketing p + h4 ***REMOVED***
+}
+.marketing p + h4 {
   margin-top: 28px;
-***REMOVED***
+}
 
 /* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) ***REMOVED***
+@media screen and (min-width: 768px) {
   /* Remove the padding we set earlier */
   .header,
   .marketing,
-  .footer ***REMOVED***
+  .footer {
     padding-right: 0;
     padding-left: 0;
-  ***REMOVED***
+  }
   /* Space out the masthead */
-  .header ***REMOVED***
+  .header {
     margin-bottom: 30px;
-  ***REMOVED***
+  }
   /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron ***REMOVED***
+  .jumbotron {
     border-bottom: 0;
-  ***REMOVED***
-***REMOVED***
+  }
+}

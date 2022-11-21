@@ -19,14 +19,14 @@
  */
 
 // mockup of the ticket data source
-var tickets = ***REMOVED******REMOVED***
-tickets["eddie@email.com"]=***REMOVED***"status":"Rejected","reason":"Your current selected offering does not qualify for the second free phone "***REMOVED***;
+var tickets = {}
+tickets["eddie@email.com"]={"status":"Rejected","reason":"Your current selected offering does not qualify for the second free phone "};
 
 
-module.exports=  ***REMOVED***
-    getUserTicket: function(config,user,next)***REMOVED***
+module.exports=  {
+    getUserTicket: function(config,user,next){
       // config to be used later when doing http request
       var c= tickets[user];
       next(c);
-    ***REMOVED***
- ***REMOVED***
+    }
+ }

@@ -20,7 +20,7 @@ var LocalStrategy = require('passport-local').Strategy;
 In this implementation we do not need to go to an internal LDAP server. The config does not
 need to have the back end login url specified. This is a mocked up implementation.
 */
-module.exports = function(passport,config) ***REMOVED***
+module.exports = function(passport,config) {
     // =========================================================================
     // passport session setup ==================================================
     // =========================================================================
@@ -28,26 +28,26 @@ module.exports = function(passport,config) ***REMOVED***
     // passport needs ability to serialize and unserialize users out of session
 
     // used to serialize the user for the session
-    passport.serializeUser(function(user, done) ***REMOVED***
+    passport.serializeUser(function(user, done) {
         done(null, user);
-    ***REMOVED***);
+    });
 
     // used to deserialize the user
-    passport.deserializeUser(function(user, done) ***REMOVED***
+    passport.deserializeUser(function(user, done) {
         done(null, user);
-    ***REMOVED***);
+    });
 
     passport.use('local', new LocalStrategy(
-      ***REMOVED***
+      {
         passReqToCallback : true // allows us to pass back the entire request to the callback
-    ***REMOVED***
-      function(req, username, password, done) ***REMOVED***
-        var user = ***REMOVED*** username:username,password:password,email:username***REMOVED***
-        if ("tester" === username || "bobbuilder@email.com" === username || "eddie@email.com" === username || "jane@email.com" === username ) ***REMOVED***
+      },
+      function(req, username, password, done) {
+        var user = { username:username,password:password,email:username}
+        if ("tester" === username || "bobbuilder@email.com" === username || "eddie@email.com" === username || "jane@email.com" === username ) {
           done(null,user)
-        ***REMOVED*** else ***REMOVED***
+        } else {
             done("Userid unknown", null);
-        ***REMOVED***
-      ***REMOVED***
+        }
+      }
      ));
-***REMOVED***;
+};

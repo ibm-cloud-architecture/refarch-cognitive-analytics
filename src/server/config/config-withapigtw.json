@@ -1,35 +1,35 @@
-***REMOVED***
-    "conversation" :***REMOVED***
-  ***REMOVED***
-***REMOVED***
-      "username":"***REMOVED***",
-      "password":"***REMOVED***",
-  ***REMOVED***
-      "workspace":"***REMOVED***",
-  ***REMOVED***
-  ***REMOVED***
-    "customerAPI":***REMOVED***
-***REMOVED***
-  ***REMOVED***
-        "xibmclientid": "***REMOVED***"
-  ***REMOVED***
-    "toneAnalyzer":***REMOVED***
-  ***REMOVED***
-  ***REMOVED***
-        "username": "***REMOVED***8",
-        "password": "***REMOVED***"
-  ***REMOVED***
-    "scoringService":***REMOVED***
-  ***REMOVED***
-  ***REMOVED***
-  ***REMOVED***
-      "username": "02f481c2-7717-4e79-b60f-3c1214b5f374",
-      "password": "***REMOVED***"
-  ***REMOVED***
-    "dbCredentials" : ***REMOVED***
-***REMOVED***
-  ***REMOVED***
-  ***REMOVED***
-  ***REMOVED***
-  ***REMOVED***
-***REMOVED***
+{
+    "conversation" :{
+      "version" : "v1",
+      "versionDate":"2017-05-26",
+      "username":"",
+      "password":"",
+      "conversationId":"Complex Relocation",
+      "workspace":"",
+      "usePersistence": false
+    },
+    "customerAPI":{
+        "url":"https://172.16.50.8:443/csplab/sb",
+        "host":"customer.green.case",
+        "xibmclientid": ""
+    },
+    "toneAnalyzer":{
+        "url": "https://gateway.watsonplatform.net/tone-analyzer/api",
+        "versionDate": "2017-09-21",
+        "username": "",
+        "password": ""
+    },
+    "scoringService":{
+      "type":"WML",
+      "baseUrl": "https://ibm-watson-ml.mybluemix.net",
+      "instance": "",
+      "username": "",
+      "password": ""
+    },
+    "dbCredentials" : {
+      "url": "https://01bcc074-b3a0-4b07-93c6-eade6fb3ce50-bluemix:cd68d33a28d499bc6211810a56a0b99393a699190630f7811c438149be944500@01bcc074-b3a0-4b07-93c6-eade6fb3ce50-bluemix.cloudant.com"
+    },
+    "debug":true,
+    "port": 3001,
+    "version": "v0.0.4"
+}

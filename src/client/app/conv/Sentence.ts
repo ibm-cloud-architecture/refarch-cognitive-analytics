@@ -1,5 +1,5 @@
-export class Sentence ***REMOVED***
+export class Sentence {
   direction: string;
   text : string;
   options: string[];
-***REMOVED***
+}

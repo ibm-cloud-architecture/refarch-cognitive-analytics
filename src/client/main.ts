@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import ***REMOVED*** enableProdMode ***REMOVED*** from '@angular/core';
-import ***REMOVED*** platformBrowserDynamic ***REMOVED*** from '@angular/platform-browser-dynamic';
+import { enableProdMode } from '@angular/core';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-import ***REMOVED*** AppModule ***REMOVED*** from './app/app.module';
-import ***REMOVED*** environment ***REMOVED*** from './environments/environment.prod';
+import { AppModule } from './app/app.module';
+import { environment } from './environments/environment.prod';
 
-if (environment.production) ***REMOVED***
+if (environment.production) {
   enableProdMode();
-***REMOVED***
+}
 
 platformBrowserDynamic().bootstrapModule(AppModule);

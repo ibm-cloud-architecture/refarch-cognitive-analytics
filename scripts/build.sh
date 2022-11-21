@@ -2,7 +2,7 @@
 # Program to modify the version number for the different element and compile
 
 # Get default version if the version is not the first argument
-prev=$(grep -o 'v\([0-9]\+.\)\***REMOVED***2\***REMOVED***\([0-9]\+\)' src/client/app/app.component.ts)
+prev=$(grep -o 'v\([0-9]\+.\)\{2\}\([0-9]\+\)' src/client/app/app.component.ts)
 
 if [[ $# -gt 0 ]]; then
 	v=v$1

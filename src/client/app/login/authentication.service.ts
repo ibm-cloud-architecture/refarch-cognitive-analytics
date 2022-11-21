@@ -11,42 +11,42 @@ sessions the behaviour could easily be changed by storing user details somewhere
  less persistent such as session storage or in a property of the authentication
  service.
 */
-import ***REMOVED*** Injectable ***REMOVED*** from '@angular/core';
-import ***REMOVED*** Headers, Http,Response,RequestOptions, RequestOptionsArgs***REMOVED*** from '@angular/http';
-import ***REMOVED*** Observable ***REMOVED*** from 'rxjs/Observable';
+import { Injectable } from '@angular/core';
+import { Headers, Http,Response,RequestOptions, RequestOptionsArgs} from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import ***REMOVED*** User ***REMOVED*** from "./User";
+import { User } from "./User";
 
 @Injectable()
-export class AuthenticationService ***REMOVED***
-    constructor(private http: Http) ***REMOVED*** ***REMOVED***
+export class AuthenticationService {
+    constructor(private http: Http) { }
 
-    login(user:User) ***REMOVED***
+    login(user:User) {
       console.log("login called for "+user.email);
-        const body = ***REMOVED***username: user.email, password: user.password***REMOVED***
+        const body = {username: user.email, password: user.password}
         return this.http.post('/login', body)
-            .map((response: Response) => ***REMOVED***
+            .map((response: Response) => {
                 // login successful if there's a jwt token in the response
                 let tokenResponse = response.json();
-                if (tokenResponse && tokenResponse.access_token) ***REMOVED***
+                if (tokenResponse && tokenResponse.access_token) {
                     // store user details and token in local storage to keep user logged in between page refreshes
                     user.token=tokenResponse.access_token;
-                ***REMOVED***
+                }
                 return user;
-            ***REMOVED***)
-            .catch((error:any) => ***REMOVED***
+            })
+            .catch((error:any) => {
               return Observable.throw(error || 'Server error')
-            ***REMOVED***);
-    ***REMOVED*** // login
-    logout() ***REMOVED***
+            });
+    } // login
+    logout() {
         // remove user from local storage to log user out
         console.log('logout called');
         this.http.get('/logout').subscribe();
         sessionStorage.removeItem('currentUser');
-    ***REMOVED***
-    authenticated() ***REMOVED***
-      return this.http.get('/api/authenticated', <RequestOptionsArgs>***REMOVED*** withCredentials: true ***REMOVED***)
+    }
+    authenticated() {
+      return this.http.get('/api/authenticated', <RequestOptionsArgs>{ withCredentials: true })
         .map((res: Response) => res.json())
-    ***REMOVED***
-***REMOVED***
+    }
+}

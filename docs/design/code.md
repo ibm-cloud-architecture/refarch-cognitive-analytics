@@ -33,13 +33,13 @@ As traditional Angular 5 app, you need:
 * a `app.module.ts` to declare all the components of the application and the URL routes declaration. Those routes are internal to the web browser. They are protected by a guard mechanism to avoid unlogged person to access some private pages. The following code declares four routes for the four main features of this application: display the main top navigation page, the customer page to access account, and the itSupport to access the chat bot user interface. The AuthGard component assesses if the user is known and logged, if not he/she is routed to the login page.
  ```
  const routes: Routes = [
-   ***REMOVED*** path: 'home', component: HomeComponent,canActivate: [AuthGuard]***REMOVED***,
-   ***REMOVED*** path: 'log', component: LoginComponent ***REMOVED***,
+   { path: 'home', component: HomeComponent,canActivate: [AuthGuard]},
+   { path: 'log', component: LoginComponent },
    //canActivate: [AuthGuard]
-   ***REMOVED*** path: 'itSupport', component: ConversationComponent,canActivate: [AuthGuard]***REMOVED***,
-   ***REMOVED*** path: 'customer', component: CustomersComponent,canActivate: [AuthGuard]***REMOVED***,
+   { path: 'itSupport', component: ConversationComponent,canActivate: [AuthGuard]},
+   { path: 'customer', component: CustomersComponent,canActivate: [AuthGuard]},
    // otherwise redirect to home
-   ***REMOVED*** path: '**', redirectTo: 'home' ***REMOVED***
+   { path: '**', redirectTo: 'home' }
  ]
  ```
 * an `app.component` to support the main page template where routing is done. This component has the header and footer of the HTML page and the placeholder directly to support sub page routing:
@@ -61,31 +61,31 @@ For example the following HTML page uses angular construct to link the button to
 
 the method delegates to the angular router with the 'itSupport' url
 ```javascript
-itSupport()***REMOVED***
+itSupport(){
   this.router.navigate(['itSupport']);
-***REMOVED***
+}
 ```
 ### Conversation bot
 
 For the conversation front end we are re-using the code approach of the conversation broker of the [Cognitive reference architecture implementation](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker).
 The same approach, service and component are used to control the user interface and to call the back end. The service does an HTTP POST of the newly entered message:
 ```
-export class ConversationService ***REMOVED***
+export class ConversationService {
   private convUrl ='/api/c/conversation/';
 
-  constructor(private http: Http) ***REMOVED***
-  ***REMOVED***;
+  constructor(private http: Http) {
+  };
 
-  submitMessage(msg:string,ctx:any): Observable<any>***REMOVED***
+  submitMessage(msg:string,ctx:any): Observable<any>{
     let user = JSON.parse(sessionStorage.getItem('currentUser'));
-    let bodyString = JSON.stringify(  ***REMOVED*** text:msg,context:ctx,user:user ***REMOVED***);
+    let bodyString = JSON.stringify(  { text:msg,context:ctx,user:user });
 
-    let headers = new Headers(***REMOVED*** 'Content-Type': 'application/json' ***REMOVED***);
-    let options = new RequestOptions(***REMOVED*** headers: headers ***REMOVED***)
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers })
     return this.http.post(this.convUrl,bodyString,options)
          .map((res:Response) => res.json())
-  ***REMOVED***
-***REMOVED***
+  }
+}
 ```
 
 So it is interesting to see the message as the watson conversation context and the user basic information.
@@ -95,42 +95,42 @@ So it is interesting to see the message as the watson conversation context and t
 When the user selects to access the account information, the routing is going to the account component in `client/app/account` folder use a service to call the nodejs / expressjs REST services as illustrated in the code below:  
 
 ```javascript
-export class CustomerService ***REMOVED***
+export class CustomerService {
   private invUrl ='/api/c';
 
-  constructor(private http: Http) ***REMOVED***
-  ***REMOVED***;
+  constructor(private http: Http) {
+  };
 
-  getItems(): Observable<any>***REMOVED***
+  getItems(): Observable<any>{
     return this.http.get(this.invUrl+'/customer')
          .map((res:Response) => res.json())
-  ***REMOVED***
-***REMOVED***
+  }
+}
 ```
 The http component is injected at service creation, and the promise returned object is map so the response can be processed as json document.
 
 An example of code using those service is the `account.component.ts`, which loads the account during component initialization phase.
 
 ```javascript
-export class AccountComponent implements OnInit ***REMOVED***
+export class AccountComponent implements OnInit {
 
-  constructor(private router: Router, private cService : CustomerService)***REMOVED***
-  ***REMOVED***
+  constructor(private router: Router, private cService : CustomerService){
+  }
 
   // Uses in init to load data and not the constructor.
-  ngOnInit(): void ***REMOVED***
+  ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('currentUser'));
-    if(this.user && 'email' in this.user) ***REMOVED***
+    if(this.user && 'email' in this.user) {
       cService.getCustomerByEmail(this.user.email).subscribe(
-          data => ***REMOVED***
+          data => {
             this.customer=data;
-        ***REMOVED***
-          error => ***REMOVED***
+          },
+          error => {
             console.log(error);
-          ***REMOVED***);
-    ***REMOVED***
-  ***REMOVED***
-***REMOVED***
+          });
+    }
+  }
+}
 ```
 
 ## Server code
@@ -143,58 +143,58 @@ The script is in `server/route/features/chatBot.js` and uses the Watson develope
 
 This module exports one function to be called by the API used by the front end. This API is defined in `api.js` as:
 ```javascript
-app.post('/api/c/conversation',isLoggedIn,(req,res) => ***REMOVED***
+app.post('/api/c/conversation',isLoggedIn,(req,res) => {
   chatBot.chat(config,req,res)
-***REMOVED***);
+});
 ```
 
 The `chatBot.chat()` method gets the message and connection parameters and uses the Watson API to transfer the call. The set of if statements are used to perform actions, call services, using the variables set in the Watson Conversation Context. One example is to use the Operational Decision Management rule engine to compute the best product for a given customer situation.
 
 ```javascript
-chat : function(config,req,res)***REMOVED***
+chat : function(config,req,res){
   req.body.context.predefinedResponses="";
   console.log("text "+req.body.text+".")
-  if (req.body.context.toneAnalyzer && req.body.text !== "" ) ***REMOVED***
+  if (req.body.context.toneAnalyzer && req.body.text !== "" ) {
       analyzeTone(config,req,res)
-  ***REMOVED***
-  if (req.body.context.action === "search" && req.body.context.item ==="UserRequests") ***REMOVED***
+  }
+  if (req.body.context.action === "search" && req.body.context.item ==="UserRequests") {
       getSupportTicket(config,req,res);
-  ***REMOVED***
-  if (req.body.context.action === "recommend") ***REMOVED***
-      odmclient.recommend(config,req.body.context,res, function(contextWithRecommendation)***REMOVED***
+  }
+  if (req.body.context.action === "recommend") {
+      odmclient.recommend(config,req.body.context,res, function(contextWithRecommendation){
         req.body.context = contextWithRecommendation;
         sendToWCSAndBackToUser(config,req,res);
-      ***REMOVED***);
-  ***REMOVED***
-  if (req.body.context.action === "transfer") ***REMOVED***
+      });
+  }
+  if (req.body.context.action === "transfer") {
       console.log("Transfer to "+ req.body.context.item)
-  ***REMOVED***
+  }
 
-  if (req.body.context.action === undefined) ***REMOVED***
+  if (req.body.context.action === undefined) {
       sendToWCSAndBackToUser(config,req,res);
-  ***REMOVED***
-***REMOVED*** // chat
+  }
+} // chat
 ```
 
 
 The send message uses the Watson developer library:
 ```javascript
 
-  conversation = watson.conversation(***REMOVED***
+  conversation = watson.conversation({
           username: config.conversation.username,
           password: config.conversation.password,
           version: config.conversation.version,
-          version_date: config.conversation.versionDate***REMOVED***);
+          version_date: config.conversation.versionDate});
 
   conversation.message(
-      ***REMOVED***
+      {
       workspace_id: wkid,
-      input: ***REMOVED***'text': message.text***REMOVED***,
+      input: {'text': message.text},
       context: message.context
-    ***REMOVED***
-      function(err, response) ***REMOVED***
+      },
+      function(err, response) {
         // add logic here to process the conversation response
-      ***REMOVED***
+      }
     )
 ```
 It uses content of the conversation context to drive some of the routing mechanism. This code supports the following sequencing:
@@ -206,47 +206,47 @@ It uses content of the conversation context to drive some of the routing mechani
 * If the conversation context has a variable action set to "search", it calls the corresponding backend to get other data. Like a ticket management app. We did not implement the ticket management app, but just a mockup.
 
  ```javascript
- if (req.body.context.action === "search" && req.body.context.item ==="UserRequests") ***REMOVED***
-  ticketing.getUserTicket(config,req.body.user.email,function(ticket)***REMOVED***
-      if (config.debug) ***REMOVED***
+ if (req.body.context.action === "search" && req.body.context.item ==="UserRequests") {
+  ticketing.getUserTicket(config,req.body.user.email,function(ticket){
+      if (config.debug) {
           console.log('Ticket response: ' + JSON.stringify(ticket));
-      ***REMOVED***
+      }
       req.body.context["Ticket"]=ticket
       sendToWCSAndBackToUser(config,req,res);
-  ***REMOVED***)***REMOVED***
+  })}
  ```
  The ticket information is returned to the conversation directly and the message response is built there.
 * if the action is "recommend", the code can call a decision service deployed on IBM Cloud and execute business rules to compute the best recommendations/ actions. See example of such approach in [the project "ODM and Watson conversation"](https://github.com/ibm-cloud-architecture/refarch-cognitive-prod-recommendations)
 * If in the conversation context the boolean `toneAnalyzer` is set to true, then any new sentence sent by the end user will be sent to Watson Tone Analyzer.
 ```javascript
-if (req.body.context.toneAnalyzer && req.body.text !== "" ) ***REMOVED***
+if (req.body.context.toneAnalyzer && req.body.text !== "" ) {
     analyzeTone(config,req,res)
-***REMOVED***
+}
 ```
 * When the result to the tone analyzer returns a tone as `Sad or Frustrated` then a call to a churn scoring service is performed.
 ```javascript
-function analyzeTone(config,req,res)***REMOVED***
-  toneAnalyzer.analyzeSentence(config,req.body.text).then(function(toneArep) ***REMOVED***
-        if (config.debug) ***REMOVED***console.log('Tone Analyzer '+ JSON.stringify(toneArep));***REMOVED***
+function analyzeTone(config,req,res){
+  toneAnalyzer.analyzeSentence(config,req.body.text).then(function(toneArep) {
+        if (config.debug) {console.log('Tone Analyzer '+ JSON.stringify(toneArep));}
         req.body.context["ToneAnalysisResponse"]=toneArep.utterances_tone[0].tones[0];
-        if (req.body.context["ToneAnalysisResponse"].tone_name === "Frustrated") ***REMOVED***
-          churnScoring.scoreCustomer(config,req,function(score)***REMOVED***
+        if (req.body.context["ToneAnalysisResponse"].tone_name === "Frustrated") {
+          churnScoring.scoreCustomer(config,req,function(score){
                     req.body.context["ChurnScore"]=score;
                     sendToWCSAndBackToUser(config,req,res);
-              ***REMOVED***)
-        ***REMOVED***
-  ***REMOVED***).catch(function(error)***REMOVED***
+              })
+        }
+  }).catch(function(error){
       console.error(error);
-      res.status(500).send(***REMOVED***'msg':error.Error***REMOVED***);
-    ***REMOVED***);
-***REMOVED*** // analyzeTone
+      res.status(500).send({'msg':error.Error});
+    });
+} // analyzeTone
 ```
 
 * when the churn score is greater than a value the call is routed to a human. This is done in the conversation dialog and the context action is set to Transfer
 ```javascript
-if (req.body.context.action === "transfer") ***REMOVED***
+if (req.body.context.action === "transfer") {
   console.log("Transfer to "+ req.body.context.item)
-***REMOVED***
+}
 ```
 See also how the IBM Watson conversation is built to support this logic, in [this note.](../wcs/README.md)
 
@@ -259,16 +259,16 @@ The customer API is defined in the server/routes/feature folder and uses the req
 The Hystrixjs is interesting to use to protect the remote call with timeout, circuit breaker, fails quickly.... modern pattern to support resiliency and fault tolerance.
 
 ```javascript
-var run = function(config,email)***REMOVED***
-  return new Promise(function(resolve, reject)***REMOVED***
+var run = function(config,email){
+  return new Promise(function(resolve, reject){
       var opts = buildOptions('GET','/customers/email/'+email,config);
       opts.headers['Content-Type']='multipart/form-data';
-      request(opts,function (error, response, body) ***REMOVED***
-        if (error) ***REMOVED***reject(error)***REMOVED***
+      request(opts,function (error, response, body) {
+        if (error) {reject(error)}
         resolve(body);
-      ***REMOVED***);
-  ***REMOVED***);
-***REMOVED***
+      });
+  });
+}
 
 // times out calls that take longer, than the configured threshold.
 var serviceCommand =CommandsFactory.getOrCreate("getCustomerDetail")
@@ -277,9 +277,9 @@ var serviceCommand =CommandsFactory.getOrCreate("getCustomerDetail")
   .requestVolumeRejectionThreshold(2)
   .build();
 
-getCustomerDetail : function(config,email) ***REMOVED***
+getCustomerDetail : function(config,email) {
     return serviceCommand.execute(config,email);
-***REMOVED***
+}
 
 ```
 
@@ -300,13 +300,13 @@ spec:
   volumes:
     - name: config
       configMap:
-        name:  ***REMOVED******REMOVED*** template "greencompute-telco-app.fullname" . ***REMOVED******REMOVED***
+        name:  {{ template "greencompute-telco-app.fullname" . }}
   containers:
-    - name: ***REMOVED******REMOVED*** .Chart.Name ***REMOVED******REMOVED***
-      image: "***REMOVED******REMOVED*** .Values.image.repository ***REMOVED******REMOVED***:***REMOVED******REMOVED*** .Values.image.tag ***REMOVED******REMOVED***"
-      imagePullPolicy: ***REMOVED******REMOVED*** .Values.image.pullPolicy ***REMOVED******REMOVED***
+    - name: {{ .Chart.Name }}
+      image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+      imagePullPolicy: {{ .Values.image.pullPolicy }}
       ports:
-        - containerPort: ***REMOVED******REMOVED*** .Values.service.internalPort ***REMOVED******REMOVED***
+        - containerPort: {{ .Values.service.internalPort }}
       volumeMounts:
         - name: config
           mountPath: /greenapp/server/config/config.json
@@ -323,15 +323,15 @@ service:
 * enable ingress and set a hostname (telcoapp.green.case)
 * In the ingress use the servicePort to map the externalPort.
 ```
-***REMOVED******REMOVED***- $servicePort := .Values.service.externalPort -***REMOVED******REMOVED***
+{{- $servicePort := .Values.service.externalPort -}}
 ```
 * In the service.yaml be sure to define the ports well using the one set in values.yaml
 ```
 ports:
-  - port: ***REMOVED******REMOVED*** .Values.service.externalPort ***REMOVED******REMOVED***
-    targetPort: ***REMOVED******REMOVED*** .Values.service.internalPort ***REMOVED******REMOVED***
+  - port: {{ .Values.service.externalPort }}
+    targetPort: {{ .Values.service.internalPort }}
     protocol: TCP
-    name: ***REMOVED******REMOVED*** .Values.service.name ***REMOVED******REMOVED***
+    name: {{ .Values.service.name }}
 ```
 
 

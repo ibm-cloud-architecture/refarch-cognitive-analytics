@@ -1,15 +1,15 @@
-import ***REMOVED***Component, OnInit***REMOVED*** from '@angular/core';
-import ***REMOVED*** CustomersService ***REMOVED***  from './customers.service';
-import ***REMOVED*** Customer ***REMOVED*** from "./Customer";
-import ***REMOVED*** Router ***REMOVED*** from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import { CustomersService }  from './customers.service';
+import { Customer } from "./Customer";
+import { Router } from '@angular/router';
 
-@Component(***REMOVED***
+@Component({
     selector: 'customers',
     styleUrls:['customer.css'],
     templateUrl:'customers.component.html'
-  ***REMOVED***)
+  })
 
-export class CustomersComponent implements OnInit ***REMOVED***
+export class CustomersComponent implements OnInit {
   customers : Customer[]=[];
   message: string = "May take some time to load....";
   loading: boolean= true;
@@ -18,90 +18,90 @@ export class CustomersComponent implements OnInit ***REMOVED***
   submitError: string;
   newCustomer : boolean = false;
 
-  constructor(private router: Router, private custService : CustomersService)***REMOVED***
-  ***REMOVED***
+  constructor(private router: Router, private custService : CustomersService){
+  }
 
   // Uses in init to load data and not the constructor.
-  ngOnInit(): void ***REMOVED***
-  ***REMOVED***
+  ngOnInit(): void {
+  }
 
-  getCustomers(): void ***REMOVED***
-    if (this.customers.length === 0) ***REMOVED***
+  getCustomers(): void {
+    if (this.customers.length === 0) {
       this.custService.getCustomers().subscribe(
-        data => ***REMOVED***
+        data => {
           this.customers=data;
           this.loading=false;
           this.message="";
-      ***REMOVED***
-        error => ***REMOVED***
+        },
+        error => {
           this.message="Error to get the data from backend";
           console.log(error);
           this.loading=false;
-          ***REMOVED***
+          }
       )
-    ***REMOVED***
-  ***REMOVED*** // get Customers
+    }
+  } // get Customers
 
-  edit(customer): void ***REMOVED***
+  edit(customer): void {
     this.selectedCustomer = JSON.parse(JSON.stringify(customer));
     this.submitError = "";
     this.newCustomer=false;
-  ***REMOVED***
+  }
 
-  add() : void ***REMOVED***
+  add() : void {
     this.selectedCustomer = new Customer();
     this.selectedCustomer.name = "NewCustomer";
     this.submitError = "";
     this.newCustomer=true;
-  ***REMOVED***
+  }
 
-  remove(i): void ***REMOVED***
+  remove(i): void {
     this.index=i;
     this.custService.deleteCustomer(this.customers[i].id).subscribe(
-        data => ***REMOVED***
+        data => {
           var updatedCustomers = this.customers.slice();
           updatedCustomers.splice(this.index, 1);
           this.customers=updatedCustomers;
           this.message="Remove customer successful";
           this.selectedCustomer=null;
-      ***REMOVED***
-        error =>***REMOVED***
+        },
+        error =>{
           console.error('Error in removing item...', error)
-          alert(`$***REMOVED***error.status***REMOVED***: $***REMOVED***error.statusText***REMOVED***`);
+          alert(`${error.status}: ${error.statusText}`);
           this.message="Error in removing item,... the error is reported to administrator.";
           this.selectedCustomer=null;
-          if(error.status == 401)***REMOVED***
-            this.router.navigate(['log'], ***REMOVED*** queryParams: ***REMOVED*** returnUrl: '/inventory' ***REMOVED*** ***REMOVED***);
-          ***REMOVED***
-        ***REMOVED***
+          if(error.status == 401){
+            this.router.navigate(['log'], { queryParams: { returnUrl: '/inventory' } });
+          }
+        }
     );
 
-  ***REMOVED***
+  }
 
 
-  customerUpdateComplete(response: any)***REMOVED***
+  customerUpdateComplete(response: any){
     console.log('Customer Save Success:', response.success, response.customer)
-    if(response.success)***REMOVED***
+    if(response.success){
       var customerUpdated = false;
-      for(var i = 0; i < this.customers.length; i++)***REMOVED***
-        if(this.customers[i].id == response.customer.id)***REMOVED***
+      for(var i = 0; i < this.customers.length; i++){
+        if(this.customers[i].id == response.customer.id){
           this.customers[i] = response.customer
           customerUpdated = true;
           console.log('customer updated!');
           break;
-        ***REMOVED***
-      ***REMOVED***
-      if(!customerUpdated)***REMOVED***
+        }
+      }
+      if(!customerUpdated){
         this.customers.push(response.customer);
         console.log('new customer added!', response.item)
-      ***REMOVED***
+      }
       this.selectedCustomer = null;
-    ***REMOVED*** else ***REMOVED***
+    } else {
       console.error('ERROR SAVING CUSTOMER', response.error);
-      alert(`Error Saving Item: ($***REMOVED***response.error.status***REMOVED***) $***REMOVED***response.error.statusText***REMOVED***`);
-      if(response.error.status == 401)***REMOVED***
-        this.router.navigate(['log'], ***REMOVED*** queryParams: ***REMOVED*** returnUrl: '/customer' ***REMOVED*** ***REMOVED***);
-      ***REMOVED***
-    ***REMOVED***
-  ***REMOVED***
-***REMOVED***
+      alert(`Error Saving Item: (${response.error.status}) ${response.error.statusText}`);
+      if(response.error.status == 401){
+        this.router.navigate(['log'], { queryParams: { returnUrl: '/customer' } });
+      }
+    }
+  }
+}

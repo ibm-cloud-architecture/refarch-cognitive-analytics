@@ -1,26 +1,26 @@
-import ***REMOVED*** Component ***REMOVED*** from '@angular/core';
-import ***REMOVED*** Router ***REMOVED***   from '@angular/router';
-import ***REMOVED*** User ***REMOVED*** from './login/User';
+import { Component } from '@angular/core';
+import { Router }   from '@angular/router';
+import { User } from './login/User';
 
-@Component(***REMOVED***
+@Component({
   selector: 'app-root',
   templateUrl: './app.component.html'
-***REMOVED***)
-export class AppComponent ***REMOVED***
+})
+export class AppComponent {
     version:string ="v0.0.5 05-15-2018";
     user: User;
 
-    constructor(private router: Router) ***REMOVED***
+    constructor(private router: Router) {
       this.user = JSON.parse(localStorage.getItem('currentUser'));
-    ***REMOVED***
+    }
 
-    logout()***REMOVED***
+    logout(){
         localStorage.removeItem('currentUser');
         this.user= null;
         this.router.navigate(['log']);
-    ***REMOVED***
+    }
 
-    home()***REMOVED***
+    home(){
       this.router.navigate(['home']);
-    ***REMOVED***
-***REMOVED***
+    }
+}

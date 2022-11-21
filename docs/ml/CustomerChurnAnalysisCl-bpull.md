@@ -154,11 +154,11 @@ In this sample are using WDP approach. We connect to Amazon S3, Cloudant on IBM 
 import ibmos2spark
 
 # @hidden_cell
-credentials = ***REMOVED***
+credentials = {
     'endpoint': 'https://s3-api.us-geo.objectstorage.service.networklayer.com',
     'api_key': '0iYlgkldtINM5my_68CDOlxU5Ts0E7dn0wJkYCs6bqOp',
     'service_id': 'iam-ServiceId-de6a2704-3436-4927-8ceb-a2e3dfc3288e',
-    'iam_service_endpoint': 'https://iam.ng.bluemix.net/oidc/token'***REMOVED***
+    'iam_service_endpoint': 'https://iam.ng.bluemix.net/oidc/token'}
 
 configuration_name = 'os_d21bf0a6588f494d822173729799c934_configs'
 cos = ibmos2spark.CloudObjectStorage(sc, credentials, configuration_name, 'bluemix_cos')
@@ -268,7 +268,7 @@ df_campaign_responses.take(5)
 
 
 ```python
-df_campaign_responses = df_campaign_responses.na.fill(***REMOVED***'Ave Text Msgs':'0'***REMOVED***)
+df_campaign_responses = df_campaign_responses.na.fill({'Ave Text Msgs':'0'})
 ```
 
 ##### In the following cell we join some of our data sources. Note that we could have done some of these using Data Refinery on Watson Data Platform using GUI support.
@@ -377,17 +377,17 @@ pandas_df_callnotes_campaign_churn.head(12)
 
 <div>
 <style scoped>
-    .dataframe tbody tr th:only-of-type ***REMOVED***
+    .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
-    ***REMOVED***
+    }
 
-    .dataframe tbody tr th ***REMOVED***
+    .dataframe tbody tr th {
         vertical-align: top;
-    ***REMOVED***
+    }
 
-    .dataframe thead th ***REMOVED***
+    .dataframe thead th {
         text-align: right;
-    ***REMOVED***
+    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -846,7 +846,7 @@ display(data_joined_callnotes_churn_campaign)
 ```
 
 
-<style type="text/css">.pd_warning***REMOVED***display:none;***REMOVED***</style><div class="pd_warning"><em>Hey, there's something awesome here! To see it, open this notebook outside GitHub, in a viewer like Jupyter</em></div>
+<style type="text/css">.pd_warning{display:none;}</style><div class="pd_warning"><em>Hey, there's something awesome here! To see it, open this notebook outside GitHub, in a viewer like Jupyter</em></div>
         <div class="pd_save is-viewer-good" style="padding-right:10px;text-align: center;line-height:initial !important;font-size: xx-large;font-weight: 500;color: coral;">
 
         </div>
@@ -924,17 +924,17 @@ results.toPandas().head(6)
 
 <div>
 <style scoped>
-    .dataframe tbody tr th:only-of-type ***REMOVED***
+    .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
-    ***REMOVED***
+    }
 
-    .dataframe tbody tr th ***REMOVED***
+    .dataframe tbody tr th {
         vertical-align: top;
-    ***REMOVED***
+    }
 
-    .dataframe thead th ***REMOVED***
+    .dataframe thead th {
         text-align: right;
-    ***REMOVED***
+    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -1013,10 +1013,10 @@ results.toPandas().head(6)
 
 
 ```python
-prefix_precision = 'Precision model1 = ***REMOVED***:.2f***REMOVED***.'
+prefix_precision = 'Precision model1 = {:.2f}.'
 print (prefix_precision.format(results.filter(results.label == results.prediction).count() / float(results.count())))
 
-prefix_aoc = 'Area under ROC curve = ***REMOVED***:.2f***REMOVED***.'
+prefix_aoc = 'Area under ROC curve = {:.2f}.'
 evaluator = BinaryClassificationEvaluator(rawPredictionCol="prediction", labelCol="label", metricName="areaUnderROC")
 print (prefix_aoc.format(evaluator.evaluate(results)))
 ```
@@ -1078,7 +1078,7 @@ from repository.mlrepositoryartifact.ml_repository_artifact import MLRepositoryA
 #service_path = 'https://ibm-watson-ml.mybluemix.net'
 #access_key = 'TIQq0il9oYIdVY938NboZNOwh6p3fwRYKdgDg0GFVFedaXXG3l3R77YHOsoPCk/oHxGxQ3pIogjgEOjN0TGDTcL0h32gVzPkwMbmHXNpi+FQYUqQmv73SQJrb1WXWeZv'
 #username = '02f481c2-7717-4e79-b60f-3c1214b5f374'
-#password = '***REMOVED***'
+#password = 'f2f9349b-ebb5-4dfd-9318-94615a06fffb'
 
 # Authorize the repository client
 ml_repository_client = MLRepositoryClient(service_url)

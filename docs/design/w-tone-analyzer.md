@@ -17,12 +17,12 @@ Select your newly created service and go to the Service credentials to define ne
 Copy those credential into the `src/server/config/config.json` file and into the `chart/values.yaml` file.
 
 ```json
-"toneAnalyzer":***REMOVED***
+"toneAnalyzer":{
     "url": "https://gateway.watsonplatform.net/tone-analyzer/api",
     "versionDate": "2017-09-21",
     "username": "3",
     "password": "z"
-***REMOVED***,
+},
 ```
 
 ## 3- Client code
@@ -32,14 +32,14 @@ The client code is already coded and can be seen in `src/server/routes/features/
 ```javascript
 var ToneAnalyzerV3=require('watson-developer-cloud/tone-analyzer/v3');
 //...
-analyzeSentence : function(config,message,res)***REMOVED***
-    return new Promise(function(resolve, reject)***REMOVED***
+analyzeSentence : function(config,message,res){
+    return new Promise(function(resolve, reject){
         var tone_analyzer = new ToneAnalyzerV3(buildOptions(config));
-        var params = ***REMOVED***
-          utterances: [***REMOVED***"text":message***REMOVED***]
-        ***REMOVED***;
+        var params = {
+          utterances: [{"text":message}]
+        };
         //...
-      ***REMOVED***)***REMOVED***
+      })}
 ```
 
 ## Integration
@@ -48,23 +48,23 @@ As explained in the [code explanation note](code.md) when the designer of the co
 
 The conversation context boolean `toneAnalyzer` is used for that, and set to true, so any new sentence sent by the end user will be routed to Watson Tone Analyzer.
 ```javascript
-if (req.body.context.toneAnalyzer && req.body.text !== "" ) ***REMOVED***
-    toneAnalyzer.analyzeSentence(config,req.body.text).then(function(toneArep) ***REMOVED***
+if (req.body.context.toneAnalyzer && req.body.text !== "" ) {
+    toneAnalyzer.analyzeSentence(config,req.body.text).then(function(toneArep) {
       // ...
-    ***REMOVED***)
-***REMOVED***
+    })
+}
 ```
 
 The returned json object is added to the context too, so it can be used for any other call to back end services, like the churn risk scoring.
 Here is an example of outcome:
 ```json
-***REMOVED***"utterances_tone":
-    [***REMOVED***"utterance_id":0,
+{"utterances_tone":
+    [{"utterance_id":0,
       "utterance_text":"what? the sale rep told me it will be free, this is a scandal very frustrating, what can be done?",
       "tones":[
-          ***REMOVED***"score":0.651769,
+          {"score":0.651769,
            "tone_id":"frustrated",
-           "tone_name":"Frustrated"***REMOVED***]
-    ***REMOVED***]
-***REMOVED***
+           "tone_name":"Frustrated"}]
+    }]
+}
 ```

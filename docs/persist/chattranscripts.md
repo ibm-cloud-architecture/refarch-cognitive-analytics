@@ -37,35 +37,35 @@ Open the `config.json file` to add the URL of the service and enable persistence
 ATTENTION: when deploying into IBM Cloud private the configuration is defined in the deployment configuration. So you may want to tune both.
 
 ```json
-"watsonassistant": ***REMOVED***
+"watsonassistant": {
   "usePersistence": false
-***REMOVED***,
-"dbCredentials" : ***REMOVED***
+},
+"dbCredentials" : {
   "url": "https://...-bluemix:cd....@...e50-bluemix.cloudant.com"
-***REMOVED***,
+},
 ```
 
 ## Implement service client
 
 The code is in the `server/routes/features/persist.js`. The method is using Cloudant API module, and the conversation response. The code is using the persistId and revId of cloudant response to modify the Watson Assistant context with those two variables so a unique document is created for all interaction, and the document is updated at each interaction.
 ```javascript
-saveConversation : function(config,conv,next)***REMOVED***
+saveConversation : function(config,conv,next){
   var cloudant = require('cloudant')(config.dbCredentials.url);
   var db = cloudant.use('wcsdb');
-  if (conv.context !== undefined) ***REMOVED***
-    if (conv.context.revId !== undefined) ***REMOVED***
+  if (conv.context !== undefined) {
+    if (conv.context.revId !== undefined) {
       conv._id=conv.context.persistId;
       conv._rev=conv.context.revId;
-    ***REMOVED***
-  ***REMOVED***
-  db.insert(conv, function(err, data) ***REMOVED***
-    if (err) ***REMOVED***
-      next(***REMOVED***error: err.message***REMOVED***);
-    ***REMOVED*** else ***REMOVED***
+    }
+  }
+  db.insert(conv, function(err, data) {
+    if (err) {
+      next({error: err.message});
+    } else {
       next(data);
-    ***REMOVED***
-  ***REMOVED***);
-***REMOVED***, // saveConversation
+    }
+  });
+}, // saveConversation
 ```
 
 ## Browse conversation content in Cloudant console
