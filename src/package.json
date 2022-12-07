@@ -41,7 +41,7 @@
     "cloudant": "^1.4.x",
     "cookie-parser": "^1.4.3",
     "core-js": "^2.4.1",
-    "express": "^4.15.3",
+    "express": "^4.17.3",
     "express-session": "^1.13.0",
     "extend": "^3.0.0",
     "hystrixjs": "0.2.0",
