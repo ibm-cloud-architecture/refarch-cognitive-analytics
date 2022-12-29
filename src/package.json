@@ -52,12 +52,12 @@
     "rxjs": "^5.4.1",
     "session-memory-store": "^0.2.2",
     "watson-developer-cloud": "^3.2.1",
-    "webpack": "^3.1.0",
+    "webpack": "^5.75.0",
     "btoa": "",
     "zone.js": "^0.8.4"
   },
   "devDependencies": {
-    "@angular/cli": "^6.0.1",
+    "@angular/cli": "^6.2.9",
     "@angular/compiler-cli": "^5.1.2",
     "@angular/language-service": "^5.1.2",
     "typescript": "~2.4.2",
