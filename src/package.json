@@ -61,11 +61,11 @@
     "@angular/compiler-cli": "^5.1.2",
     "@angular/language-service": "^5.1.2",
     "typescript": "~2.4.2",
-    "lite-server": "^2.2.2",
+    "lite-server": "^2.6.1",
     "@types/node": "~6.0.60",
     "chai": "^4.0.0",
     "concurrently": "^3.5.0",
-    "mocha": "^3.4.1",
+    "mocha": "^10.2.0",
     "nodemon": "^1.11.0"
   }
 }
